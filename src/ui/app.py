@@ -181,25 +181,25 @@ p, span, div, h1, h2, h3, h4, label {
     font-weight: 800 !important;
 }
 
-div[role="radiogroup"] {
-    background: #ffffff !important;
-    border: 1.5px solid #bae6fd !important;
-    border-radius: 8px !important;
-    padding: 3px !important;
-    gap: 4px !important;
+div[data-testid="stRadio"], div[role="radiogroup"] {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    gap: 6px !important;
     display: flex !important;
     flex-direction: row !important;
     flex-wrap: nowrap !important;
     margin-top: 2px !important;
-    margin-bottom: 6px !important;
+    margin-bottom: 8px !important;
 }
 div[role="radiogroup"] label {
-    background: #f0f9ff !important;
+    background: #ffffff !important;
     border: 1px solid #bae6fd !important;
-    padding: 4px 6px !important;
-    border-radius: 6px !important;
+    padding: 5px 8px !important;
+    border-radius: 8px !important;
     font-weight: 700 !important;
-    font-size: 10.5px !important;
+    font-size: 11px !important;
     color: #0369a1 !important;
     flex: 1 1 0px !important;
     min-width: 0 !important;
@@ -208,6 +208,7 @@ div[role="radiogroup"] label {
     white-space: nowrap !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;
+    box-shadow: 0 2px 5px rgba(2, 132, 199, 0.05) !important;
     margin: 0 !important;
 }
 
@@ -359,25 +360,25 @@ p, span, div, h1, h2, h3, h4, h5, h6, label, strong, b, li {
     font-weight: 800 !important;
 }
 
-div[role="radiogroup"] {
-    background: #1e293b !important;
-    border: 1px solid rgba(255, 255, 255, 0.15) !important;
-    border-radius: 8px !important;
-    padding: 3px !important;
-    gap: 4px !important;
+div[data-testid="stRadio"], div[role="radiogroup"] {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    gap: 6px !important;
     display: flex !important;
     flex-direction: row !important;
     flex-wrap: nowrap !important;
     margin-top: 2px !important;
-    margin-bottom: 6px !important;
+    margin-bottom: 8px !important;
 }
 div[role="radiogroup"] label {
-    background: #0f172a !important;
+    background: #1e293b !important;
     border: 1px solid rgba(255, 255, 255, 0.15) !important;
-    padding: 4px 6px !important;
-    border-radius: 6px !important;
+    padding: 5px 8px !important;
+    border-radius: 8px !important;
     font-weight: 700 !important;
-    font-size: 10.5px !important;
+    font-size: 11px !important;
     color: #f8fafc !important;
     flex: 1 1 0px !important;
     min-width: 0 !important;
@@ -386,6 +387,7 @@ div[role="radiogroup"] label {
     white-space: nowrap !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2) !important;
     margin: 0 !important;
 }
 
