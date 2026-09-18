@@ -773,28 +773,156 @@ with tab_chat:
 
                 if msg.get("actions"):
                     chips_html = "".join([render_chip(a, language=lang) for a in msg["actions"]])
-                    st.markdown(f"<div style='margin-top: 6px;'>{chips_html}</div>", unsafe_allow_html=True)
+                    st.markdown(f"<div style='margin-top: 10px; margin-bottom: 8px; display: flex; flex-wrap: wrap; gap: 6px; line-height: 1.4;'>{chips_html}</div>", unsafe_allow_html=True)
+
+        # ── Dynamic Context-Aware Quick Replies (Adapts to chat progression) ───
+        taken_actions = [a for m in st.session_state.messages for a in m.get("actions", [])]
+        is_escalated = any(m.get("escalated") for m in st.session_state.messages)
+
+        if is_escalated:
+            if lang == "hi":
+                dynamic_opts = [
+                    ("📞 ड्यूटी सुपरवाइजर से बात करें", "कृपया मुझे तुरंत ड्यूटी सुपरवाइजर से जोड़ें।"),
+                    ("📄 आधिकारिक विवाद रिकॉर्ड मांगें", "मुझे इस मामले का आधिकारिक संदर्भ रिकॉर्ड चाहिए।"),
+                    ("⚖️ एयरलाइन शिकायत नीति पूछें", "कृपया मुझे एयरलाइन की औपचारिक शिकायत नीति और अधिकार बताएं।"),
+                    ("🔄 अन्य विकल्प जांचें", "क्या मेरी बुकिंग से जुड़ा कोई और विकल्प उपलब्ध है?")
+                ]
+            else:
+                dynamic_opts = [
+                    ("📞 Connect to Supervisor", "Please connect me with the Duty Supervisor immediately."),
+                    ("📄 Request Dispute Record", "I would like an official reference record of this escalated dispute."),
+                    ("⚖️ Complaint Procedures", "Please explain the formal airline complaint and dispute procedure."),
+                    ("🔄 Check Other Options", "Is there any other available alternative for my itinerary?")
+                ]
+        elif active_booking and active_booking.status == BookingStatus.CANCELLED:
+            if "refund" in taken_actions:
+                if lang == "hi":
+                    dynamic_opts = [
+                        ("📄 रिफंड खाते में कब आएगा?", "मेरा रिफंड किस माध्यम से और कितने दिनों में खाते में आएगा?"),
+                        ("💼 चेक-इन सामान की स्थिति?", "मेरी निरस्त उड़ान के चेक-इन सामान की क्या स्थिति है?"),
+                        ("✈️ रीबुकिंग नियम पूछें", "यदि मैं रिफंड के बजाय रीबुकिंग चुनना चाहूँ तो क्या नियम हैं?"),
+                        ("📄 समाधान स्लिप डाउनलोड करें", "कृपया मुझे इस समाधान की आधिकारिक रसीद प्रदान करें।")
+                    ]
+                else:
+                    dynamic_opts = [
+                        ("📄 When will refund reflect?", "How and within how many days will the refund reflect in my account?"),
+                        ("💼 Checked baggage status?", "What is the status of my checked baggage for the cancelled flight?"),
+                        ("✈️ Ask Rebooking rules", "What are the rules if I prefer rebooking instead of a refund?"),
+                        ("📄 Request Claim Slip", "Please provide me with an official confirmation receipt of this resolution.")
+                    ]
+            elif "rebook" in taken_actions:
+                if lang == "hi":
+                    dynamic_opts = [
+                        ("🎫 नई उड़ान का समय व गेट?", "मेरी नई रीबुक की गई उड़ान का प्रस्थान समय और टर्मिनल क्या है?"),
+                        ("🍽️ क्या भोजन वाउचर मिलेगा?", "रीबुकिंग के दौरान प्रतीक्षा के लिए क्या मुझे भोजन वाउचर मिलेगा?"),
+                        ("💺 पसंदीदा सीट आवंटन मांगें", "क्या मुझे मेरी नई उड़ान में खिड़की या आगे की सीट मिल सकती है?"),
+                        ("📄 नई टिकट पुष्टि डाउनलोड करें", "कृपया मुझे नई उड़ान का पुष्टिकरण विवरण दें।")
+                    ]
+                else:
+                    dynamic_opts = [
+                        ("🎫 New Flight Schedule?", "What is the departure time and terminal for my newly rebooked flight?"),
+                        ("🍽️ Meal voucher eligibility?", "Am I eligible for meal vouchers while waiting for my new flight?"),
+                        ("💺 Preferred Seat Assignment?", "Can I get my preferred window or aisle seat on the new flight?"),
+                        ("📄 Rebooking Confirmation", "Please give me the official confirmation details for the new flight.")
+                    ]
+            else:
+                if lang == "hi":
+                    dynamic_opts = [
+                        ("💰 पूरा रिफंड मांगें (7 दिन)", "मुझे अपनी निरस्त उड़ान के लिए पूरा रिफंड चाहिए।"),
+                        ("✈️ 24h में प्राथमिकता रीबुकिंग", "कृपया मुझे 24 घंटे के भीतर अगली उपलब्ध उड़ान पर रीबुक करें।"),
+                        ("👑 बिजनेस क्लास अपग्रेड पूछें", "क्या मुझे इस परेशानी के लिए बिजनेस क्लास में अपग्रेड मिल सकता है?"),
+                        ("ℹ️ उपलब्ध वैकल्पिक उड़ानें", "आज और कल के लिए कौन-कौन सी वैकल्पिक उड़ानें उपलब्ध हैं?")
+                    ]
+                else:
+                    dynamic_opts = [
+                        ("💰 Request Full Refund", "I would like to request a full refund for my flight."),
+                        ("✈️ Request Free Rebooking", "Please rebook me on the next available flight within 24 hours."),
+                        ("👑 Ask Business Upgrade", "Can you provide a complimentary business class upgrade for this disruption?"),
+                        ("ℹ️ Available Flight Options", "What alternative flights are available today and tomorrow?")
+                    ]
+        elif active_booking and active_booking.delay_hours and active_booking.delay_hours >= 5:
+            if "escalate_to_supervisor" in taken_actions or "hotel_accommodation" in taken_actions:
+                if lang == "hi":
+                    dynamic_opts = [
+                        ("⏱️ सुपरवाइजर किराया स्वीकृति स्थिति", "ड्यूटी सुपरवाइजर से ₹2,000 किराया छूट की स्वीकृति में कितना समय लगेगा?"),
+                        ("🏨 ट्रांजिट होटल का विवरण", "हवाई अड्डे के पास कौन से होटल में मेरा ट्रांजिट स्टे बुक किया गया है?"),
+                        ("🍽️ लाउंज व भोजन पास उपयोग", "मेरे लाउंज पास और भोजन कूपन की वैधता कितनी देर तक है?"),
+                        ("📄 आधिकारिक क्लेम स्लिप डाउनलोड", "कृपया मुझे इस संपूर्ण समाधान और सुपरवाइजर डॉसियर की रसीद दें।")
+                    ]
+                else:
+                    dynamic_opts = [
+                        ("⏱️ Track Fare Waiver Status", "How long will the Duty Supervisor take to approve the ₹2,000 fare difference waiver?"),
+                        ("🏨 Transit Hotel Location", "Which transit hotel near the airport has been arranged for my delay duration?"),
+                        ("🍽️ Lounge Access Details", "What is the validity and entitlement for my executive lounge pass and meal coupon?"),
+                        ("📄 Download Official Slip", "Please generate my official resolution slip and supervisor escalation dossier.")
+                    ]
+            else:
+                if lang == "hi":
+                    dynamic_opts = [
+                        ("🏨 ट्रांजिट होटल आवास मांगें", "मेरी 6 घंटे की देरी के लिए ट्रांजिट होटल आवास की व्यवस्था करें।"),
+                        ("🔄 ₹2,000 किराया अंतर पर उड़ान बदलें", "मैं किसी अन्य वैकल्पिक उड़ान में बदलना चाहती हूँ जिसमें ₹2,000 का किराया अंतर है।"),
+                        ("🍽️ भोजन व लाउंज पास लें", "मेरी 6 घंटे की देरी के लिए भोजन और लाउंज वाउचर जारी करें।"),
+                        ("👑 प्लेटिनम प्राथमिकता सहायता", "प्लेटिनम सदस्य के रूप में मुझे क्या विशेष प्राथमिकताएं प्राप्त हैं?")
+                    ]
+                else:
+                    dynamic_opts = [
+                        ("🏨 Claim Transit Hotel", "Please arrange transit hotel accommodation for my 6-hour flight delay."),
+                        ("🔄 Switch Flight (₹2k Fare Diff)", "I want to switch to an alternative flight with a ₹2,000 fare difference."),
+                        ("🍽️ Claim Meal & Lounge", "Please issue my meal and lounge access vouchers for the 6-hour delay."),
+                        ("👑 Platinum Priority Support", "What priority disruption privileges do I have as a Platinum member?")
+                    ]
+        else:
+            if "meal_voucher" in taken_actions or "lounge_access" in taken_actions:
+                if lang == "hi":
+                    dynamic_opts = [
+                        ("📍 एग्जीक्यूटिव लाउंज कहाँ है?", "टर्मिनल पर एग्जीक्यूटिव लाउंज कहाँ स्थित है और मैं प्रवेश कैसे करूँ?"),
+                        ("🍽️ भोजन वाउचर कैसे उपयोग करूँ?", "मैं हवाई अड्डे के किन आउटलेट्स पर अपना भोजन वाउचर रिडीम कर सकता हूँ?"),
+                        ("🏨 होटल आवास नियम पूछें", "होटल आवास के लिए एयरलाइन की न्यूनतम देरी नीति क्या है?"),
+                        ("📄 वाउचर रसीद डाउनलोड करें", "कृपया मुझे मेरे जारी वाउचर का आधिकारिक पुष्टिकरण दें।")
+                    ]
+                else:
+                    dynamic_opts = [
+                        ("📍 Where is Executive Lounge?", "Where is the executive lounge located in the terminal and how do I enter?"),
+                        ("🍽️ Redeem Meal Voucher?", "Which airport dining outlets accept this meal voucher?"),
+                        ("🏨 Hotel Policy Threshold?", "What is the airline's minimum delay policy required for hotel accommodation?"),
+                        ("📄 Download Claim Slip", "Please provide me with an official confirmation receipt of my issued vouchers.")
+                    ]
+            else:
+                if lang == "hi":
+                    dynamic_opts = [
+                        ("🍽️ भोजन व लाउंज पास क्लेम करें", "मेरी 4 घंटे की देरी के लिए भोजन वाउचर और लाउंज एक्सेस जारी करें।"),
+                        ("🏨 होटल आवास मांगें", "क्या मुझे इस 4 घंटे की देरी के लिए होटल आवास मिल सकता है?"),
+                        ("⏱️ संशोधित प्रस्थान समय जांचें", "मेरी उड़ान का सटीक संशोधित प्रस्थान समय क्या है?"),
+                        ("💼 कनेक्टिंग यात्रा की जानकारी", "इस देरी से मेरी आगे की यात्रा और मीटिंग पर क्या प्रभाव पड़ेगा?")
+                    ]
+                else:
+                    dynamic_opts = [
+                        ("🍽️ Claim Meal & Lounge Pass", "Please issue my eligible meal voucher and executive lounge access for the 4-hour delay."),
+                        ("🏨 Request Hotel Stay", "Can you arrange hotel accommodation for my 4-hour delay?"),
+                        ("⏱️ Check Departure Time", "What is the exact rescheduled departure time for flight SK-118?"),
+                        ("💼 Connecting Flight Impact", "How will this delay affect my connecting plans and onward journey?")
+                    ]
 
         # Quick Passenger Action Chips placed directly ABOVE the input box (2x2 grid for comfortable tap)
-        st.markdown(f"<div style='margin-top: 14px; margin-bottom: 6px; font-size: 11px; font-weight: 700; color: #0284c7;'>{t['quick_actions_title']}</div>", unsafe_allow_html=True)
+        st.markdown(f"<div style='margin-top: 14px; margin-bottom: 6px; font-size: 11px; font-weight: 700; color: #0284c7;'>⚡ {t['quick_actions_title']}</div>", unsafe_allow_html=True)
         q_row1_1, q_row1_2 = st.columns(2)
         with q_row1_1:
-            if st.button(t['quick_refund'], key="b_ref_top", use_container_width=True):
-                st.session_state.pending_prompt = "मुझे अपनी निरस्त उड़ान के लिए पूरा रिफंड चाहिए।" if lang == "hi" else "I would like to request a full refund for my flight."
+            if st.button(dynamic_opts[0][0], key="dyn_opt_1", use_container_width=True):
+                st.session_state.pending_prompt = dynamic_opts[0][1]
                 st.rerun()
         with q_row1_2:
-            if st.button(t['quick_rebook'], key="b_reb_top", use_container_width=True):
-                st.session_state.pending_prompt = "कृपया मुझे अगली उपलब्ध उड़ान पर रीबुक करें।" if lang == "hi" else "Please rebook me on the next available flight."
+            if st.button(dynamic_opts[1][0], key="dyn_opt_2", use_container_width=True):
+                st.session_state.pending_prompt = dynamic_opts[1][1]
                 st.rerun()
 
         q_row2_1, q_row2_2 = st.columns(2)
         with q_row2_1:
-            if st.button(t['quick_vouchers'], key="b_vou_top", use_container_width=True):
-                st.session_state.pending_prompt = "मेरी देरी के लिए भोजन वाउचर और लाउंज की क्या पात्रता है?" if lang == "hi" else "What meal vouchers and lounge access am I entitled to?"
+            if st.button(dynamic_opts[2][0], key="dyn_opt_3", use_container_width=True):
+                st.session_state.pending_prompt = dynamic_opts[2][1]
                 st.rerun()
         with q_row2_2:
-            if st.button(t['quick_hotel'], key="b_hot_top", use_container_width=True):
-                st.session_state.pending_prompt = "क्या आप मेरी देरी के लिए होटल आवास की व्यवस्था कर सकते हैं?" if lang == "hi" else "Can you arrange hotel accommodation for my delay?"
+            if st.button(dynamic_opts[3][0], key="dyn_opt_4", use_container_width=True):
+                st.session_state.pending_prompt = dynamic_opts[3][1]
                 st.rerun()
 
         # Chat Input Bar
