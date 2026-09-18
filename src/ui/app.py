@@ -63,7 +63,7 @@ if not is_dark:
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
         
         * {
-            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif !important;
+            font-family: 'Plus Jakarta Sans', -apple-system, 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji', sans-serif !important;
         }
 
         .stApp {
@@ -134,6 +134,29 @@ if not is_dark:
             background-color: #ffffff !important;
             color: #0369a1 !important;
         }
+        .stButton>button:hover {
+            background-color: #f0f9ff !important;
+            border-color: #0284c7 !important;
+            color: #0284c7 !important;
+        }
+
+        .stDownloadButton>button {
+            border-radius: 10px !important;
+            font-weight: 800 !important;
+            background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%) !important;
+            color: #ffffff !important;
+            border: none !important;
+            padding: 10px 22px !important;
+            box-shadow: 0 4px 14px rgba(2, 132, 199, 0.3) !important;
+        }
+        .stDownloadButton>button * {
+            color: #ffffff !important;
+            font-weight: 800 !important;
+        }
+        .stDownloadButton>button:hover {
+            background: linear-gradient(135deg, #0369a1 0%, #075985 100%) !important;
+            color: #ffffff !important;
+        }
 
         div[role="radiogroup"] {
             background: #ffffff !important;
@@ -166,7 +189,7 @@ else:
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
         
         * {
-            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif !important;
+            font-family: 'Plus Jakarta Sans', -apple-system, 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji', sans-serif !important;
         }
 
         .stApp {
@@ -240,6 +263,24 @@ else:
         .stButton>button:hover {
             border-color: #38bdf8 !important;
             color: #38bdf8 !important;
+        }
+
+        .stDownloadButton>button {
+            border-radius: 10px !important;
+            font-weight: 800 !important;
+            background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%) !important;
+            color: #ffffff !important;
+            border: 1px solid rgba(255, 255, 255, 0.25) !important;
+            padding: 10px 22px !important;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4) !important;
+        }
+        .stDownloadButton>button * {
+            color: #ffffff !important;
+            font-weight: 800 !important;
+        }
+        .stDownloadButton>button:hover {
+            background: linear-gradient(135deg, #0369a1 0%, #075985 100%) !important;
+            color: #ffffff !important;
         }
 
         div[role="radiogroup"] {
