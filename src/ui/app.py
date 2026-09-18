@@ -1,8 +1,9 @@
 """SkyWay Airlines Disruption Resolution Portal.
 
 Features:
+- Clean passenger display without member tier badges
 - Flawless Night Mode & Day Mode with 100% text contrast
-- High-contrast dropdown popovers (zero white-on-white text)
+- High-contrast dropdown popovers
 - Native Streamlit containers for boarding pass & policy cards
 - Grounded multi-turn conversational agent
 """
@@ -324,7 +325,7 @@ def get_orchestrator() -> AgentOrchestrator:
 orchestrator = get_orchestrator()
 
 
-# ── Chip Renderer ──────────────────────────────────────────────────────────────
+# ── Chip Renderer ──────────────────────────────────────────────────────
 def render_chip(action_type: str) -> str:
     badges = {
         "rebook": ("✈️ Priority Rebooking Authorized", "chip-rebook"),
@@ -361,7 +362,7 @@ st.markdown(f"""
 
 # ── Top Control Bar (Passenger Selector + Day/Night Toggle + Reset) ─────────────
 customers = st.session_state.customer_repo.get_all()
-cust_map = {f"{c.name} (PNR: {c.booking_reference} • {c.loyalty_tier.value} Member)": c.name for c in customers}
+cust_map = {f"{c.name} (PNR: {c.booking_reference})": c.name for c in customers}
 options_list = ["— Select Verified Passenger Itinerary —"] + list(cust_map.keys())
 
 current_idx = 0
@@ -406,18 +407,17 @@ if selected_label != options_list[0]:
 active_cust = orchestrator.current_customer
 
 if active_cust:
-    tier_val = active_cust.loyalty_tier.value
     active_booking = orchestrator._get_active_booking()
 
     cities = active_booking.route.split("→") if active_booking else ["Delhi", "Goa"]
     origin_city = cities[0].strip() if len(cities) > 0 else "Delhi"
     dest_city = cities[1].strip() if len(cities) > 1 else "Goa"
 
-    # ── Boarding Pass Card (100% Native High-Contrast Streamlit Container) ───────
+    # ── Boarding Pass Card (Clean Native Streamlit Container) ───────────────────
     with st.container(border=True):
         col_p1, col_p2 = st.columns([3, 1])
         with col_p1:
-            st.markdown(f"### 👤 {active_cust.name} &nbsp; `{tier_val.upper()} MEMBER`")
+            st.markdown(f"### 👤 {active_cust.name}")
             st.caption(f"Booking PNR: **{active_cust.booking_reference}** • Contact: {active_cust.contact.email} ({active_cust.contact.phone})")
         with col_p2:
             if active_booking:
@@ -477,23 +477,23 @@ with tab_chat:
             with st.container(border=True):
                 st.markdown("**Flight SK-204 (DEL → GOI)**")
                 st.error("● Cancelled (Operational)")
-                st.caption("Passenger: **Priya Nair (Gold)**\n\nPolicy: Free Rebooking (24h) OR Full Refund (7 Days)")
+                st.caption("Passenger: **Priya Nair**\n\nPolicy: Free Rebooking (24h) OR Full Refund (7 Days)")
         with sc2:
             with st.container(border=True):
                 st.markdown("**Flight SK-118 (BOM → BLR)**")
                 st.warning("● Delayed 4 Hours (11:10)")
-                st.caption("Passenger: **Arvind Kulkarni (Silver)**\n\nPolicy: Meal Voucher + Lounge Access")
+                st.caption("Passenger: **Arvind Kulkarni**\n\nPolicy: Meal Voucher + Lounge Access")
         with sc3:
             with st.container(border=True):
                 st.markdown("**Flight SK-305 (DEL → HYD)**")
                 st.warning("● Delayed 6 Hours (20:00)")
-                st.caption("Passenger: **Meher Kaur (Platinum)**\n\nPolicy: Meal + Lounge + Transit Hotel + Supervisor Review")
+                st.caption("Passenger: **Meher Kaur**\n\nPolicy: Meal + Lounge + Transit Hotel + Supervisor Review")
     else:
         # Welcome message
         if not st.session_state.messages:
             if active_booking and active_booking.status == BookingStatus.CANCELLED:
                 welcome = (
-                    f"Hello **{active_cust.name}**. As a valued **{active_cust.loyalty_tier.value} Member**, we sincerely apologize that flight **{active_booking.flight} ({active_booking.route})** "
+                    f"Hello **{active_cust.name}**. We sincerely apologize that flight **{active_booking.flight} ({active_booking.route})** "
                     f"has been cancelled due to operational reasons.\n\n"
                     f"Under SkyWay Airlines policy, I can arrange **Free Priority Rebooking** on the next available flight within 24 hours, "
                     f"or process a **Full Refund** to your original payment method. Which option would you prefer?"
@@ -550,19 +550,19 @@ with tab_chat:
         st.caption("⚡ Quick Passenger Requests:")
         q1, q2, q3, q4 = st.columns(4)
         with q1:
-            if st.button("💰 Request Full Refund", key="b_ref_act2", use_container_width=True):
+            if st.button("💰 Request Full Refund", key="b_ref_act3", use_container_width=True):
                 st.session_state.pending_prompt = "I would like to request a full refund for my flight."
                 st.rerun()
         with q2:
-            if st.button("✈️ Request Priority Rebook", key="b_reb_act2", use_container_width=True):
+            if st.button("✈️ Request Priority Rebook", key="b_reb_act3", use_container_width=True):
                 st.session_state.pending_prompt = "Please rebook me on the next available flight."
                 st.rerun()
         with q3:
-            if st.button("🍽️ Claim Meal & Lounge", key="b_vou_act2", use_container_width=True):
+            if st.button("🍽️ Claim Meal & Lounge", key="b_vou_act3", use_container_width=True):
                 st.session_state.pending_prompt = "What meal vouchers and lounge access am I entitled to?"
                 st.rerun()
         with q4:
-            if st.button("🏨 Inquire Transit Hotel", key="b_hot_act2", use_container_width=True):
+            if st.button("🏨 Inquire Transit Hotel", key="b_hot_act3", use_container_width=True):
                 st.session_state.pending_prompt = "Can you arrange hotel accommodation for my delay?"
                 st.rerun()
 
@@ -580,7 +580,7 @@ with tab_policy:
             st.markdown("#### 1. Cancellation Rebooking Policy")
             st.markdown("""
             When a flight is cancelled by SkyWay Airlines for operational reasons, passengers are entitled to choose between:
-            - **Free Rebooking** on the next available flight within 24 hours (with priority seating for Gold/Platinum members).
+            - **Free Rebooking** on the next available flight within 24 hours.
             - **Full Refund** issued to the original payment method within 7 business days.
             """)
 
@@ -602,10 +602,10 @@ with tab_policy:
             """)
 
         with st.container(border=True):
-            st.markdown("#### 4. Loyalty Tier Benefits")
+            st.markdown("#### 4. Priority Passenger Care")
             st.markdown("""
-            - **Gold & Platinum Members:** Receive first-priority rebooking on replacement flights.
-            - *Note:* Loyalty status does not authorize complimentary cabin upgrades or compensation beyond standard policy.
+            - Eligible disruption cases receive first-priority rebooking on replacement flights.
+            - *Note:* Complimentary cabin upgrades or compensation beyond standard policy are not authorized.
             """)
 
 
