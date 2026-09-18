@@ -116,6 +116,16 @@ footer {visibility: hidden;}
     border-color: #0284c7 !important;
     color: #0284c7 !important;
 }
+.stButton > button[kind="primary"] {
+    background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%) !important;
+    color: #ffffff !important;
+    border: none !important;
+    box-shadow: 0 2px 8px rgba(2, 132, 199, 0.35) !important;
+}
+.stButton > button[kind="primary"] * {
+    color: #ffffff !important;
+    font-weight: 800 !important;
+}
 
 .stTabs {
     width: 100% !important;
@@ -297,6 +307,16 @@ footer {visibility: hidden;}
     border-color: #38bdf8 !important;
     color: #ffffff !important;
 }
+.stButton > button[kind="primary"] {
+    background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%) !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4) !important;
+}
+.stButton > button[kind="primary"] * {
+    color: #ffffff !important;
+    font-weight: 800 !important;
+}
 
 .stTabs {
     width: 100% !important;
@@ -475,76 +495,72 @@ def render_chip(action_type: str, language: str = "en") -> str:
 
 
 # ── Top Unified Toolbar (Header + 3 Micro-Toggles in ONE neat row) ────────────
-top_brand, top_lang, top_theme, top_reset = st.columns([2.2, 0.9, 0.9, 0.8])
+top_brand, top_lang, top_theme, top_reset = st.columns([1.8, 1.1, 0.6, 0.6])
 
 with top_brand:
     title_color = "#0369a1" if not is_dark else "#38bdf8"
     sub_color = "#64748b" if not is_dark else "#94a3b8"
     st.markdown(f"""
-    <div style="display: flex; align-items: center; gap: 8px; padding-top: 2px;">
-        <span style="font-size: 22px;">✈️</span>
+    <div style="display: flex; align-items: center; gap: 6px; padding-top: 2px;">
+        <span style="font-size: 20px;">✈️</span>
         <div>
-            <div style="font-size: 15px; font-weight: 800; color: {title_color}; line-height: 1.1;">SkyWay Care</div>
-            <div style="font-size: 9px; color: {sub_color}; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">23 Sep 2026 • Ops Portal</div>
+            <div style="font-size: 14px; font-weight: 800; color: {title_color}; line-height: 1.1;">SkyWay Care</div>
+            <div style="font-size: 8.5px; color: {sub_color}; font-weight: 600; text-transform: uppercase;">23 Sep 2026</div>
         </div>
     </div>
     """, unsafe_allow_html=True)
 
 with top_lang:
-    lang_btn_text = "🌐 हिन्दी" if lang == "en" else "🌐 Eng"
-    if st.button(lang_btn_text, use_container_width=True):
+    lang_btn_text = "🌐 हिन्दी" if lang == "en" else "🌐 EN"
+    if st.button(lang_btn_text, key="top_lang_btn", use_container_width=True):
         st.session_state.language = "hi" if lang == "en" else "en"
         st.session_state.messages = []
         st.rerun()
 
 with top_theme:
-    theme_label = "🌙 Night" if not is_dark else "☀️ Day"
-    if st.button(theme_label, use_container_width=True):
+    theme_icon = "🌙" if not is_dark else "☀️"
+    if st.button(theme_icon, key="top_theme_btn", use_container_width=True):
         st.session_state.theme_mode = "night_dark" if not is_dark else "sky_light"
         st.rerun()
 
 with top_reset:
-    if st.button("🔄 Reset", use_container_width=True):
+    if st.button("🔄", key="top_reset_btn", use_container_width=True):
         st.session_state.messages = []
         if st.session_state.selected_customer:
             orchestrator.set_customer(st.session_state.selected_customer)
         st.rerun()
 
 
-# ── 1-Tap Passenger Itinerary Switcher (Compact Segmented Chips) ───────────────
-customers = st.session_state.customer_repo.get_all()
-tier_icons = {"Gold": "🏆", "Silver": "🥈", "Platinum": "👑"}
-cust_map = {
-    f"👤 {c.name} ({tier_icons.get(c.loyalty_tier.value, '')} {c.loyalty_tier.value} • {c.booking_reference})": c.name 
-    for c in customers
-}
-radio_options = list(cust_map.keys())
+# ── 1-Tap Passenger Itinerary Selector (Zero-Glitch Native Segmented Pills) ────
+curr_cust = st.session_state.selected_customer or "Priya Nair"
+c_p1, c_p2, c_p3 = st.columns(3)
 
-current_idx = 0
-if st.session_state.selected_customer:
-    for i, (label_key, name) in enumerate(cust_map.items()):
-        if name == st.session_state.selected_customer:
-            current_idx = i
-            break
+with c_p1:
+    is_p1 = (curr_cust == "Priya Nair")
+    if st.button("🏆 Priya (Gold)", key="nav_priya", type="primary" if is_p1 else "secondary", use_container_width=True):
+        if not is_p1:
+            st.session_state.selected_customer = "Priya Nair"
+            orchestrator.set_customer("Priya Nair")
+            st.session_state.messages = []
+            st.rerun()
 
-selected_label = st.radio(
-    "Select Passenger Itinerary:",
-    options=radio_options,
-    index=current_idx,
-    horizontal=True,
-    label_visibility="collapsed",
-)
+with c_p2:
+    is_p2 = (curr_cust == "Arvind Kulkarni")
+    if st.button("🥈 Arvind (Silver)", key="nav_arvind", type="primary" if is_p2 else "secondary", use_container_width=True):
+        if not is_p2:
+            st.session_state.selected_customer = "Arvind Kulkarni"
+            orchestrator.set_customer("Arvind Kulkarni")
+            st.session_state.messages = []
+            st.rerun()
 
-chosen_name = cust_map[selected_label]
-if (
-    not orchestrator.current_customer
-    or chosen_name != st.session_state.selected_customer
-    or orchestrator.current_customer.name != chosen_name
-):
-    st.session_state.selected_customer = chosen_name
-    orchestrator.set_customer(chosen_name)
-    st.session_state.messages = []
-    st.rerun()
+with c_p3:
+    is_p3 = (curr_cust == "Meher Kaur")
+    if st.button("👑 Meher (Plat)", key="nav_meher", type="primary" if is_p3 else "secondary", use_container_width=True):
+        if not is_p3:
+            st.session_state.selected_customer = "Meher Kaur"
+            orchestrator.set_customer("Meher Kaur")
+            st.session_state.messages = []
+            st.rerun()
 
 
 active_cust = orchestrator.current_customer
