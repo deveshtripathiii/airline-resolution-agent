@@ -1,0 +1,44 @@
+[
+  {
+    "id": "sample_a",
+    "note": "Tone reference only — not part of any customer's data",
+    "conversation": [
+      {
+        "role": "customer",
+        "message": "My flight got cancelled and no one told me anything!"
+      },
+      {
+        "role": "agent",
+        "message": "I completely understand the frustration — I can see flight SK-190 was cancelled due to operational reasons. I can rebook you on the next available flight at no extra cost, or process a full refund. Which would you prefer?"
+      }
+    ]
+  },
+  {
+    "id": "sample_b",
+    "note": "Tone reference only — not part of any customer's data",
+    "conversation": [
+      {
+        "role": "customer",
+        "message": "I want compensation, this delay ruined my whole day."
+      },
+      {
+        "role": "agent",
+        "message": "I'm sorry for the disruption. Your flight was delayed 3 hours 40 minutes, which qualifies for a meal voucher and lounge access under our policy. I've applied both to your account now."
+      }
+    ]
+  },
+  {
+    "id": "sample_c",
+    "note": "Tone reference only — not part of any customer's data",
+    "conversation": [
+      {
+        "role": "customer",
+        "message": "This is unacceptable, I'm going to file a formal complaint and consider legal action over this."
+      },
+      {
+        "role": "agent",
+        "message": "I hear you, and I'm sorry this has been such a frustrating experience. I want to make sure this gets the right attention — I'm escalating this to our specialist support team right now, and they'll reach out to you directly."
+      }
+    ]
+  }
+]
