@@ -113,9 +113,16 @@ class SmartDeterministicClient(BaseLLMClient):
             return res
 
         msg = user_message.lower()
+        is_hindi = "[LANGUAGE: HINDI]" in system_prompt or bool(re.search(r'[\u0900-\u097F]', user_message))
 
         # 1. Escalation for legal/formal complaint
-        if re.search(r"legal|lawyer|sue|court|formal\s*complaint", msg):
+        if re.search(r"legal|lawyer|sue|court|formal\s*complaint|वकील|कोर्ट|शिकायत", msg):
+            if is_hindi:
+                return (
+                    "मैं आपकी असुविधा और चिंता को पूरी तरह समझता हूँ। "
+                    "औपचारिक कानूनी सूचना / एस्केलेशन के उल्लेख के कारण, मैं यह मामला तत्काल हमारी विशेषज्ञ सहायता टीम को सौंप रहा हूँ। "
+                    "एक वरिष्ठ अधिकारी आपके पूरे केस की समीक्षा कर 24 घंटे के भीतर आपसे सीधे संपर्क करेंगे।"
+                )
             return (
                 "I completely hear your concerns, and I sincerely apologize that you've had such a frustrating experience. "
                 "Because you mentioned formal escalation / legal action, I am immediately escalating this case to our Specialist Support Team. "
@@ -124,7 +131,15 @@ class SmartDeterministicClient(BaseLLMClient):
 
         # 2. Priya Scenario (Cancelled Flight + Upgrade Ask)
         if "priya" in system_prompt.lower() or "sk-204" in system_prompt.lower() or "sk4821x" in system_prompt.lower():
-            if "upgrade" in msg:
+            if "upgrade" in msg or "अपग्रेड" in msg:
+                if is_hindi:
+                    return (
+                        "उड़ान SK-204 (दिल्ली से गोवा) के निरस्त होने के कारण हुई असुविधा के लिए हमें गहरा खेद है।\n\n"
+                        "हमारी नीति के अनुसार, हम आपको 24 घंटे के भीतर अगली उपलब्ध उड़ान पर **निःशुल्क प्राथमिकता रीबुकिंग** "
+                        "या आपके मूल भुगतान माध्यम पर **पूर्ण धनवापसी (7 कार्य दिवसों में)** प्रदान करने के लिए तैयार हैं।\n\n"
+                        "हालाँकि, निःशुल्क बिजनेस क्लास अपग्रेड हमारी नीति का हिस्सा नहीं है, अतः मैं वापसी उड़ान पर मुफ्त अपग्रेड स्वीकृत नहीं कर सकता। "
+                        "क्या आप **पूर्ण रिफंड** चाहते हैं या **प्राथमिकता रीबुकिंग**?"
+                    )
                 return (
                     "I completely understand your frustration regarding the cancellation of flight SK-204 from Delhi to Goa. "
                     "As a valued Gold Tier member, your comfort is important to us. \n\n"
@@ -133,13 +148,24 @@ class SmartDeterministicClient(BaseLLMClient):
                     "However, complimentary business class upgrades are not part of our disruption compensation policy, so I am unable to approve the free upgrade on your return flight. "
                     "Would you like me to process your **Full Refund** or proceed with **Priority Rebooking**?"
                 )
-            if "refund" in msg:
+            if "refund" in msg or "रिफंड" in msg:
+                if is_hindi:
+                    return (
+                        "मैंने उड़ान SK-204 के लिए आपके **पूर्ण रिफंड (Full Refund)** की प्रक्रिया शुरू कर दी है। "
+                        "एयरलाइन नीति के अनुसार, यह राशि 7 कार्य दिवसों के भीतर आपके मूल भुगतान खाते में जमा हो जाएगी। "
+                        "क्या मैं आपकी किसी और प्रकार से सहायता कर सकता हूँ?"
+                    )
                 return (
                     "I have initiated your **Full Refund request** for flight SK-204. "
                     "Per our policy, refunds for airline-caused cancellations are processed in full to your original payment method within 7 business days. "
                     "A confirmation reference has been logged. Is there anything else I can assist you with?"
                 )
-            if "rebook" in msg:
+            if "rebook" in msg or "रीबुक" in msg or "बुकिंग" in msg:
+                if is_hindi:
+                    return (
+                        "आपको बिना किसी अतिरिक्त शुल्क के 24 घंटे के भीतर गोवा के लिए अगली उपलब्ध उड़ान पर **प्राथमिकता रीबुकिंग** दे दी गई है। "
+                        "आपका अद्यतन यात्रा विवरण पंजीकृत संपर्क पर प्रेषित किया जाएगा।"
+                    )
                 return (
                     "As a Gold Tier member, you have **Priority Rebooking Access**. "
                     "I have secured you on the next available flight to Goa within 24 hours at zero additional cost. "
@@ -148,13 +174,25 @@ class SmartDeterministicClient(BaseLLMClient):
 
         # 3. Arvind Scenario (4h Delay + Hotel Request)
         if "arvind" in system_prompt.lower() or "sk-118" in system_prompt.lower() or "tr1190b" in system_prompt.lower():
-            if "hotel" in msg or "accommodation" in msg:
+            if "hotel" in msg or "accommodation" in msg or "होटल" in msg:
+                if is_hindi:
+                    return (
+                        "उड़ान SK-118 में 4 घंटे के विलंब के लिए हमें खेद है। "
+                        "हमारी नीति के अनुसार, 4 घंटे की देरी पर आपको **भोजन वाउचर और निःशुल्क लाउंज प्रवेश** प्रदान कर दिया गया है।\n\n"
+                        "होटल आवास नीति केवल 5 घंटे से अधिक के विलंब पर लागू होती है। अतः 4 घंटे की देरी के लिए होटल स्वीकृत नहीं किया जा सकता। "
+                        "आप प्रस्थान तक हमारे एग्जीक्यूटिव लाउंज में विश्राम कर सकते हैं।"
+                    )
                 return (
                     "I truly apologize for the disruption and understand how critical your connecting meeting in Bengaluru is. "
                     "Flight SK-118 is currently delayed by 4 hours (rescheduled to 11:10).\n\n"
                     "Under our policy, a 4-hour delay qualifies for **Meal Vouchers and Complimentary Lounge Access**, both of which I have applied to your boarding pass.\n\n"
                     "Regarding hotel accommodation: airline policy only provides hotel accommodations for delays **exceeding 5 hours**. "
                     "Therefore, I cannot authorize a hotel stay for a 4-hour delay. You are welcome to relax in our departure lounge with full hospitality until boarding."
+                )
+            if is_hindi:
+                return (
+                    "उड़ान SK-118 के 4 घंटे के विलंब के लिए हमें खेद है। "
+                    "आपकी सुविधा हेतु आपके बोर्डिंग पास पर **भोजन वाउचर** और **एग्जीक्यूटिव लाउंज पास** सक्रिय कर दिया गया है।"
                 )
             return (
                 "I am very sorry for the 4-hour delay on your flight SK-118. "
@@ -163,19 +201,34 @@ class SmartDeterministicClient(BaseLLMClient):
 
         # 4. Meher Scenario (6h Delay + Full Night Hotel + ₹2,000 Fare Diff)
         if "meher" in system_prompt.lower() or "sk-305" in system_prompt.lower() or "wl7742" in system_prompt.lower():
-            if "fare" in msg or "2000" in msg or "2,000" in msg or "different flight" in msg or "higher" in msg:
+            if "fare" in msg or "2000" in msg or "2,000" in msg or "different flight" in msg or "higher" in msg or "किराया" in msg:
+                if is_hindi:
+                    return (
+                        "सुश्री कौर, धैर्य रखने के लिए धन्यवाद।\n\n"
+                        "1. **विलंब सुविधाएँ (6 घंटे की देरी)**: आपके लिए **भोजन वाउचर, एग्जीक्यूटिव लाउंज पास और ट्रांजिट होटल आवास** (विलंबित अवधि के लिए) जारी कर दिया गया है।\n\n"
+                        "2. **वैकल्पिक उड़ान एवं किराया अंतर**: ₹2,000 किराया अंतर के लिए ₹1,500 की फ्रंट-लाइन सीमा पार होने के कारण, **मैंने यह मामला तत्काल स्वीकृति हेतु ड्यूटी सुपरवाइजर को प्राथमिकता के साथ अग्रेषित कर दिया है**।"
+                    )
                 return (
                     "Thank you for your patience, Ms. Kaur. As a valued Platinum Tier member, you have top priority access.\n\n"
                     "1. **Delay Entitlements (6-Hour Delay)**: We have issued your **Meal Voucher, Executive Lounge Access, and Day-Hotel Accommodation** covering the delayed-hours duration until your 20:00 departure (policy covers the delayed period, rather than a full overnight stay).\n\n"
                     "2. **Alternative Flight & Fare Difference**: For rebooking onto the earlier higher-fare flight with a ₹2,000 fare difference: front-line agents are authorized to waive fare differences up to ₹1,500. Since ₹2,000 exceeds this limit, **I have escalated your waiver request to the Duty Supervisor** with Platinum Priority for immediate approval."
                 )
-            if "hotel" in msg:
+            if "hotel" in msg or "होटल" in msg:
+                if is_hindi:
+                    return (
+                        "5 घंटे से अधिक के विलंब के कारण, आपके लिए 20:00 बजे के प्रस्थान तक **ट्रांजिट होटल आवास** की व्यवस्था कर दी गई है (यह विलंब अवधि के लिए है, न कि पूरी रात के लिए)। लाउंज और भोजन वाउचर भी सक्रिय हैं।"
+                    )
                 return (
                     "Under our policy for flights delayed over 5 hours, we have arranged **Hotel Accommodation covering the delayed hours portion** until your 20:00 departure. "
                     "Please note that policy covers the delay period rather than a full night's stay. Lounge access and meal vouchers have also been activated."
                 )
 
         # Generic grounded fallback
+        if is_hindi:
+            return (
+                "मैं आपके उड़ान व्यवधान के अनुरोध को समझता हूँ। हमारी सेवा नीति के अनुसार मैंने आपकी बुकिंग की समीक्षा की है। "
+                "कृपया बताएं कि क्या आप रीबुकिंग, रिफंड, या अपने भोजन व लाउंज वाउचर प्राप्त करना चाहते हैं।"
+            )
         return (
             "I understand your request regarding your flight disruption. Based on our service policies, "
             "I have evaluated your booking and entitlements. Please let me know if you would like me to process your rebooking, refund, or claim your eligible meal and lounge vouchers."

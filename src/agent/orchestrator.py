@@ -82,11 +82,12 @@ class AgentOrchestrator:
     def actions_taken(self) -> list[AgentAction]:
         return self._actions_taken
 
-    def handle_message(self, message: str) -> AgentResponse:
+    def handle_message(self, message: str, language: str = "en") -> AgentResponse:
         """Process a customer message through the full pipeline."""
         if not self._current_customer:
+            msg = "क्षमा करें, पहले अपने खाते की पहचान दर्ज करें।" if language == "hi" else "I'm sorry, I need to identify your account first. Could you please provide your name or booking reference?"
             return AgentResponse(
-                message="I'm sorry, I need to identify your account first. Could you please provide your name or booking reference?",
+                message=msg,
                 actions_taken=[],
             )
 
@@ -96,13 +97,13 @@ class AgentOrchestrator:
         # ── Step 2: Check for immediate escalation (legal threats) ─────────────
         escalation = rules_engine.is_escalation_required(message)
         if escalation or intent_analysis.mentions_legal_action:
-            return self._handle_escalation(message, escalation, intent_analysis)
+            return self._handle_escalation(message, escalation, intent_analysis, language=language)
 
         # ── Step 3: Apply business rules based on intent ───────────────────────
         actions, decision_context = self._apply_rules(intent_analysis)
 
         # ── Step 4: Generate LLM response ──────────────────────────────────────
-        response_text = self._generate_response(message, decision_context, actions)
+        response_text = self._generate_response(message, decision_context, actions, language=language)
 
         # ── Step 5: Build response ─────────────────────────────────────────────
         response = AgentResponse(
@@ -222,7 +223,7 @@ class AgentOrchestrator:
         return actions, "\n".join(context_parts)
 
     def _handle_escalation(
-        self, message: str, escalation: Optional[AgentAction], intent: IntentAnalysis
+        self, message: str, escalation: Optional[AgentAction], intent: IntentAnalysis, language: str = "en"
     ) -> AgentResponse:
         """Handle messages that require escalation to specialist team."""
         esc_action = escalation or AgentAction(
@@ -238,7 +239,7 @@ class AgentOrchestrator:
             "proper attention, and inform them you are escalating to the specialist support team. "
             "Do NOT try to resolve the complaint yourself — escalate."
         )
-        response_text = self._generate_response(message, decision_context, [esc_action])
+        response_text = self._generate_response(message, decision_context, [esc_action], language=language)
 
         response = AgentResponse(
             message=response_text,
@@ -250,7 +251,9 @@ class AgentOrchestrator:
         self._record_turn(message, response, intent)
         return response
 
-    def _generate_response(self, message: str, decision_context: str, actions: list[AgentAction]) -> str:
+    def _generate_response(
+        self, message: str, decision_context: str, actions: list[AgentAction], language: str = "en"
+    ) -> str:
         """Use LLM to generate a natural response grounded in policy decisions."""
         customer = self._current_customer
         active_booking = self._get_active_booking()
@@ -278,6 +281,10 @@ class AgentOrchestrator:
             booking_lines.append(line)
         booking_details = "\n".join(booking_lines)
 
+        lang_instruction = ""
+        if language == "hi":
+            lang_instruction = "\n[LANGUAGE: HINDI] You must reply in fluent, courteous, professional Hindi while strictly following all policy decisions."
+
         system_prompt = build_system_prompt(
             airline_name=AIRLINE_NAME,
             exercise_date=EXERCISE_DATE,
@@ -285,7 +292,7 @@ class AgentOrchestrator:
             booking_details=booking_details,
             policies_text=self.policies.get_all_policies_text(),
             sample_conversations=self.samples.get_formatted_examples(),
-            decision_context=decision_context,
+            decision_context=decision_context + lang_instruction,
         )
 
         return self.llm.generate(system_prompt, message, self._conversation_history or None)
