@@ -56,319 +56,365 @@ t = TRANSLATIONS.get(lang, TRANSLATIONS['en'])
 
 
 # ── Dynamic High-Contrast & Zero-Overflow CSS ──────────────────────────────────
-base_css = """
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
-    
-    * {
-        font-family: 'Plus Jakarta Sans', -apple-system, 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji', sans-serif !important;
-        box-sizing: border-box !important;
-    }
-
-    /* Zero horizontal overflow on any device */
-    html, body, [data-testid="stAppViewContainer"], .main, .block-container, [data-testid="stVerticalBlock"] {
-        max-width: 100vw !important;
-        overflow-x: hidden !important;
-        box-sizing: border-box !important;
-    }
-
-    .block-container {
-        padding: 0.75rem 0.6rem 2rem 0.6rem !important;
-        max-width: 920px !important;
-        margin: 0 auto !important;
-    }
-
-    header {visibility: hidden;}
-    footer {visibility: hidden;}
-    #MainMenu {visibility: hidden;}
-
-    /* Compact Top Toolbar Buttons */
-    .stButton > button {
-        border-radius: 8px !important;
-        font-weight: 700 !important;
-        font-size: 12px !important;
-        padding: 4px 6px !important;
-        min-height: 32px !important;
-        height: 32px !important;
-        line-height: 1.2 !important;
-        white-space: nowrap !important;
-    }
-
-    /* Tabs styling - 100% width, no overflow */
-    .stTabs {
-        width: 100% !important;
-        max-width: 100% !important;
-        overflow-x: hidden !important;
-    }
-    .stTabs [data-baseweb="tab-list"] {
-        display: flex !important;
-        width: 100% !important;
-        gap: 4px !important;
-        padding: 4px !important;
-        border-radius: 10px !important;
-    }
-    .stTabs [data-baseweb="tab"] {
-        flex: 1 1 0px !important;
-        min-width: 0 !important;
-        padding: 8px 4px !important;
-        font-size: 12px !important;
-        font-weight: 700 !important;
-        text-align: center !important;
-        justify-content: center !important;
-        border-radius: 6px !important;
-        white-space: nowrap !important;
-        overflow: hidden !important;
-        text-overflow: ellipsis !important;
-    }
-
-    /* Action Chips */
-    .action-chip {
-        display: inline-flex;
-        align-items: center;
-        gap: 5px;
-        padding: 4px 10px;
-        border-radius: 6px;
-        font-size: 11px;
-        font-weight: 700;
-        margin: 3px 3px 3px 0;
-    }
-    .chip-rebook { background: #e0f2fe; color: #0369a1 !important; border: 1px solid #bae6fd; }
-    .chip-refund { background: #dcfce7; color: #15803d !important; border: 1px solid #bbf7d0; }
-    .chip-meal { background: #fef3c7; color: #b45309 !important; border: 1px solid #fde68a; }
-    .chip-lounge { background: #f3e8ff; color: #7e22ce !important; border: 1px solid #e9d5ff; }
-    .chip-hotel { background: #ffe4e6; color: #be123c !important; border: 1px solid #fecdd3; }
-    .chip-escalate { background: #fee2e2; color: #b91c1c !important; border: 1px solid #fca5a5; }
-    .chip-decline { background: #f1f5f9; color: #475569 !important; border: 1px solid #cbd5e1; }
-</style>
-"""
-
 if not is_dark:
     # ⛅ SKY DAY THEME
-    theme_css = f"""
-    {base_css}
-    <style>
-        .stApp {{
-            background: linear-gradient(180deg, #dbeafe 0%, #e0f2fe 25%, #f0f9ff 60%, #ffffff 100%) !important;
-            color: #0f172a !important;
-        }}
+    st.markdown("""<style>
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
-        .sky-nav-banner {{
-            background: linear-gradient(135deg, #0284c7 0%, #0369a1 60%, #075985 100%);
-            color: #ffffff !important;
-            border-radius: 12px;
-            padding: 12px 16px;
-            margin-bottom: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 4px 15px rgba(2, 132, 199, 0.2);
-            flex-wrap: wrap;
-            gap: 8px;
-        }}
+* {
+    font-family: 'Plus Jakarta Sans', -apple-system, 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji', sans-serif !important;
+    box-sizing: border-box !important;
+}
 
-        .stTabs [data-baseweb="tab-list"] {{
-            background-color: #ffffff !important;
-            border: 2px solid #bae6fd !important;
-            box-shadow: 0 2px 8px rgba(2, 132, 199, 0.08) !important;
-        }}
-        .stTabs [data-baseweb="tab"] {{
-            color: #0369a1 !important;
-        }}
-        .stTabs [aria-selected="true"] {{
-            background-color: #0284c7 !important;
-            color: #ffffff !important;
-        }}
+html, body, [data-testid="stAppViewContainer"], .main, .block-container, [data-testid="stVerticalBlock"] {
+    max-width: 100vw !important;
+    overflow-x: hidden !important;
+    box-sizing: border-box !important;
+}
 
-        [data-testid="stVerticalBlockBorderWrapper"] {{
-            background-color: #ffffff !important;
-            border: 2px solid #bae6fd !important;
-            border-radius: 14px !important;
-            box-shadow: 0 4px 12px rgba(2, 132, 199, 0.06) !important;
-            padding: 0.5rem !important;
-        }}
+.block-container {
+    padding: 0.75rem 0.6rem 2rem 0.6rem !important;
+    max-width: 920px !important;
+    margin: 0 auto !important;
+}
 
-        p, span, div, h1, h2, h3, h4, label {{
-            color: #0f172a !important;
-        }}
-        .stCaption, .stCaption p {{
-            color: #475569 !important;
-            font-weight: 500 !important;
-        }}
+header {visibility: hidden;}
+footer {visibility: hidden;}
+#MainMenu {visibility: hidden;}
 
-        .stButton>button {{
-            border: 1px solid #7dd3fc !important;
-            background-color: #ffffff !important;
-            color: #0369a1 !important;
-        }}
-        .stButton>button:hover {{
-            background-color: #f0f9ff !important;
-            border-color: #0284c7 !important;
-            color: #0284c7 !important;
-        }}
+.stApp {
+    background: linear-gradient(180deg, #dbeafe 0%, #e0f2fe 25%, #f0f9ff 60%, #ffffff 100%) !important;
+    color: #0f172a !important;
+}
 
-        .stDownloadButton>button {{
-            border-radius: 10px !important;
-            font-weight: 800 !important;
-            background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%) !important;
-            color: #ffffff !important;
-            border: none !important;
-            padding: 10px 18px !important;
-            box-shadow: 0 4px 14px rgba(2, 132, 199, 0.3) !important;
-        }}
-        .stDownloadButton>button * {{
-            color: #ffffff !important;
-            font-weight: 800 !important;
-        }}
+.sky-nav-banner {
+    background: linear-gradient(135deg, #0284c7 0%, #0369a1 60%, #075985 100%);
+    color: #ffffff !important;
+    border-radius: 12px;
+    padding: 12px 16px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(2, 132, 199, 0.2);
+    flex-wrap: wrap;
+    gap: 8px;
+}
 
-        div[role="radiogroup"] {{
-            background: #ffffff !important;
-            border: 2px solid #bae6fd !important;
-            border-radius: 10px !important;
-            padding: 4px !important;
-            gap: 4px !important;
-            display: flex !important;
-            flex-direction: row !important;
-            flex-wrap: wrap !important;
-        }}
-        div[role="radiogroup"] label {{
-            background: #f0f9ff !important;
-            border: 1px solid #bae6fd !important;
-            padding: 4px 8px !important;
-            border-radius: 6px !important;
-            font-weight: 700 !important;
-            font-size: 11px !important;
-            color: #0369a1 !important;
-            flex: 1 1 calc(33.333% - 6px) !important;
-            min-width: 120px !important;
-            text-align: center !important;
-            justify-content: center !important;
-            margin: 0 !important;
-        }}
+.stButton > button {
+    border-radius: 8px !important;
+    font-weight: 700 !important;
+    font-size: 12px !important;
+    padding: 4px 6px !important;
+    min-height: 32px !important;
+    height: 32px !important;
+    line-height: 1.2 !important;
+    white-space: nowrap !important;
+    border: 1px solid #7dd3fc !important;
+    background-color: #ffffff !important;
+    color: #0369a1 !important;
+}
+.stButton > button:hover {
+    background-color: #f0f9ff !important;
+    border-color: #0284c7 !important;
+    color: #0284c7 !important;
+}
 
-        [data-testid="stChatMessage"] {{
-            background-color: #ffffff !important;
-            border: 1px solid #e0f2fe !important;
-            border-radius: 12px !important;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.03) !important;
-        }}
-    </style>
-    """
-    st.markdown(theme_css, unsafe_allow_html=True)
+.stTabs {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+}
+.stTabs [data-baseweb="tab-list"] {
+    display: flex !important;
+    width: 100% !important;
+    gap: 4px !important;
+    padding: 4px !important;
+    border-radius: 10px !important;
+    background-color: #ffffff !important;
+    border: 2px solid #bae6fd !important;
+    box-shadow: 0 2px 8px rgba(2, 132, 199, 0.08) !important;
+}
+.stTabs [data-baseweb="tab"] {
+    flex: 1 1 0px !important;
+    min-width: 0 !important;
+    padding: 8px 4px !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    text-align: center !important;
+    justify-content: center !important;
+    border-radius: 6px !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    color: #0369a1 !important;
+}
+.stTabs [aria-selected="true"] {
+    background-color: #0284c7 !important;
+    color: #ffffff !important;
+}
+
+[data-testid="stVerticalBlockBorderWrapper"] {
+    background-color: #ffffff !important;
+    border: 2px solid #bae6fd !important;
+    border-radius: 14px !important;
+    box-shadow: 0 4px 12px rgba(2, 132, 199, 0.06) !important;
+    padding: 0.5rem !important;
+}
+
+p, span, div, h1, h2, h3, h4, label {
+    color: #0f172a !important;
+}
+.stCaption, .stCaption p {
+    color: #475569 !important;
+    font-weight: 500 !important;
+}
+
+.stDownloadButton>button {
+    border-radius: 10px !important;
+    font-weight: 800 !important;
+    background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%) !important;
+    color: #ffffff !important;
+    border: none !important;
+    padding: 10px 18px !important;
+    box-shadow: 0 4px 14px rgba(2, 132, 199, 0.3) !important;
+}
+.stDownloadButton>button * {
+    color: #ffffff !important;
+    font-weight: 800 !important;
+}
+
+div[role="radiogroup"] {
+    background: #ffffff !important;
+    border: 2px solid #bae6fd !important;
+    border-radius: 10px !important;
+    padding: 4px !important;
+    gap: 4px !important;
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+}
+div[role="radiogroup"] label {
+    background: #f0f9ff !important;
+    border: 1px solid #bae6fd !important;
+    padding: 4px 8px !important;
+    border-radius: 6px !important;
+    font-weight: 700 !important;
+    font-size: 11px !important;
+    color: #0369a1 !important;
+    flex: 1 1 calc(33.333% - 6px) !important;
+    min-width: 120px !important;
+    text-align: center !important;
+    justify-content: center !important;
+    margin: 0 !important;
+}
+
+[data-testid="stChatMessage"] {
+    background-color: #ffffff !important;
+    border: 1px solid #e0f2fe !important;
+    border-radius: 12px !important;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.03) !important;
+}
+
+.action-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    margin: 3px 3px 3px 0;
+}
+.chip-rebook { background: #e0f2fe; color: #0369a1 !important; border: 1px solid #bae6fd; }
+.chip-refund { background: #dcfce7; color: #15803d !important; border: 1px solid #bbf7d0; }
+.chip-meal { background: #fef3c7; color: #b45309 !important; border: 1px solid #fde68a; }
+.chip-lounge { background: #f3e8ff; color: #7e22ce !important; border: 1px solid #e9d5ff; }
+.chip-hotel { background: #ffe4e6; color: #be123c !important; border: 1px solid #fecdd3; }
+.chip-escalate { background: #fee2e2; color: #b91c1c !important; border: 1px solid #fca5a5; }
+.chip-decline { background: #f1f5f9; color: #475569 !important; border: 1px solid #cbd5e1; }
+</style>""", unsafe_allow_html=True)
 else:
     # 🌙 STARRY NIGHT THEME
-    theme_css = f"""
-    {base_css}
-    <style>
-        .stApp {{
-            background: radial-gradient(circle at 10% 20%, #0f172a 0%, #030712 100%) !important;
-            color: #f8fafc !important;
-        }}
+    st.markdown("""<style>
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
-        .sky-nav-banner {{
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 60%, #0284c7 100%);
-            color: #ffffff !important;
-            border-radius: 12px;
-            padding: 12px 16px;
-            margin-bottom: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
-            flex-wrap: wrap;
-            gap: 8px;
-        }}
+* {
+    font-family: 'Plus Jakarta Sans', -apple-system, 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji', sans-serif !important;
+    box-sizing: border-box !important;
+}
 
-        .stTabs [data-baseweb="tab-list"] {{
-            background-color: #1e293b !important;
-            border: 1px solid rgba(255, 255, 255, 0.15) !important;
-        }}
-        .stTabs [data-baseweb="tab"] {{
-            color: #94a3b8 !important;
-        }}
-        .stTabs [aria-selected="true"] {{
-            background-color: #0284c7 !important;
-            color: #ffffff !important;
-        }}
+html, body, [data-testid="stAppViewContainer"], .main, .block-container, [data-testid="stVerticalBlock"] {
+    max-width: 100vw !important;
+    overflow-x: hidden !important;
+    box-sizing: border-box !important;
+}
 
-        [data-testid="stVerticalBlockBorderWrapper"] {{
-            background-color: #1e293b !important;
-            border: 1px solid rgba(255, 255, 255, 0.15) !important;
-            border-radius: 14px !important;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4) !important;
-            padding: 0.5rem !important;
-        }}
+.block-container {
+    padding: 0.75rem 0.6rem 2rem 0.6rem !important;
+    max-width: 920px !important;
+    margin: 0 auto !important;
+}
 
-        p, span, div, h1, h2, h3, h4, h5, h6, label, strong, b, li {{
-            color: #f8fafc !important;
-        }}
-        .stCaption, .stCaption p {{
-            color: #94a3b8 !important;
-            font-weight: 500 !important;
-        }}
+header {visibility: hidden;}
+footer {visibility: hidden;}
+#MainMenu {visibility: hidden;}
 
-        .stButton>button {{
-            background-color: #1e293b !important;
-            border: 1px solid rgba(255, 255, 255, 0.2) !important;
-            color: #38bdf8 !important;
-        }}
-        .stButton>button:hover {{
-            background-color: #0284c7 !important;
-            border-color: #38bdf8 !important;
-            color: #ffffff !important;
-        }}
+.stApp {
+    background: radial-gradient(circle at 10% 20%, #0f172a 0%, #030712 100%) !important;
+    color: #f8fafc !important;
+}
 
-        .stDownloadButton>button {{
-            border-radius: 10px !important;
-            font-weight: 800 !important;
-            background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%) !important;
-            color: #ffffff !important;
-            border: 1px solid rgba(255, 255, 255, 0.2) !important;
-            padding: 10px 18px !important;
-        }}
-        .stDownloadButton>button * {{
-            color: #ffffff !important;
-            font-weight: 800 !important;
-        }}
+.sky-nav-banner {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 60%, #0284c7 100%);
+    color: #ffffff !important;
+    border-radius: 12px;
+    padding: 12px 16px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+    flex-wrap: wrap;
+    gap: 8px;
+}
 
-        div[role="radiogroup"] {{
-            background: #1e293b !important;
-            border: 1px solid rgba(255, 255, 255, 0.15) !important;
-            border-radius: 10px !important;
-            padding: 4px !important;
-            gap: 4px !important;
-            display: flex !important;
-            flex-direction: row !important;
-            flex-wrap: wrap !important;
-        }}
-        div[role="radiogroup"] label {{
-            background: #0f172a !important;
-            border: 1px solid rgba(255, 255, 255, 0.15) !important;
-            padding: 4px 8px !important;
-            border-radius: 6px !important;
-            font-weight: 700 !important;
-            font-size: 11px !important;
-            color: #f8fafc !important;
-            flex: 1 1 calc(33.333% - 6px) !important;
-            min-width: 120px !important;
-            text-align: center !important;
-            justify-content: center !important;
-            margin: 0 !important;
-        }}
+.stButton > button {
+    border-radius: 8px !important;
+    font-weight: 700 !important;
+    font-size: 12px !important;
+    padding: 4px 6px !important;
+    min-height: 32px !important;
+    height: 32px !important;
+    line-height: 1.2 !important;
+    white-space: nowrap !important;
+    background-color: #1e293b !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    color: #38bdf8 !important;
+}
+.stButton > button:hover {
+    background-color: #0284c7 !important;
+    border-color: #38bdf8 !important;
+    color: #ffffff !important;
+}
 
-        [data-testid="stChatMessage"] {{
-            background-color: #1e293b !important;
-            border: 1px solid rgba(255, 255, 255, 0.1) !important;
-            border-radius: 12px !important;
-            color: #f8fafc !important;
-        }}
+.stTabs {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+}
+.stTabs [data-baseweb="tab-list"] {
+    display: flex !important;
+    width: 100% !important;
+    gap: 4px !important;
+    padding: 4px !important;
+    border-radius: 10px !important;
+    background-color: #1e293b !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+}
+.stTabs [data-baseweb="tab"] {
+    flex: 1 1 0px !important;
+    min-width: 0 !important;
+    padding: 8px 4px !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    text-align: center !important;
+    justify-content: center !important;
+    border-radius: 6px !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    color: #94a3b8 !important;
+}
+.stTabs [aria-selected="true"] {
+    background-color: #0284c7 !important;
+    color: #ffffff !important;
+}
 
-        hr {{
-            border-color: rgba(255, 255, 255, 0.15) !important;
-        }}
-    </style>
-    """
-    st.markdown(theme_css, unsafe_allow_html=True)
+[data-testid="stVerticalBlockBorderWrapper"] {
+    background-color: #1e293b !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    border-radius: 14px !important;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4) !important;
+    padding: 0.5rem !important;
+}
+
+p, span, div, h1, h2, h3, h4, h5, h6, label, strong, b, li {
+    color: #f8fafc !important;
+}
+.stCaption, .stCaption p {
+    color: #94a3b8 !important;
+    font-weight: 500 !important;
+}
+
+.stDownloadButton>button {
+    border-radius: 10px !important;
+    font-weight: 800 !important;
+    background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%) !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    padding: 10px 18px !important;
+}
+.stDownloadButton>button * {
+    color: #ffffff !important;
+    font-weight: 800 !important;
+}
+
+div[role="radiogroup"] {
+    background: #1e293b !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    border-radius: 10px !important;
+    padding: 4px !important;
+    gap: 4px !important;
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+}
+div[role="radiogroup"] label {
+    background: #0f172a !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    padding: 4px 8px !important;
+    border-radius: 6px !important;
+    font-weight: 700 !important;
+    font-size: 11px !important;
+    color: #f8fafc !important;
+    flex: 1 1 calc(33.333% - 6px) !important;
+    min-width: 120px !important;
+    text-align: center !important;
+    justify-content: center !important;
+    margin: 0 !important;
+}
+
+[data-testid="stChatMessage"] {
+    background-color: #1e293b !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 12px !important;
+    color: #f8fafc !important;
+}
+
+hr {
+    border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+.action-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    margin: 3px 3px 3px 0;
+}
+.chip-rebook { background: #e0f2fe; color: #0369a1 !important; border: 1px solid #bae6fd; }
+.chip-refund { background: #dcfce7; color: #15803d !important; border: 1px solid #bbf7d0; }
+.chip-meal { background: #fef3c7; color: #b45309 !important; border: 1px solid #fde68a; }
+.chip-lounge { background: #f3e8ff; color: #7e22ce !important; border: 1px solid #e9d5ff; }
+.chip-hotel { background: #ffe4e6; color: #be123c !important; border: 1px solid #fecdd3; }
+.chip-escalate { background: #fee2e2; color: #b91c1c !important; border: 1px solid #fca5a5; }
+.chip-decline { background: #f1f5f9; color: #475569 !important; border: 1px solid #cbd5e1; }
+</style>""", unsafe_allow_html=True)
 
 
 # ── Initialization ─────────────────────────────────────────────────────────────
