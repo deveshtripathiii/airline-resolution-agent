@@ -1,9 +1,9 @@
 """SkyWay Airlines Disruption Resolution Portal.
 
 Features:
-- Clean passenger display without member tier badges
+- Instant 1-tap passenger switcher (Zero dropdown popover glitches)
+- Clean passenger view without member tier labels
 - Flawless Night Mode & Day Mode with 100% text contrast
-- High-contrast dropdown popovers
 - Native Streamlit containers for boarding pass & policy cards
 - Grounded multi-turn conversational agent
 """
@@ -124,26 +124,20 @@ if not is_dark:
             color: #0369a1 !important;
         }
 
-        /* Dropdown & Popover Styling */
-        .stSelectbox div[data-baseweb="select"] {
-            background-color: #ffffff !important;
-            border-radius: 8px !important;
-            border: 1px solid #7dd3fc !important;
-            color: #0f172a !important;
-            font-weight: 600 !important;
+        /* Radio Pill Selection Styling */
+        div[role="radiogroup"] {
+            background: #ffffff !important;
+            border: 2px solid #bae6fd !important;
+            border-radius: 12px !important;
+            padding: 8px !important;
+            gap: 10px !important;
         }
-        div[data-baseweb="popover"], ul[data-testid="stSelectboxVirtualDropdown"], div[data-baseweb="menu"] {
-            background-color: #ffffff !important;
+        div[role="radiogroup"] label {
+            background: #f0f9ff !important;
             border: 1px solid #bae6fd !important;
-            border-radius: 10px !important;
-        }
-        li[role="option"], li[role="option"] span, li[role="option"] div {
-            color: #0f172a !important;
-            background-color: #ffffff !important;
-            font-weight: 600 !important;
-        }
-        li[role="option"]:hover, li[role="option"]:hover span, li[role="option"]:hover div, li[aria-selected="true"] {
-            background-color: #e0f2fe !important;
+            padding: 6px 14px !important;
+            border-radius: 8px !important;
+            font-weight: 700 !important;
             color: #0369a1 !important;
         }
 
@@ -238,28 +232,21 @@ else:
             color: #38bdf8 !important;
         }
 
-        /* Dropdown & Popover Dark Styling */
-        .stSelectbox div[data-baseweb="select"] {
-            background-color: #1e293b !important;
+        /* Radio Pill Selection Styling Dark */
+        div[role="radiogroup"] {
+            background: #1e293b !important;
+            border: 1px solid rgba(255, 255, 255, 0.15) !important;
+            border-radius: 12px !important;
+            padding: 8px !important;
+            gap: 10px !important;
+        }
+        div[role="radiogroup"] label {
+            background: #0f172a !important;
+            border: 1px solid rgba(255, 255, 255, 0.15) !important;
+            padding: 6px 14px !important;
             border-radius: 8px !important;
-            border: 1px solid rgba(255, 255, 255, 0.25) !important;
+            font-weight: 700 !important;
             color: #f8fafc !important;
-            font-weight: 600 !important;
-        }
-        div[data-baseweb="popover"], ul[data-testid="stSelectboxVirtualDropdown"], div[data-baseweb="menu"] {
-            background-color: #0f172a !important;
-            border: 1px solid rgba(255, 255, 255, 0.2) !important;
-            border-radius: 10px !important;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8) !important;
-        }
-        li[role="option"], li[role="option"] span, li[role="option"] div {
-            color: #f8fafc !important;
-            background-color: #0f172a !important;
-            font-weight: 600 !important;
-        }
-        li[role="option"]:hover, li[role="option"]:hover span, li[role="option"]:hover div, li[aria-selected="true"] {
-            background-color: #0284c7 !important;
-            color: #ffffff !important;
         }
 
         [data-testid="stChatMessage"] {
@@ -317,7 +304,7 @@ def get_orchestrator() -> AgentOrchestrator:
         st.session_state.booking_repo = BookingRepository()
         st.session_state.policy_repo = PolicyRepository()
         st.session_state.messages = []
-        st.session_state.selected_customer = None
+        st.session_state.selected_customer = "Priya Nair"
 
     return st.session_state.orchestrator
 
@@ -325,7 +312,7 @@ def get_orchestrator() -> AgentOrchestrator:
 orchestrator = get_orchestrator()
 
 
-# ── Chip Renderer ──────────────────────────────────────────────────────
+# ── Chip Renderer ──────────────────────────────────────────────────────────────
 def render_chip(action_type: str) -> str:
     badges = {
         "rebook": ("✈️ Priority Rebooking Authorized", "chip-rebook"),
@@ -360,25 +347,29 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 
-# ── Top Control Bar (Passenger Selector + Day/Night Toggle + Reset) ─────────────
+# ── 1-Tap Passenger Switcher Bar (Zero Dropdown Glitches) ───────────────────────
 customers = st.session_state.customer_repo.get_all()
-cust_map = {f"{c.name} (PNR: {c.booking_reference})": c.name for c in customers}
-options_list = ["— Select Verified Passenger Itinerary —"] + list(cust_map.keys())
+cust_map = {
+    f"👤 {c.name}  (PNR: {c.booking_reference})": c.name 
+    for c in customers
+}
+radio_options = list(cust_map.keys())
 
 current_idx = 0
 if st.session_state.selected_customer:
-    for i, label in enumerate(options_list):
-        if label != options_list[0] and cust_map[label] == st.session_state.selected_customer:
+    for i, (label, name) in enumerate(cust_map.items()):
+        if name == st.session_state.selected_customer:
             current_idx = i
             break
 
-col_pnr, col_theme, col_reset = st.columns([3, 1, 1])
+col_passengers, col_theme, col_reset = st.columns([3.5, 1, 0.8])
 
-with col_pnr:
-    selected_label = st.selectbox(
-        "Passenger Itinerary Verification:",
-        options=options_list,
+with col_passengers:
+    selected_label = st.radio(
+        "Select Passenger Itinerary:",
+        options=radio_options,
         index=current_idx,
+        horizontal=True,
         label_visibility="collapsed",
     )
 
@@ -389,19 +380,18 @@ with col_theme:
         st.rerun()
 
 with col_reset:
-    if st.button("🔄 New Session", use_container_width=True):
+    if st.button("🔄 Reset", use_container_width=True):
         st.session_state.messages = []
         if st.session_state.selected_customer:
             orchestrator.set_customer(st.session_state.selected_customer)
         st.rerun()
 
-if selected_label != options_list[0]:
-    chosen_name = cust_map[selected_label]
-    if chosen_name != st.session_state.selected_customer:
-        st.session_state.selected_customer = chosen_name
-        orchestrator.set_customer(chosen_name)
-        st.session_state.messages = []
-        st.rerun()
+chosen_name = cust_map[selected_label]
+if chosen_name != st.session_state.selected_customer:
+    st.session_state.selected_customer = chosen_name
+    orchestrator.set_customer(chosen_name)
+    st.session_state.messages = []
+    st.rerun()
 
 
 active_cust = orchestrator.current_customer
@@ -469,25 +459,7 @@ tab_chat, tab_policy, tab_records = st.tabs([
 # ───────────────────────────────────────────────────────────────────────────────
 with tab_chat:
     if not active_cust:
-        st.info("👈 **Please select your verified passenger booking from the dropdown above to begin.**")
-        
-        st.markdown("#### ✈️ Flight Disruption Network Status")
-        sc1, sc2, sc3 = st.columns(3)
-        with sc1:
-            with st.container(border=True):
-                st.markdown("**Flight SK-204 (DEL → GOI)**")
-                st.error("● Cancelled (Operational)")
-                st.caption("Passenger: **Priya Nair**\n\nPolicy: Free Rebooking (24h) OR Full Refund (7 Days)")
-        with sc2:
-            with st.container(border=True):
-                st.markdown("**Flight SK-118 (BOM → BLR)**")
-                st.warning("● Delayed 4 Hours (11:10)")
-                st.caption("Passenger: **Arvind Kulkarni**\n\nPolicy: Meal Voucher + Lounge Access")
-        with sc3:
-            with st.container(border=True):
-                st.markdown("**Flight SK-305 (DEL → HYD)**")
-                st.warning("● Delayed 6 Hours (20:00)")
-                st.caption("Passenger: **Meher Kaur**\n\nPolicy: Meal + Lounge + Transit Hotel + Supervisor Review")
+        st.info("👈 **Please select your verified passenger booking from above to begin.**")
     else:
         # Welcome message
         if not st.session_state.messages:
@@ -550,19 +522,19 @@ with tab_chat:
         st.caption("⚡ Quick Passenger Requests:")
         q1, q2, q3, q4 = st.columns(4)
         with q1:
-            if st.button("💰 Request Full Refund", key="b_ref_act3", use_container_width=True):
+            if st.button("💰 Request Full Refund", key="b_ref_act4", use_container_width=True):
                 st.session_state.pending_prompt = "I would like to request a full refund for my flight."
                 st.rerun()
         with q2:
-            if st.button("✈️ Request Priority Rebook", key="b_reb_act3", use_container_width=True):
+            if st.button("✈️ Request Priority Rebook", key="b_reb_act4", use_container_width=True):
                 st.session_state.pending_prompt = "Please rebook me on the next available flight."
                 st.rerun()
         with q3:
-            if st.button("🍽️ Claim Meal & Lounge", key="b_vou_act3", use_container_width=True):
+            if st.button("🍽️ Claim Meal & Lounge", key="b_vou_act4", use_container_width=True):
                 st.session_state.pending_prompt = "What meal vouchers and lounge access am I entitled to?"
                 st.rerun()
         with q4:
-            if st.button("🏨 Inquire Transit Hotel", key="b_hot_act3", use_container_width=True):
+            if st.button("🏨 Inquire Transit Hotel", key="b_hot_act4", use_container_width=True):
                 st.session_state.pending_prompt = "Can you arrange hotel accommodation for my delay?"
                 st.rerun()
 
