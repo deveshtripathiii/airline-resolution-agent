@@ -2,8 +2,8 @@
 
 Features:
 - Flawless Night Mode & Day Mode with 100% text contrast
-- High-contrast typography for headings, metrics, captions, and tabs
-- Zero HTML rendering bugs via native Streamlit containers
+- High-contrast dropdown popovers (zero white-on-white text)
+- Native Streamlit containers for boarding pass & policy cards
 - Grounded multi-turn conversational agent
 """
 
@@ -43,7 +43,7 @@ if "theme_mode" not in st.session_state:
 is_dark = st.session_state.theme_mode == "night_dark"
 
 
-# ── High-Contrast Dynamic CSS for Light & Night Modes ─────────────────────────
+# ── Dynamic High-Contrast CSS for Light & Night Modes ─────────────────────────
 if not is_dark:
     # ⛅ SKY DAY THEME
     st.markdown("""
@@ -59,7 +59,6 @@ if not is_dark:
             color: #0f172a !important;
         }
 
-        /* Top Header */
         .sky-nav-banner {
             background: linear-gradient(135deg, #0284c7 0%, #0369a1 60%, #075985 100%);
             color: #ffffff !important;
@@ -72,7 +71,6 @@ if not is_dark:
             box-shadow: 0 8px 20px rgba(2, 132, 199, 0.25);
         }
 
-        /* Tab Navigation Bar */
         .stTabs [data-baseweb="tab-list"] {
             background-color: #ffffff !important;
             border-radius: 12px !important;
@@ -94,7 +92,6 @@ if not is_dark:
             color: #ffffff !important;
         }
 
-        /* Bordered Containers */
         [data-testid="stVerticalBlockBorderWrapper"] {
             background-color: #ffffff !important;
             border: 2px solid #bae6fd !important;
@@ -102,7 +99,6 @@ if not is_dark:
             box-shadow: 0 4px 15px rgba(2, 132, 199, 0.06) !important;
         }
 
-        /* Text & Metrics */
         p, span, div, h1, h2, h3, h4, label {
             color: #0f172a !important;
         }
@@ -119,7 +115,6 @@ if not is_dark:
             font-weight: 600 !important;
         }
 
-        /* Buttons & Inputs */
         .stButton>button {
             border-radius: 8px !important;
             font-weight: 700 !important;
@@ -128,6 +123,7 @@ if not is_dark:
             color: #0369a1 !important;
         }
 
+        /* Dropdown & Popover Styling */
         .stSelectbox div[data-baseweb="select"] {
             background-color: #ffffff !important;
             border-radius: 8px !important;
@@ -135,8 +131,21 @@ if not is_dark:
             color: #0f172a !important;
             font-weight: 600 !important;
         }
+        div[data-baseweb="popover"], ul[data-testid="stSelectboxVirtualDropdown"], div[data-baseweb="menu"] {
+            background-color: #ffffff !important;
+            border: 1px solid #bae6fd !important;
+            border-radius: 10px !important;
+        }
+        li[role="option"], li[role="option"] span, li[role="option"] div {
+            color: #0f172a !important;
+            background-color: #ffffff !important;
+            font-weight: 600 !important;
+        }
+        li[role="option"]:hover, li[role="option"]:hover span, li[role="option"]:hover div, li[aria-selected="true"] {
+            background-color: #e0f2fe !important;
+            color: #0369a1 !important;
+        }
 
-        /* Chat Bubbles */
         [data-testid="stChatMessage"] {
             background-color: #ffffff !important;
             border: 1px solid #e0f2fe !important;
@@ -146,7 +155,7 @@ if not is_dark:
     </style>
     """, unsafe_allow_html=True)
 else:
-    # 🌙 STARRY NIGHT THEME (Comprehensive High-Contrast White & Cyan on Dark)
+    # 🌙 STARRY NIGHT THEME (Aviation Midnight)
     st.markdown("""
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
@@ -160,7 +169,6 @@ else:
             color: #f8fafc !important;
         }
 
-        /* Top Header */
         .sky-nav-banner {
             background: linear-gradient(135deg, #0f172a 0%, #1e293b 60%, #0284c7 100%);
             color: #ffffff !important;
@@ -174,7 +182,6 @@ else:
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
         }
 
-        /* Tab Navigation Bar */
         .stTabs [data-baseweb="tab-list"] {
             background-color: #1e293b !important;
             border-radius: 12px !important;
@@ -195,7 +202,6 @@ else:
             color: #ffffff !important;
         }
 
-        /* Bordered Containers */
         [data-testid="stVerticalBlockBorderWrapper"] {
             background-color: #1e293b !important;
             border: 1px solid rgba(255, 255, 255, 0.15) !important;
@@ -203,7 +209,6 @@ else:
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4) !important;
         }
 
-        /* Universal Text Visibility in Night Mode */
         p, span, div, h1, h2, h3, h4, h5, h6, label, strong, b, li {
             color: #f8fafc !important;
         }
@@ -220,7 +225,6 @@ else:
             font-weight: 600 !important;
         }
 
-        /* Buttons & Inputs */
         .stButton>button {
             border-radius: 8px !important;
             font-weight: 700 !important;
@@ -233,6 +237,7 @@ else:
             color: #38bdf8 !important;
         }
 
+        /* Dropdown & Popover Dark Styling */
         .stSelectbox div[data-baseweb="select"] {
             background-color: #1e293b !important;
             border-radius: 8px !important;
@@ -240,8 +245,22 @@ else:
             color: #f8fafc !important;
             font-weight: 600 !important;
         }
+        div[data-baseweb="popover"], ul[data-testid="stSelectboxVirtualDropdown"], div[data-baseweb="menu"] {
+            background-color: #0f172a !important;
+            border: 1px solid rgba(255, 255, 255, 0.2) !important;
+            border-radius: 10px !important;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8) !important;
+        }
+        li[role="option"], li[role="option"] span, li[role="option"] div {
+            color: #f8fafc !important;
+            background-color: #0f172a !important;
+            font-weight: 600 !important;
+        }
+        li[role="option"]:hover, li[role="option"]:hover span, li[role="option"]:hover div, li[aria-selected="true"] {
+            background-color: #0284c7 !important;
+            color: #ffffff !important;
+        }
 
-        /* Chat Bubbles */
         [data-testid="stChatMessage"] {
             background-color: #1e293b !important;
             border: 1px solid rgba(255, 255, 255, 0.1) !important;
@@ -249,7 +268,6 @@ else:
             color: #f8fafc !important;
         }
 
-        /* Dividers */
         hr {
             border-color: rgba(255, 255, 255, 0.15) !important;
         }
@@ -532,19 +550,19 @@ with tab_chat:
         st.caption("⚡ Quick Passenger Requests:")
         q1, q2, q3, q4 = st.columns(4)
         with q1:
-            if st.button("💰 Request Full Refund", key="b_ref_act", use_container_width=True):
+            if st.button("💰 Request Full Refund", key="b_ref_act2", use_container_width=True):
                 st.session_state.pending_prompt = "I would like to request a full refund for my flight."
                 st.rerun()
         with q2:
-            if st.button("✈️ Request Priority Rebook", key="b_reb_act", use_container_width=True):
+            if st.button("✈️ Request Priority Rebook", key="b_reb_act2", use_container_width=True):
                 st.session_state.pending_prompt = "Please rebook me on the next available flight."
                 st.rerun()
         with q3:
-            if st.button("🍽️ Claim Meal & Lounge", key="b_vou_act", use_container_width=True):
+            if st.button("🍽️ Claim Meal & Lounge", key="b_vou_act2", use_container_width=True):
                 st.session_state.pending_prompt = "What meal vouchers and lounge access am I entitled to?"
                 st.rerun()
         with q4:
-            if st.button("🏨 Inquire Transit Hotel", key="b_hot_act", use_container_width=True):
+            if st.button("🏨 Inquire Transit Hotel", key="b_hot_act2", use_container_width=True):
                 st.session_state.pending_prompt = "Can you arrange hotel accommodation for my delay?"
                 st.rerun()
 
