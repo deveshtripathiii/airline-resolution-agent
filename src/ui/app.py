@@ -494,6 +494,26 @@ with tab_chat:
                     chips_html = "".join([render_chip(a) for a in msg["actions"]])
                     st.markdown(f"<div style='margin-top: 8px;'>{chips_html}</div>", unsafe_allow_html=True)
 
+        # Quick Passenger Action Chips placed directly ABOVE the input box
+        st.markdown("<div style='margin-top: 16px; margin-bottom: 6px; font-size: 12px; font-weight: 700; color: #0284c7;'>⚡ Quick Resolution Options:</div>", unsafe_allow_html=True)
+        q1, q2, q3, q4 = st.columns(4)
+        with q1:
+            if st.button("💰 Request Full Refund", key="b_ref_top", use_container_width=True):
+                st.session_state.pending_prompt = "I would like to request a full refund for my flight."
+                st.rerun()
+        with q2:
+            if st.button("✈️ Request Free Rebooking", key="b_reb_top", use_container_width=True):
+                st.session_state.pending_prompt = "Please rebook me on the next available flight."
+                st.rerun()
+        with q3:
+            if st.button("🍽️ Claim Meal & Lounge", key="b_vou_top", use_container_width=True):
+                st.session_state.pending_prompt = "What meal vouchers and lounge access am I entitled to?"
+                st.rerun()
+        with q4:
+            if st.button("🏨 Inquire Transit Hotel", key="b_hot_top", use_container_width=True):
+                st.session_state.pending_prompt = "Can you arrange hotel accommodation for my delay?"
+                st.rerun()
+
         # Chat Input Bar
         user_input = None
         if "pending_prompt" in st.session_state and st.session_state.pending_prompt:
@@ -516,27 +536,6 @@ with tab_chat:
                 "actions": [a.action_type.value for a in resp.actions_taken],
             })
             st.rerun()
-
-        # Passenger Quick Options
-        st.markdown("---")
-        st.caption("⚡ Quick Passenger Requests:")
-        q1, q2, q3, q4 = st.columns(4)
-        with q1:
-            if st.button("💰 Request Full Refund", key="b_ref_act4", use_container_width=True):
-                st.session_state.pending_prompt = "I would like to request a full refund for my flight."
-                st.rerun()
-        with q2:
-            if st.button("✈️ Request Priority Rebook", key="b_reb_act4", use_container_width=True):
-                st.session_state.pending_prompt = "Please rebook me on the next available flight."
-                st.rerun()
-        with q3:
-            if st.button("🍽️ Claim Meal & Lounge", key="b_vou_act4", use_container_width=True):
-                st.session_state.pending_prompt = "What meal vouchers and lounge access am I entitled to?"
-                st.rerun()
-        with q4:
-            if st.button("🏨 Inquire Transit Hotel", key="b_hot_act4", use_container_width=True):
-                st.session_state.pending_prompt = "Can you arrange hotel accommodation for my delay?"
-                st.rerun()
 
 
 # ───────────────────────────────────────────────────────────────────────────────
