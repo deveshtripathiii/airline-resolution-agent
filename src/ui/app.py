@@ -27,6 +27,9 @@ from src.config import EXERCISE_DATE, GEMINI_API_KEY
 from src.data_access.repository import BookingRepository, CustomerRepository, PolicyRepository
 from src.domain.models import ActionType, BookingStatus
 from src.llm.client import GeminiClient, SmartDeterministicClient
+import importlib
+import src.ui.translations as trans_mod
+importlib.reload(trans_mod)
 from src.ui.translations import TRANSLATIONS
 from src.utils.pdf_generator import generate_claim_slip_pdf
 
@@ -49,7 +52,7 @@ if "language" not in st.session_state:
 
 is_dark = st.session_state.theme_mode == "night_dark"
 lang = st.session_state.language
-t = TRANSLATIONS[lang]
+t = TRANSLATIONS.get(lang, TRANSLATIONS['en'])
 
 
 # ── Dynamic High-Contrast CSS for Light & Night Modes ─────────────────────────
