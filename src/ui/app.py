@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import json
 import sys
+import textwrap
 from datetime import datetime
 from pathlib import Path
 
@@ -33,8 +34,13 @@ st.set_page_config(
 )
 
 
+# ── Custom HTML helper to avoid markdown 4-space code block traps ─────────────
+def render_html(html_str: str) -> None:
+    st.markdown(textwrap.dedent(html_str).strip(), unsafe_allow_html=True)
+
+
 # ── Production-Grade Luxury Airline CSS ───────────────────────────────────────
-st.markdown("""
+render_html("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap');
     
@@ -210,7 +216,7 @@ st.markdown("""
     .tag-platinum { background: rgba(192, 132, 252, 0.2); color: #e9d5ff; border: 1px solid rgba(192, 132, 252, 0.4); }
     .tag-silver { background: rgba(148, 163, 184, 0.2); color: #e2e8f0; border: 1px solid rgba(148, 163, 184, 0.4); }
 
-    /* Flight Path Telemetry */
+    /* Flight Route Telemetry */
     .telemetry-route {
         display: flex;
         justify-content: space-between;
@@ -293,31 +299,6 @@ st.markdown("""
         border: 1px solid rgba(16, 185, 129, 0.4);
     }
 
-    /* Action Decision Cards in Chat */
-    .claim-card {
-        background: rgba(30, 41, 59, 0.7);
-        border: 1px solid rgba(255, 255, 255, 0.12);
-        border-radius: 14px;
-        padding: 14px 18px;
-        margin: 10px 0;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 12px;
-    }
-
-    .claim-title {
-        font-size: 13px;
-        font-weight: 700;
-        color: #ffffff;
-    }
-
-    .claim-desc {
-        font-size: 11px;
-        color: #94a3b8;
-        margin-top: 2px;
-    }
-
     .escalation-handover-card {
         background: linear-gradient(135deg, rgba(239, 68, 68, 0.25), rgba(153, 27, 27, 0.35));
         border: 1px solid #ef4444;
@@ -349,7 +330,6 @@ st.markdown("""
     .c-escalate { background: rgba(239, 68, 68, 0.25); color: #fca5a5; border: 1px solid #ef4444; }
     .c-decline { background: rgba(148, 163, 184, 0.15); color: #cbd5e1; border: 1px solid rgba(148, 163, 184, 0.35); }
 
-    /* Policy Sheet View */
     .rule-box {
         background: #1e293b;
         border: 1px solid rgba(255, 255, 255, 0.08);
@@ -358,7 +338,6 @@ st.markdown("""
         margin-bottom: 12px;
     }
 
-    /* Mobile Responsive Optimizations */
     @media (max-width: 768px) {
         .portal-header {
             padding: 12px 16px;
@@ -376,7 +355,7 @@ st.markdown("""
         }
     }
 </style>
-""", unsafe_allow_html=True)
+""")
 
 
 # ── Initialization ─────────────────────────────────────────────────────────────
@@ -417,7 +396,7 @@ def render_chip(action_type: str) -> str:
 
 
 # ── Top Navigation Header ──────────────────────────────────────────────────────
-st.markdown(f"""
+render_html(f"""
 <div class="portal-header">
     <div class="brand-cluster">
         <div class="brand-emblem">✈</div>
@@ -431,7 +410,7 @@ st.markdown(f"""
         <span>Live Operational System • {EXERCISE_DATE}</span>
     </div>
 </div>
-""", unsafe_allow_html=True)
+""")
 
 
 # ── Passenger Verification & Selection Bar ─────────────────────────────────────
@@ -497,54 +476,52 @@ if active_cust:
             status_label = f"DELAYED {active_booking.delay_hours}H (EST: {active_booking.new_departure})"
 
     # ── Boarding Pass Visual ───────────────────────────────────────────────────
-    st.markdown(f"""
-    <div class="flight-pass-hero">
-        <div class="pass-profile-header">
-            <div class="passenger-info-block">
-                <div class="p-avatar {avatar_css}">{initials}</div>
-                <div>
-                    <div style="font-size: 18px; font-weight: 700; color: #ffffff;">{active_cust.name}</div>
-                    <div style="font-size: 12px; color: #94a3b8; margin-top: 2px;">
-                        PNR: <strong style="color: #38bdf8;">{active_cust.booking_reference}</strong> &nbsp;•&nbsp; 
-                        <span class="tag-tier {tag_css}">{tier_val} TIER</span>
-                    </div>
-                </div>
-            </div>
+    render_html(f"""
+<div class="flight-pass-hero">
+    <div class="pass-profile-header">
+        <div class="passenger-info-block">
+            <div class="p-avatar {avatar_css}">{initials}</div>
             <div>
-                <span class="disruption-pill {status_pill_class}">● {status_label}</span>
+                <div style="font-size: 18px; font-weight: 700; color: #ffffff;">{active_cust.name}</div>
+                <div style="font-size: 12px; color: #94a3b8; margin-top: 2px;">
+                    PNR: <strong style="color: #38bdf8;">{active_cust.booking_reference}</strong> &nbsp;•&nbsp; 
+                    <span class="tag-tier {tag_css}">{tier_val} TIER</span>
+                </div>
             </div>
         </div>
-
-        <div class="telemetry-route">
-            <div class="city-block">
-                <div class="city-iata">{origin_city.upper()[:3]}</div>
-                <div class="city-full">{origin_city}</div>
-            </div>
-            <div class="vector-track">
-                <div style="font-size: 12px; color: #38bdf8; font-weight: 700; margin-bottom: 6px;">
-                    Flight {active_booking.flight if active_booking else 'SK-204'}
-                </div>
-                <div class="track-line">
-                    <div class="track-jet">✈</div>
-                </div>
-                <div style="font-size: 11px; color: #94a3b8; margin-top: 6px;">
-                    Scheduled: {active_booking.scheduled_departure if active_booking else '18:40'}
-                    {f" &nbsp;•&nbsp; <strong style='color:#fdba74;'>Rescheduled: {active_booking.new_departure}</strong>" if active_booking.delay_hours else ""}
-                </div>
-            </div>
-            <div class="city-block">
-                <div class="city-iata">{dest_city.upper()[:3]}</div>
-                <div class="city-full">{dest_city}</div>
-            </div>
-        </div>
-
-        <div style="display: flex; justify-content: space-between; font-size: 12px; color: #94a3b8; margin-top: 8px; flex-wrap: wrap; gap: 10px;">
-            <div>✈ Annual Travel: <strong style="color: #f8fafc;">{active_cust.travel_history.flights_last_12_months} flights (12M)</strong></div>
-            <div>📋 Service Records: <strong style="color: #f8fafc;">{active_cust.travel_history.prior_complaints} logged</strong></div>
-            <div>✉️ Registered: <strong style="color: #f8fafc;">{active_cust.contact.email}</strong></div>
+        <div>
+            <span class="disruption-pill {status_pill_class}">● {status_label}</span>
         </div>
     </div>
-    """, unsafe_allow_html=True)
+    <div class="telemetry-route">
+        <div class="city-block">
+            <div class="city-iata">{origin_city.upper()[:3]}</div>
+            <div class="city-full">{origin_city}</div>
+        </div>
+        <div class="vector-track">
+            <div style="font-size: 12px; color: #38bdf8; font-weight: 700; margin-bottom: 6px;">
+                Flight {active_booking.flight if active_booking else 'SK-204'}
+            </div>
+            <div class="track-line">
+                <div class="track-jet">✈</div>
+            </div>
+            <div style="font-size: 11px; color: #94a3b8; margin-top: 6px;">
+                Scheduled: {active_booking.scheduled_departure if active_booking else '18:40'}
+                {f" &nbsp;•&nbsp; <strong style='color:#fdba74;'>Rescheduled: {active_booking.new_departure}</strong>" if active_booking.delay_hours else ""}
+            </div>
+        </div>
+        <div class="city-block">
+            <div class="city-iata">{dest_city.upper()[:3]}</div>
+            <div class="city-full">{dest_city}</div>
+        </div>
+    </div>
+    <div style="display: flex; justify-content: space-between; font-size: 12px; color: #94a3b8; margin-top: 8px; flex-wrap: wrap; gap: 10px;">
+        <div>✈ Annual Travel: <strong style="color: #f8fafc;">{active_cust.travel_history.flights_last_12_months} flights (12M)</strong></div>
+        <div>📋 Service Records: <strong style="color: #f8fafc;">{active_cust.travel_history.prior_complaints} logged</strong></div>
+        <div>✉️ Registered: <strong style="color: #f8fafc;">{active_cust.contact.email}</strong></div>
+    </div>
+</div>
+""")
 
 
 # ── Main Tabbed Experience ─────────────────────────────────────────────────────
@@ -560,7 +537,13 @@ tab_chat, tab_policy, tab_records = st.tabs([
 # ───────────────────────────────────────────────────────────────────────────────
 with tab_chat:
     if not active_cust:
-        st.info("👈 **Please select a passenger booking from the dropdown above to access live disruption care.**")
+        render_html("""
+        <div style="background: rgba(30, 41, 59, 0.6); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 20px; text-align: center; margin-bottom: 20px;">
+            <div style="font-size: 24px; margin-bottom: 8px;">✈️</div>
+            <div style="font-size: 16px; font-weight: 700; color: #ffffff;">Please select your verified passenger booking above to access care services.</div>
+            <div style="font-size: 13px; color: #94a3b8; margin-top: 4px;">Self-service options for cancellations, flight delays, meal vouchers, and lounge passes.</div>
+        </div>
+        """)
         
         st.markdown("#### ✈️ Flight Disruption Network Status")
         sc1, sc2, sc3 = st.columns(3)
@@ -611,7 +594,7 @@ with tab_chat:
             is_assistant = msg["role"] == "assistant"
             with st.chat_message(msg["role"], avatar="✈️" if is_assistant else "👤"):
                 if msg.get("escalated"):
-                    st.markdown(f"""
+                    render_html("""
                     <div class="escalation-handover-card">
                         <div style="font-size: 24px;">🚨</div>
                         <div>
@@ -621,13 +604,13 @@ with tab_chat:
                             </div>
                         </div>
                     </div>
-                    """, unsafe_allow_html=True)
+                    """)
 
                 st.markdown(msg["content"])
 
                 if msg.get("actions"):
                     chips_html = "".join([render_chip(a) for a in msg["actions"]])
-                    st.markdown(f"<div style='margin-top: 10px;'>{chips_html}</div>", unsafe_allow_html=True)
+                    render_html(f"<div style='margin-top: 10px;'>{chips_html}</div>")
 
         # Chat Input Bar
         user_input = None
@@ -683,7 +666,7 @@ with tab_policy:
 
     r1, r2 = st.columns(2)
     with r1:
-        st.markdown("""
+        render_html("""
         <div class="rule-box">
             <h4 style="color: #38bdf8; margin: 0 0 8px 0;">1. Cancellation Rebooking Policy</h4>
             <p style="font-size: 13px; color: #cbd5e1; line-height: 1.5;">
@@ -701,10 +684,10 @@ with tab_policy:
                 • <strong>Over 5 Hours Delay:</strong> Meal Voucher + Lounge Access + Hotel Accommodation covering the delayed-hours duration only (not a full night's stay).
             </p>
         </div>
-        """, unsafe_allow_html=True)
+        """)
 
     with r2:
-        st.markdown("""
+        render_html("""
         <div class="rule-box">
             <h4 style="color: #34d399; margin: 0 0 8px 0;">3. Fare Difference & Rebooking Authority</h4>
             <p style="font-size: 13px; color: #cbd5e1; line-height: 1.5;">
@@ -721,7 +704,7 @@ with tab_policy:
                 <br/>• <em>Note:</em> Loyalty status does not authorize complimentary cabin upgrades or compensation beyond standard policy.
             </p>
         </div>
-        """, unsafe_allow_html=True)
+        """)
 
 
 # ───────────────────────────────────────────────────────────────────────────────
