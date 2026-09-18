@@ -52,9 +52,9 @@ lang = st.session_state.language
 t = TRANSLATIONS.get(lang, TRANSLATIONS['en'])
 
 
-# ── Dynamic Ultra-Luxury & High-Contrast CSS ──────────────────────────────────
+# ── Dynamic Ultra-Luxury & High-Contrast CSS (Royal Saffron & Sunset Orange) ──
 if not is_dark:
-    # ⛅ EXECUTIVE LUXURY DAY THEME (Singapore Airlines / Emirates Inspired)
+    # ⛅ ROYAL SAFFRON & SUNSET ORANGE DAY THEME
     st.markdown("""<style>
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
 
@@ -80,10 +80,10 @@ footer {visibility: hidden;}
 #MainMenu {visibility: hidden;}
 
 .stApp {
-    background: radial-gradient(at 10% 0%, rgba(37, 99, 235, 0.04) 0px, transparent 50%),
-                radial-gradient(at 90% 0%, rgba(14, 165, 233, 0.05) 0px, transparent 50%),
-                #f8fafc !important;
-    color: #0f172a !important;
+    background: radial-gradient(at 10% 0%, rgba(249, 115, 22, 0.05) 0px, transparent 50%),
+                radial-gradient(at 90% 0%, rgba(245, 158, 11, 0.06) 0px, transparent 50%),
+                #fafaf9 !important;
+    color: #1c1917 !important;
 }
 
 [data-testid="stHorizontalBlock"] {
@@ -102,7 +102,7 @@ footer {visibility: hidden;}
     overflow: visible !important;
 }
 
-/* Premium Buttons */
+/* Saffron & Orange Buttons */
 .stButton > button {
     border-radius: 10px !important;
     font-weight: 700 !important;
@@ -112,31 +112,31 @@ footer {visibility: hidden;}
     height: 36px !important;
     line-height: 1.2 !important;
     white-space: nowrap !important;
-    border: 1px solid #e2e8f0 !important;
+    border: 1px solid #e7e5e4 !important;
     background-color: #ffffff !important;
-    color: #1e293b !important;
-    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04) !important;
+    color: #292524 !important;
+    box-shadow: 0 1px 3px rgba(28, 25, 23, 0.04) !important;
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 .stButton > button:hover {
-    background-color: #f1f5f9 !important;
-    border-color: #cbd5e1 !important;
-    color: #0f172a !important;
+    background-color: #fff7ed !important;
+    border-color: #fdba74 !important;
+    color: #ea580c !important;
     transform: translateY(-1px) !important;
-    box-shadow: 0 4px 10px rgba(15, 23, 42, 0.08) !important;
+    box-shadow: 0 4px 10px rgba(234, 88, 12, 0.12) !important;
 }
 .stButton > button[kind="primary"] {
-    background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%) !important;
+    background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%) !important;
     color: #ffffff !important;
-    border: 1px solid #1e3a8a !important;
-    box-shadow: 0 4px 14px rgba(30, 58, 138, 0.25) !important;
+    border: 1px solid #c2410c !important;
+    box-shadow: 0 4px 14px rgba(234, 88, 12, 0.3) !important;
 }
 .stButton > button[kind="primary"] * {
     color: #ffffff !important;
     font-weight: 800 !important;
 }
 
-/* Modern Tabs */
+/* Saffron Modern Tabs */
 .stTabs {
     width: 100% !important;
     max-width: 100% !important;
@@ -148,8 +148,8 @@ footer {visibility: hidden;}
     gap: 6px !important;
     padding: 5px !important;
     border-radius: 12px !important;
-    background-color: #f1f5f9 !important;
-    border: 1px solid #e2e8f0 !important;
+    background-color: #f5f5f4 !important;
+    border: 1px solid #e7e5e4 !important;
 }
 .stTabs [data-baseweb="tab"] {
     flex: 1 1 0px !important;
@@ -163,45 +163,46 @@ footer {visibility: hidden;}
     white-space: nowrap !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;
-    color: #64748b !important;
+    color: #78716c !important;
     transition: all 0.2s ease !important;
 }
 .stTabs [aria-selected="true"] {
     background: #ffffff !important;
-    color: #0f172a !important;
-    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08) !important;
+    color: #ea580c !important;
+    box-shadow: 0 2px 8px rgba(234, 88, 12, 0.12) !important;
+    border-bottom: 2px solid #ea580c !important;
 }
 
 [data-testid="stVerticalBlockBorderWrapper"] {
     background-color: #ffffff !important;
-    border: 1px solid #e2e8f0 !important;
+    border: 1px solid #e7e5e4 !important;
     border-radius: 16px !important;
-    box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05), 0 2px 6px -1px rgba(15, 23, 42, 0.02) !important;
+    box-shadow: 0 4px 20px -2px rgba(28, 25, 23, 0.05), 0 2px 6px -1px rgba(28, 25, 23, 0.02) !important;
     padding: 0.85rem !important;
 }
 
 p, span, div, h1, h2, h3, h4, label {
-    color: #0f172a !important;
+    color: #1c1917 !important;
 }
 .stCaption, .stCaption p {
-    color: #64748b !important;
+    color: #78716c !important;
     font-weight: 500 !important;
 }
 
-/* Luxury Download Button */
+/* Saffron Luxury Download Button */
 .stDownloadButton>button {
     border-radius: 12px !important;
     font-weight: 800 !important;
-    background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%) !important;
+    background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%) !important;
     color: #ffffff !important;
     border: 1px solid rgba(255, 255, 255, 0.15) !important;
     padding: 12px 20px !important;
-    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.2) !important;
+    box-shadow: 0 4px 16px rgba(234, 88, 12, 0.3) !important;
     transition: all 0.2s ease !important;
 }
 .stDownloadButton>button:hover {
     transform: translateY(-1px) !important;
-    box-shadow: 0 6px 20px rgba(15, 23, 42, 0.3) !important;
+    box-shadow: 0 6px 20px rgba(234, 88, 12, 0.4) !important;
 }
 .stDownloadButton>button * {
     color: #ffffff !important;
@@ -211,9 +212,9 @@ p, span, div, h1, h2, h3, h4, label {
 /* Chat Message Styling */
 [data-testid="stChatMessage"] {
     background-color: #ffffff !important;
-    border: 1px solid #e2e8f0 !important;
+    border: 1px solid #f5f5f4 !important;
     border-radius: 16px !important;
-    box-shadow: 0 2px 10px rgba(15, 23, 42, 0.03) !important;
+    box-shadow: 0 2px 10px rgba(28, 25, 23, 0.03) !important;
     padding: 16px 18px 20px 18px !important;
     margin-bottom: 14px !important;
     overflow: visible !important;
@@ -229,31 +230,31 @@ p, span, div, h1, h2, h3, h4, label {
 }
 [data-testid="stChatInput"] > div, .stChatInput > div {
     background-color: #ffffff !important;
-    border: 1.5px solid #cbd5e1 !important;
+    border: 1.5px solid #d6d3d1 !important;
     border-radius: 16px !important;
-    box-shadow: 0 4px 18px rgba(15, 23, 42, 0.08) !important;
+    box-shadow: 0 4px 18px rgba(28, 25, 23, 0.06) !important;
     transition: all 0.2s ease !important;
 }
 [data-testid="stChatInput"] > div:focus-within, .stChatInput > div:focus-within {
-    border-color: #1e3a8a !important;
-    box-shadow: 0 4px 20px rgba(30, 58, 138, 0.15) !important;
+    border-color: #ea580c !important;
+    box-shadow: 0 4px 20px rgba(234, 88, 12, 0.2) !important;
 }
 [data-testid="stChatInput"] textarea, .stChatInput textarea {
     background-color: #ffffff !important;
-    color: #0f172a !important;
+    color: #1c1917 !important;
     font-size: 14px !important;
     font-weight: 600 !important;
-    caret-color: #1e3a8a !important;
+    caret-color: #ea580c !important;
 }
 [data-testid="stChatInput"] textarea::placeholder, .stChatInput textarea::placeholder {
-    color: #94a3b8 !important;
+    color: #a8a29e !important;
     font-weight: 500 !important;
 }
 [data-testid="stChatInput"] button, .stChatInput button {
-    color: #1e3a8a !important;
+    color: #ea580c !important;
 }
 
-/* Ultra-Refined Action Chips */
+/* Saffron Action Chips */
 .action-chip {
     display: inline-flex;
     align-items: center;
@@ -265,16 +266,16 @@ p, span, div, h1, h2, h3, h4, label {
     margin: 4px 4px 4px 0;
     letter-spacing: 0.2px;
 }
-.chip-rebook { background: #eff6ff; color: #1d4ed8 !important; border: 1px solid #bfdbfe; }
+.chip-rebook { background: #fff7ed; color: #c2410c !important; border: 1px solid #ffedd5; }
 .chip-refund { background: #ecfdf5; color: #047857 !important; border: 1px solid #a7f3d0; }
 .chip-meal { background: #fffbeb; color: #b45309 !important; border: 1px solid #fde68a; }
 .chip-lounge { background: #faf5ff; color: #7e22ce !important; border: 1px solid #e9d5ff; }
 .chip-hotel { background: #fff1f2; color: #be123c !important; border: 1px solid #fecdd3; }
 .chip-escalate { background: #fef2f2; color: #b91c1c !important; border: 1px solid #fca5a5; }
-.chip-decline { background: #f8fafc; color: #475569 !important; border: 1px solid #e2e8f0; }
+.chip-decline { background: #f5f5f4; color: #57534e !important; border: 1px solid #e7e5e4; }
 </style>""", unsafe_allow_html=True)
 else:
-    # 🌙 MIDNIGHT OBSIDIAN THEME (Ultra-Modern Dark Aviation)
+    # 🌙 ROYAL SAFFRON MIDNIGHT THEME
     st.markdown("""<style>
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
 
@@ -300,10 +301,10 @@ footer {visibility: hidden;}
 #MainMenu {visibility: hidden;}
 
 .stApp {
-    background: radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.08) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(99, 102, 241, 0.06) 0px, transparent 50%),
-                #090d16 !important;
-    color: #f8fafc !important;
+    background: radial-gradient(at 0% 0%, rgba(249, 115, 22, 0.12) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(245, 158, 11, 0.08) 0px, transparent 50%),
+                #0c0a09 !important;
+    color: #fafaf9 !important;
 }
 
 [data-testid="stHorizontalBlock"] {
@@ -322,7 +323,7 @@ footer {visibility: hidden;}
     overflow: visible !important;
 }
 
-/* Premium Dark Buttons */
+/* Premium Dark Saffron Buttons */
 .stButton > button {
     border-radius: 10px !important;
     font-weight: 700 !important;
@@ -332,31 +333,31 @@ footer {visibility: hidden;}
     height: 36px !important;
     line-height: 1.2 !important;
     white-space: nowrap !important;
-    background-color: #131b2e !important;
+    background-color: #1c1917 !important;
     border: 1px solid rgba(255, 255, 255, 0.12) !important;
-    color: #38bdf8 !important;
+    color: #fb923c !important;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3) !important;
     transition: all 0.2s ease !important;
 }
 .stButton > button:hover {
-    background-color: #1e293b !important;
-    border-color: #38bdf8 !important;
+    background-color: #292524 !important;
+    border-color: #fb923c !important;
     color: #ffffff !important;
     transform: translateY(-1px) !important;
-    box-shadow: 0 4px 12px rgba(56, 189, 248, 0.2) !important;
+    box-shadow: 0 4px 12px rgba(249, 115, 22, 0.25) !important;
 }
 .stButton > button[kind="primary"] {
-    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%) !important;
+    background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%) !important;
     color: #ffffff !important;
     border: 1px solid rgba(255, 255, 255, 0.2) !important;
-    box-shadow: 0 4px 16px rgba(37, 99, 235, 0.35) !important;
+    box-shadow: 0 4px 16px rgba(234, 88, 12, 0.4) !important;
 }
 .stButton > button[kind="primary"] * {
     color: #ffffff !important;
     font-weight: 800 !important;
 }
 
-/* Dark Modern Tabs */
+/* Dark Saffron Tabs */
 .stTabs {
     width: 100% !important;
     max-width: 100% !important;
@@ -368,7 +369,7 @@ footer {visibility: hidden;}
     gap: 6px !important;
     padding: 5px !important;
     border-radius: 12px !important;
-    background-color: #0f172a !important;
+    background-color: #1c1917 !important;
     border: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
 .stTabs [data-baseweb="tab"] {
@@ -383,16 +384,16 @@ footer {visibility: hidden;}
     white-space: nowrap !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;
-    color: #94a3b8 !important;
+    color: #a8a29e !important;
 }
 .stTabs [aria-selected="true"] {
-    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%) !important;
+    background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%) !important;
     color: #ffffff !important;
-    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3) !important;
+    box-shadow: 0 4px 12px rgba(234, 88, 12, 0.35) !important;
 }
 
 [data-testid="stVerticalBlockBorderWrapper"] {
-    background-color: #111827 !important;
+    background-color: #171412 !important;
     border: 1px solid rgba(255, 255, 255, 0.08) !important;
     border-radius: 16px !important;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5) !important;
@@ -400,21 +401,21 @@ footer {visibility: hidden;}
 }
 
 p, span, div, h1, h2, h3, h4, h5, h6, label, strong, b, li {
-    color: #f8fafc !important;
+    color: #fafaf9 !important;
 }
 .stCaption, .stCaption p {
-    color: #94a3b8 !important;
+    color: #a8a29e !important;
     font-weight: 500 !important;
 }
 
 .stDownloadButton>button {
     border-radius: 12px !important;
     font-weight: 800 !important;
-    background: linear-gradient(135deg, #2563eb 0%, #0284c7 100%) !important;
+    background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%) !important;
     color: #ffffff !important;
     border: 1px solid rgba(255, 255, 255, 0.2) !important;
     padding: 12px 20px !important;
-    box-shadow: 0 4px 16px rgba(37, 99, 235, 0.3) !important;
+    box-shadow: 0 4px 16px rgba(234, 88, 12, 0.35) !important;
 }
 .stDownloadButton>button * {
     color: #ffffff !important;
@@ -422,10 +423,10 @@ p, span, div, h1, h2, h3, h4, h5, h6, label, strong, b, li {
 }
 
 [data-testid="stChatMessage"] {
-    background-color: #111827 !important;
+    background-color: #171412 !important;
     border: 1px solid rgba(255, 255, 255, 0.08) !important;
     border-radius: 16px !important;
-    color: #f8fafc !important;
+    color: #fafaf9 !important;
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4) !important;
     padding: 16px 18px 20px 18px !important;
     margin-bottom: 14px !important;
@@ -441,24 +442,24 @@ p, span, div, h1, h2, h3, h4, h5, h6, label, strong, b, li {
     background-color: transparent !important;
 }
 [data-testid="stChatInput"] > div, .stChatInput > div {
-    background-color: #131b2e !important;
+    background-color: #1c1917 !important;
     border: 1.5px solid rgba(255, 255, 255, 0.15) !important;
     border-radius: 16px !important;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5) !important;
 }
 [data-testid="stChatInput"] textarea, .stChatInput textarea {
-    background-color: #131b2e !important;
-    color: #f8fafc !important;
+    background-color: #1c1917 !important;
+    color: #fafaf9 !important;
     font-size: 14px !important;
     font-weight: 600 !important;
-    caret-color: #38bdf8 !important;
+    caret-color: #fb923c !important;
 }
 [data-testid="stChatInput"] textarea::placeholder, .stChatInput textarea::placeholder {
-    color: #94a3b8 !important;
+    color: #a8a29e !important;
     font-weight: 500 !important;
 }
 [data-testid="stChatInput"] button, .stChatInput button {
-    color: #38bdf8 !important;
+    color: #fb923c !important;
 }
 
 hr {
@@ -476,13 +477,13 @@ hr {
     margin: 4px 4px 4px 0;
     letter-spacing: 0.2px;
 }
-.chip-rebook { background: rgba(37, 99, 235, 0.2); color: #60a5fa !important; border: 1px solid rgba(59, 130, 246, 0.4); }
+.chip-rebook { background: rgba(234, 88, 12, 0.2); color: #fb923c !important; border: 1px solid rgba(249, 115, 22, 0.4); }
 .chip-refund { background: rgba(5, 150, 105, 0.2); color: #34d399 !important; border: 1px solid rgba(16, 185, 129, 0.4); }
 .chip-meal { background: rgba(217, 119, 6, 0.2); color: #fbbf24 !important; border: 1px solid rgba(245, 158, 11, 0.4); }
 .chip-lounge { background: rgba(126, 34, 206, 0.2); color: #c084fc !important; border: 1px solid rgba(168, 85, 247, 0.4); }
 .chip-hotel { background: rgba(190, 18, 60, 0.2); color: #fb7185 !important; border: 1px solid rgba(244, 63, 94, 0.4); }
 .chip-escalate { background: rgba(185, 28, 28, 0.2); color: #f87171 !important; border: 1px solid rgba(239, 68, 68, 0.4); }
-.chip-decline { background: rgba(71, 85, 105, 0.2); color: #cbd5e1 !important; border: 1px solid rgba(100, 116, 139, 0.4); }
+.chip-decline { background: rgba(87, 83, 78, 0.2); color: #d6d3d1 !important; border: 1px solid rgba(120, 113, 108, 0.4); }
 </style>""", unsafe_allow_html=True)
 
 
@@ -542,12 +543,12 @@ def render_chip(action_type: str, language: str = "en") -> str:
 top_brand, top_lang, top_theme, top_reset = st.columns([3.4, 0.95, 0.45, 0.45])
 
 with top_brand:
-    brand_title_color = "#0f172a" if not is_dark else "#f8fafc"
-    brand_sub_color = "#d97706" if not is_dark else "#fbbf24"
-    icon_bg = "linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%)" if not is_dark else "linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%)"
+    brand_title_color = "#1c1917" if not is_dark else "#fafaf9"
+    brand_sub_color = "#ea580c" if not is_dark else "#fb923c"
+    icon_bg = "linear-gradient(135deg, #ea580c 0%, #c2410c 100%)"
     st.markdown(f"""
     <div style="display: flex; align-items: center; gap: 10px; overflow: visible; padding: 2px 0;">
-        <div style="width: 36px; height: 36px; border-radius: 10px; background: {icon_bg}; display: flex; align-items: center; justify-content: center; color: #ffffff; font-size: 17px; box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15); flex-shrink: 0;">✈️</div>
+        <div style="width: 36px; height: 36px; border-radius: 10px; background: {icon_bg}; display: flex; align-items: center; justify-content: center; color: #ffffff; font-size: 17px; box-shadow: 0 3px 10px rgba(234, 88, 12, 0.25); flex-shrink: 0;">✈️</div>
         <div style="overflow: visible; white-space: nowrap;">
             <div style="font-size: 15px; font-weight: 800; letter-spacing: -0.2px; color: {brand_title_color}; line-height: 1.2;">SKYWAY AIRLINES</div>
             <div style="font-size: 9.5px; font-weight: 700; color: {brand_sub_color}; text-transform: uppercase; letter-spacing: 0.5px; line-height: 1.2;">Executive Concierge • 23 Sep 2026</div>
@@ -626,7 +627,7 @@ if active_cust:
             status_html = f"<span style='background:#fef2f2; color:#dc2626; padding:4px 12px; border-radius:8px; font-weight:800; font-size:11px; border:1px solid #fecaca; box-shadow: 0 1px 3px rgba(220, 38, 38, 0.1);'>● {t['status_cancelled']}</span>"
         elif active_booking.status == BookingStatus.DELAYED:
             status_text = t['status_delayed'].format(hours=active_booking.delay_hours, est=active_booking.new_departure)
-            status_html = f"<span style='background:#fffbeb; color:#d97706; padding:4px 12px; border-radius:8px; font-weight:800; font-size:11px; border:1px solid #fde68a; box-shadow: 0 1px 3px rgba(217, 119, 6, 0.1);'>● {status_text}</span>"
+            status_html = f"<span style='background:#fff7ed; color:#ea580c; padding:4px 12px; border-radius:8px; font-weight:800; font-size:11px; border:1px solid #fed7aa; box-shadow: 0 1px 3px rgba(234, 88, 12, 0.1);'>● {status_text}</span>"
         else:
             status_html = f"<span style='background:#ecfdf5; color:#059669; padding:4px 12px; border-radius:8px; font-weight:800; font-size:11px; border:1px solid #a7f3d0; box-shadow: 0 1px 3px rgba(5, 150, 105, 0.1);'>● {t['status_ontime']}</span>"
     else:
@@ -636,16 +637,16 @@ if active_cust:
         f"👑 {active_cust.loyalty_tier.value} Elite" if active_cust.loyalty_tier.value == "Platinum" else f"🥈 {active_cust.loyalty_tier.value} Member"
     )
 
-    card_text_primary = "#0f172a" if not is_dark else "#f8fafc"
-    card_text_muted = "#64748b" if not is_dark else "#94a3b8"
-    accent_blue = "#1e3a8a" if not is_dark else "#38bdf8"
-    flight_box_bg = "background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); border: 1px solid #e2e8f0;" if not is_dark else "background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08);"
-    telemetry_item_bg = "background: #ffffff; border: 1px solid #e2e8f0;" if not is_dark else "background: #131b2e; border: 1px solid rgba(255, 255, 255, 0.08);"
+    card_text_primary = "#1c1917" if not is_dark else "#fafaf9"
+    card_text_muted = "#78716c" if not is_dark else "#a8a29e"
+    accent_orange = "#ea580c" if not is_dark else "#fb923c"
+    flight_box_bg = "background: linear-gradient(135deg, #fff7ed 0%, #fffbeb 100%); border: 1px solid #fed7aa;" if not is_dark else "background: rgba(249, 115, 22, 0.04); border: 1px solid rgba(249, 115, 22, 0.15);"
+    telemetry_item_bg = "background: #ffffff; border: 1px solid #e7e5e4;" if not is_dark else "background: #1c1917; border: 1px solid rgba(255, 255, 255, 0.08);"
 
     flight_num = active_booking.flight if active_booking else "SK-204"
     sched_str = f"Sch: <b>{active_booking.scheduled_departure}</b>" if active_booking else "Sch: 18:40"
     if active_booking and active_booking.delay_hours:
-        sched_str += f" &nbsp;•&nbsp; <span style='color:#d97706; font-weight:700;'>Est: {active_booking.new_departure}</span>"
+        sched_str += f" &nbsp;•&nbsp; <span style='color:#ea580c; font-weight:700;'>Est: {active_booking.new_departure}</span>"
 
     # ── Luxury Digital Boarding Pass Container ─────────────────────────────────
     with st.container(border=True):
@@ -654,10 +655,10 @@ if active_cust:
             <div>
                 <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
                     <span style="font-size: 17px; font-weight: 800; color: {card_text_primary}; letter-spacing: -0.2px;">👤 {active_cust.name}</span>
-                    <span style="font-size: 11px; background: {'#fffbeb' if not is_dark else 'rgba(245, 158, 11, 0.15)'}; color: {'#b45309' if not is_dark else '#fbbf24'}; padding: 3px 9px; border-radius: 6px; font-weight: 700; border: 1px solid {'#fde68a' if not is_dark else 'rgba(245, 158, 11, 0.3)'};">{tier_badge}</span>
+                    <span style="font-size: 11px; background: {'#fff7ed' if not is_dark else 'rgba(249, 115, 22, 0.15)'}; color: {'#c2410c' if not is_dark else '#fb923c'}; padding: 3px 9px; border-radius: 6px; font-weight: 700; border: 1px solid {'#fed7aa' if not is_dark else 'rgba(249, 115, 22, 0.3)'};">{tier_badge}</span>
                 </div>
                 <div style="font-size: 11px; color: {card_text_muted}; margin-top: 3px;">
-                    {t['pnr_label']}: <span style="font-family: monospace; font-weight: 800; color: {accent_blue}; background: {'#eff6ff' if not is_dark else 'rgba(56, 189, 248, 0.15)'}; padding: 1px 6px; border-radius: 4px;">{active_cust.booking_reference}</span> • {t['contact_label']}: {active_cust.contact.email}
+                    {t['pnr_label']}: <span style="font-family: monospace; font-weight: 800; color: {accent_orange}; background: {'#fff7ed' if not is_dark else 'rgba(249, 115, 22, 0.15)'}; padding: 1px 6px; border-radius: 4px; border: 1px solid {'#fed7aa' if not is_dark else 'rgba(249, 115, 22, 0.3)'};">{active_cust.booking_reference}</span> • {t['contact_label']}: {active_cust.contact.email}
                 </div>
             </div>
             <div style="align-self: center;">
@@ -672,11 +673,11 @@ if active_cust:
                     <div style="font-size: 10.5px; color: {card_text_muted}; font-weight: 600; margin-top: 2px;">{origin_city}</div>
                 </div>
                 <div style="flex: 1; padding: 0 10px; text-align: center; min-width: 0;">
-                    <div style="font-size: 12px; font-weight: 800; color: {accent_blue}; letter-spacing: 0.3px;">Flight {flight_num}</div>
+                    <div style="font-size: 12px; font-weight: 800; color: {accent_orange}; letter-spacing: 0.3px;">Flight {flight_num}</div>
                     <div style="display: flex; align-items: center; justify-content: center; gap: 6px; margin: 3px 0;">
                         <span style="font-size: 13px;">✈</span>
-                        <div style="flex: 1; height: 2px; border-bottom: 2px dashed {'#cbd5e1' if not is_dark else 'rgba(255, 255, 255, 0.2)'}; max-width: 120px;"></div>
-                        <span style="font-size: 12px; font-weight: 800; color: {accent_blue};">➔</span>
+                        <div style="flex: 1; height: 2px; border-bottom: 2px dashed {'#fdba74' if not is_dark else 'rgba(249, 115, 22, 0.4)'}; max-width: 120px;"></div>
+                        <span style="font-size: 12px; font-weight: 800; color: {accent_orange};">➔</span>
                     </div>
                     <div style="font-size: 10.5px; color: {card_text_muted};">{sched_str}</div>
                 </div>
@@ -972,7 +973,7 @@ with tab_chat:
                     ]
 
         # Quick Passenger Action Chips placed directly ABOVE the input box (2x2 grid for comfortable tap)
-        action_header_color = "#0f172a" if not is_dark else "#f8fafc"
+        action_header_color = "#ea580c" if not is_dark else "#fb923c"
         st.markdown(f"<div style='margin-top: 14px; margin-bottom: 8px; font-size: 11.5px; font-weight: 800; color: {action_header_color}; letter-spacing: 0.3px;'>✦ {t['quick_actions_title']}</div>", unsafe_allow_html=True)
         q_row1_1, q_row1_2 = st.columns(2)
         with q_row1_1:
