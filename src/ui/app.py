@@ -92,9 +92,14 @@ footer {visibility: hidden;}
     flex-wrap: nowrap !important;
     align-items: center !important;
     gap: 6px !important;
+    overflow: visible !important;
 }
 [data-testid="stHorizontalBlock"] > [data-testid="stColumn"] {
     min-width: 0 !important;
+    overflow: visible !important;
+}
+.stMarkdown {
+    overflow: visible !important;
 }
 
 /* Premium Buttons */
@@ -307,9 +312,14 @@ footer {visibility: hidden;}
     flex-wrap: nowrap !important;
     align-items: center !important;
     gap: 6px !important;
+    overflow: visible !important;
 }
 [data-testid="stHorizontalBlock"] > [data-testid="stColumn"] {
     min-width: 0 !important;
+    overflow: visible !important;
+}
+.stMarkdown {
+    overflow: visible !important;
 }
 
 /* Premium Dark Buttons */
@@ -529,24 +539,24 @@ def render_chip(action_type: str, language: str = "en") -> str:
 
 
 # ── Top Unified Toolbar (Luxury Brand Header + 3 Micro-Toggles in ONE row) ───
-top_brand, top_lang, top_theme, top_reset = st.columns([1.9, 1.1, 0.5, 0.5])
+top_brand, top_lang, top_theme, top_reset = st.columns([3.4, 0.95, 0.45, 0.45])
 
 with top_brand:
     brand_title_color = "#0f172a" if not is_dark else "#f8fafc"
     brand_sub_color = "#d97706" if not is_dark else "#fbbf24"
     icon_bg = "linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%)" if not is_dark else "linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%)"
     st.markdown(f"""
-    <div style="display: flex; align-items: center; gap: 8px; padding-top: 1px;">
-        <div style="width: 32px; height: 32px; border-radius: 9px; background: {icon_bg}; display: flex; align-items: center; justify-content: center; color: #ffffff; font-size: 15px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15); flex-shrink: 0;">✈️</div>
-        <div>
-            <div style="font-size: 13.5px; font-weight: 800; letter-spacing: -0.2px; color: {brand_title_color}; line-height: 1.1;">SKYWAY AIRLINES</div>
-            <div style="font-size: 8.5px; font-weight: 700; color: {brand_sub_color}; text-transform: uppercase; letter-spacing: 0.4px;">Executive Concierge • 23 Sep 2026</div>
+    <div style="display: flex; align-items: center; gap: 10px; overflow: visible; padding: 2px 0;">
+        <div style="width: 36px; height: 36px; border-radius: 10px; background: {icon_bg}; display: flex; align-items: center; justify-content: center; color: #ffffff; font-size: 17px; box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15); flex-shrink: 0;">✈️</div>
+        <div style="overflow: visible; white-space: nowrap;">
+            <div style="font-size: 15px; font-weight: 800; letter-spacing: -0.2px; color: {brand_title_color}; line-height: 1.2;">SKYWAY AIRLINES</div>
+            <div style="font-size: 9.5px; font-weight: 700; color: {brand_sub_color}; text-transform: uppercase; letter-spacing: 0.5px; line-height: 1.2;">Executive Concierge • 23 Sep 2026</div>
         </div>
     </div>
     """, unsafe_allow_html=True)
 
 with top_lang:
-    lang_btn_text = "🌐 हिन्दी" if lang == "en" else "🌐 English"
+    lang_btn_text = "🌐 हिन्दी" if lang == "en" else "🌐 EN"
     if st.button(lang_btn_text, key="top_lang_btn", use_container_width=True):
         st.session_state.language = "hi" if lang == "en" else "en"
         st.session_state.messages = []
