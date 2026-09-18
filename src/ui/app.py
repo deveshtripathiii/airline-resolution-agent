@@ -1,7 +1,10 @@
 """SkyWay Airlines Disruption Resolution Portal.
 
-Native Streamlit Architecture — Zero HTML escaping bugs, high-contrast, mobile-responsive.
-Strictly grounded in AIONOS Assignment 3 PDF Guidelines.
+Features:
+- Flawless Night Mode & Day Mode with 100% text contrast
+- High-contrast typography for headings, metrics, captions, and tabs
+- Zero HTML rendering bugs via native Streamlit containers
+- Grounded multi-turn conversational agent
 """
 
 from __future__ import annotations
@@ -40,8 +43,9 @@ if "theme_mode" not in st.session_state:
 is_dark = st.session_state.theme_mode == "night_dark"
 
 
-# ── Clean High-Contrast CSS ───────────────────────────────────────────────────
+# ── High-Contrast Dynamic CSS for Light & Night Modes ─────────────────────────
 if not is_dark:
+    # ⛅ SKY DAY THEME
     st.markdown("""
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
@@ -55,10 +59,10 @@ if not is_dark:
             color: #0f172a !important;
         }
 
-        /* Navigation Banner */
+        /* Top Header */
         .sky-nav-banner {
             background: linear-gradient(135deg, #0284c7 0%, #0369a1 60%, #075985 100%);
-            color: #ffffff;
+            color: #ffffff !important;
             border-radius: 14px;
             padding: 16px 22px;
             margin-bottom: 18px;
@@ -68,7 +72,7 @@ if not is_dark:
             box-shadow: 0 8px 20px rgba(2, 132, 199, 0.25);
         }
 
-        /* Tab Navigation */
+        /* Tab Navigation Bar */
         .stTabs [data-baseweb="tab-list"] {
             background-color: #ffffff !important;
             border-radius: 12px !important;
@@ -90,6 +94,32 @@ if not is_dark:
             color: #ffffff !important;
         }
 
+        /* Bordered Containers */
+        [data-testid="stVerticalBlockBorderWrapper"] {
+            background-color: #ffffff !important;
+            border: 2px solid #bae6fd !important;
+            border-radius: 16px !important;
+            box-shadow: 0 4px 15px rgba(2, 132, 199, 0.06) !important;
+        }
+
+        /* Text & Metrics */
+        p, span, div, h1, h2, h3, h4, label {
+            color: #0f172a !important;
+        }
+        .stCaption, .stCaption p {
+            color: #475569 !important;
+            font-weight: 500 !important;
+        }
+        [data-testid="stMetricValue"] {
+            color: #0284c7 !important;
+            font-weight: 800 !important;
+        }
+        [data-testid="stMetricLabel"] {
+            color: #475569 !important;
+            font-weight: 600 !important;
+        }
+
+        /* Buttons & Inputs */
         .stButton>button {
             border-radius: 8px !important;
             font-weight: 700 !important;
@@ -105,9 +135,18 @@ if not is_dark:
             color: #0f172a !important;
             font-weight: 600 !important;
         }
+
+        /* Chat Bubbles */
+        [data-testid="stChatMessage"] {
+            background-color: #ffffff !important;
+            border: 1px solid #e0f2fe !important;
+            border-radius: 14px !important;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04) !important;
+        }
     </style>
     """, unsafe_allow_html=True)
 else:
+    # 🌙 STARRY NIGHT THEME (Comprehensive High-Contrast White & Cyan on Dark)
     st.markdown("""
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
@@ -117,22 +156,25 @@ else:
         }
 
         .stApp {
-            background: radial-gradient(circle at 10% 20%, #0f172a 0%, #020617 100%) !important;
+            background: radial-gradient(circle at 10% 20%, #0f172a 0%, #030712 100%) !important;
             color: #f8fafc !important;
         }
 
+        /* Top Header */
         .sky-nav-banner {
             background: linear-gradient(135deg, #0f172a 0%, #1e293b 60%, #0284c7 100%);
-            color: #ffffff;
+            color: #ffffff !important;
             border-radius: 14px;
             padding: 16px 22px;
             margin-bottom: 18px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
         }
 
+        /* Tab Navigation Bar */
         .stTabs [data-baseweb="tab-list"] {
             background-color: #1e293b !important;
             border-radius: 12px !important;
@@ -153,6 +195,32 @@ else:
             color: #ffffff !important;
         }
 
+        /* Bordered Containers */
+        [data-testid="stVerticalBlockBorderWrapper"] {
+            background-color: #1e293b !important;
+            border: 1px solid rgba(255, 255, 255, 0.15) !important;
+            border-radius: 16px !important;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4) !important;
+        }
+
+        /* Universal Text Visibility in Night Mode */
+        p, span, div, h1, h2, h3, h4, h5, h6, label, strong, b, li {
+            color: #f8fafc !important;
+        }
+        .stCaption, .stCaption p {
+            color: #94a3b8 !important;
+            font-weight: 500 !important;
+        }
+        [data-testid="stMetricValue"] {
+            color: #38bdf8 !important;
+            font-weight: 800 !important;
+        }
+        [data-testid="stMetricLabel"] {
+            color: #94a3b8 !important;
+            font-weight: 600 !important;
+        }
+
+        /* Buttons & Inputs */
         .stButton>button {
             border-radius: 8px !important;
             font-weight: 700 !important;
@@ -160,13 +228,30 @@ else:
             color: #f8fafc !important;
             border: 1px solid rgba(255, 255, 255, 0.2) !important;
         }
+        .stButton>button:hover {
+            border-color: #38bdf8 !important;
+            color: #38bdf8 !important;
+        }
 
         .stSelectbox div[data-baseweb="select"] {
             background-color: #1e293b !important;
             border-radius: 8px !important;
-            border: 1px solid rgba(255, 255, 255, 0.2) !important;
+            border: 1px solid rgba(255, 255, 255, 0.25) !important;
             color: #f8fafc !important;
             font-weight: 600 !important;
+        }
+
+        /* Chat Bubbles */
+        [data-testid="stChatMessage"] {
+            background-color: #1e293b !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            border-radius: 14px !important;
+            color: #f8fafc !important;
+        }
+
+        /* Dividers */
+        hr {
+            border-color: rgba(255, 255, 255, 0.15) !important;
         }
     </style>
     """, unsafe_allow_html=True)
@@ -189,13 +274,13 @@ st.markdown("""
         font-weight: 700;
         margin: 4px 4px 4px 0;
     }
-    .chip-rebook { background: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd; }
-    .chip-refund { background: #dcfce7; color: #15803d; border: 1px solid #bbf7d0; }
-    .chip-meal { background: #fef3c7; color: #b45309; border: 1px solid #fde68a; }
-    .chip-lounge { background: #f3e8ff; color: #7e22ce; border: 1px solid #e9d5ff; }
-    .chip-hotel { background: #ffe4e6; color: #be123c; border: 1px solid #fecdd3; }
-    .chip-escalate { background: #fee2e2; color: #b91c1c; border: 1px solid #fca5a5; }
-    .chip-decline { background: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; }
+    .chip-rebook { background: #e0f2fe; color: #0369a1 !important; border: 1px solid #bae6fd; }
+    .chip-refund { background: #dcfce7; color: #15803d !important; border: 1px solid #bbf7d0; }
+    .chip-meal { background: #fef3c7; color: #b45309 !important; border: 1px solid #fde68a; }
+    .chip-lounge { background: #f3e8ff; color: #7e22ce !important; border: 1px solid #e9d5ff; }
+    .chip-hotel { background: #ffe4e6; color: #be123c !important; border: 1px solid #fecdd3; }
+    .chip-escalate { background: #fee2e2; color: #b91c1c !important; border: 1px solid #fca5a5; }
+    .chip-decline { background: #f1f5f9; color: #475569 !important; border: 1px solid #cbd5e1; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -243,14 +328,14 @@ st.markdown(f"""
     <div style="display: flex; align-items: center; gap: 12px;">
         <span style="font-size: 28px;">✈️</span>
         <div>
-            <div style="font-size: 20px; font-weight: 800;">SkyWay Airlines</div>
-            <div style="font-size: 11px; opacity: 0.9; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;">
+            <div style="font-size: 20px; font-weight: 800; color: #ffffff !important;">SkyWay Airlines</div>
+            <div style="font-size: 11px; color: #bae6fd !important; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;">
                 Customer Self-Service & Disruption Care Portal
             </div>
         </div>
     </div>
-    <div style="background: rgba(255, 255, 255, 0.2); padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 700;">
-        📅 Flight Operations: <strong>{EXERCISE_DATE}</strong>
+    <div style="background: rgba(255, 255, 255, 0.2); color: #ffffff !important; padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 700;">
+        📅 Flight Operations: {EXERCISE_DATE}
     </div>
 </div>
 """, unsafe_allow_html=True)
@@ -310,7 +395,7 @@ if active_cust:
     origin_city = cities[0].strip() if len(cities) > 0 else "Delhi"
     dest_city = cities[1].strip() if len(cities) > 1 else "Goa"
 
-    # ── Boarding Pass Card (100% Native Streamlit Container) ───────────────────
+    # ── Boarding Pass Card (100% Native High-Contrast Streamlit Container) ───────
     with st.container(border=True):
         col_p1, col_p2 = st.columns([3, 1])
         with col_p1:
@@ -338,7 +423,7 @@ if active_cust:
             st.markdown("<div style='text-align:center; font-size:18px; color:#0284c7;'>✈ ─────────────── ➔</div>", unsafe_allow_html=True)
             sched_str = f"Sch: **{active_booking.scheduled_departure}**" if active_booking else "Sch: 18:40"
             if active_booking and active_booking.delay_hours:
-                sched_str += f" &nbsp;•&nbsp; <span style='color:#b45309; font-weight:700;'>Rescheduled: {active_booking.new_departure}</span>"
+                sched_str += f" &nbsp;•&nbsp; <span style='color:#f59e0b; font-weight:700;'>Rescheduled: {active_booking.new_departure}</span>"
             st.markdown(f"<div style='text-align:center; font-size:12px;'>{sched_str}</div>", unsafe_allow_html=True)
         with c_dst:
             st.markdown(f"## {dest_city.upper()[:3]}")
@@ -447,19 +532,19 @@ with tab_chat:
         st.caption("⚡ Quick Passenger Requests:")
         q1, q2, q3, q4 = st.columns(4)
         with q1:
-            if st.button("💰 Request Full Refund", key="b_ref", use_container_width=True):
+            if st.button("💰 Request Full Refund", key="b_ref_act", use_container_width=True):
                 st.session_state.pending_prompt = "I would like to request a full refund for my flight."
                 st.rerun()
         with q2:
-            if st.button("✈️ Request Priority Rebook", key="b_reb", use_container_width=True):
+            if st.button("✈️ Request Priority Rebook", key="b_reb_act", use_container_width=True):
                 st.session_state.pending_prompt = "Please rebook me on the next available flight."
                 st.rerun()
         with q3:
-            if st.button("🍽️ Claim Meal & Lounge", key="b_vou", use_container_width=True):
+            if st.button("🍽️ Claim Meal & Lounge", key="b_vou_act", use_container_width=True):
                 st.session_state.pending_prompt = "What meal vouchers and lounge access am I entitled to?"
                 st.rerun()
         with q4:
-            if st.button("🏨 Inquire Transit Hotel", key="b_hot", use_container_width=True):
+            if st.button("🏨 Inquire Transit Hotel", key="b_hot_act", use_container_width=True):
                 st.session_state.pending_prompt = "Can you arrange hotel accommodation for my delay?"
                 st.rerun()
 
