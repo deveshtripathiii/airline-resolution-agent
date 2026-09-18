@@ -500,30 +500,51 @@ if active_cust:
 
         st.divider()
 
-        # Flight Vector Telemetry
-        c_org, c_route, c_dst = st.columns([1, 2, 1])
-        with c_org:
-            st.markdown(f"## {origin_city.upper()[:3]}")
-            st.caption(origin_city)
-        with c_route:
-            flight_num = active_booking.flight if active_booking else "SK-204"
-            st.markdown(f"<div style='text-align:center; font-weight:800; color:#0284c7; font-size:16px;'>Flight {flight_num}</div>", unsafe_allow_html=True)
-            st.markdown("<div style='text-align:center; font-size:18px; color:#0284c7;'>✈ ─────────────── ➔</div>", unsafe_allow_html=True)
-            sched_str = f"Sch: **{active_booking.scheduled_departure}**" if active_booking else "Sch: 18:40"
-            if active_booking and active_booking.delay_hours:
-                sched_str += f" &nbsp;•&nbsp; <span style='color:#f59e0b; font-weight:700;'>Rescheduled: {active_booking.new_departure}</span>"
-            st.markdown(f"<div style='text-align:center; font-size:12px;'>{sched_str}</div>", unsafe_allow_html=True)
-        with c_dst:
-            st.markdown(f"## {dest_city.upper()[:3]}")
-            st.caption(dest_city)
+        # ── Flight Vector Telemetry (100% Mobile Responsive Flexbox) ───────────
+        flight_num = active_booking.flight if active_booking else "SK-204"
+        sched_str = f"Sch: <b>{active_booking.scheduled_departure}</b>" if active_booking else "Sch: 18:40"
+        if active_booking and active_booking.delay_hours:
+            sched_str += f" &nbsp;•&nbsp; <span style='color:#f59e0b; font-weight:700;'>Rescheduled: {active_booking.new_departure}</span>"
 
-        st.divider()
+        telemetry_bg = "background: rgba(2, 132, 199, 0.04); border: 1px solid #bae6fd;" if not is_dark else "background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.12);"
+        stat_card_bg = "background: #f0f9ff; border: 1px solid #bae6fd;" if not is_dark else "background: #0f172a; border: 1px solid rgba(255, 255, 255, 0.12);"
+        city_color = "#0284c7" if not is_dark else "#38bdf8"
+        text_sub = "#64748b" if not is_dark else "#94a3b8"
 
-        # History Stats
-        m1, m2, m3 = st.columns(3)
-        m1.metric(t['flights_12m'], f"{active_cust.travel_history.flights_last_12_months} (12M)")
-        m2.metric(t['prior_complaints'], f"{active_cust.travel_history.prior_complaints}")
-        m3.metric(t['complaint_history'], f"{active_cust.travel_history.complaint_details or 'None'}")
+        st.markdown(f"""
+        <div style="{telemetry_bg} border-radius: 12px; padding: 12px 16px; margin-bottom: 12px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; text-align: center;">
+                <div style="text-align: left; min-width: 65px;">
+                    <div style="font-size: 26px; font-weight: 800; color: {city_color}; line-height: 1.1;">{origin_city.upper()[:3]}</div>
+                    <div style="font-size: 11px; color: {text_sub}; font-weight: 600;">{origin_city}</div>
+                </div>
+                <div style="flex: 1; padding: 0 10px; text-align: center;">
+                    <div style="font-size: 13px; font-weight: 800; color: {city_color};">Flight {flight_num}</div>
+                    <div style="font-size: 15px; color: {city_color}; letter-spacing: -0.5px; margin: 2px 0;">✈ ────────── ➔</div>
+                    <div style="font-size: 11px; color: {text_sub};">{sched_str}</div>
+                </div>
+                <div style="text-align: right; min-width: 65px;">
+                    <div style="font-size: 26px; font-weight: 800; color: {city_color}; line-height: 1.1;">{dest_city.upper()[:3]}</div>
+                    <div style="font-size: 11px; color: {text_sub}; font-weight: 600;">{dest_city}</div>
+                </div>
+            </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 6px;">
+            <div style="{stat_card_bg} border-radius: 10px; padding: 8px 10px; text-align: center;">
+                <div style="font-size: 10px; font-weight: 700; color: {text_sub}; text-transform: uppercase;">{t['flights_12m']}</div>
+                <div style="font-size: 16px; font-weight: 800; color: {city_color};">{active_cust.travel_history.flights_last_12_months} (12M)</div>
+            </div>
+            <div style="{stat_card_bg} border-radius: 10px; padding: 8px 10px; text-align: center;">
+                <div style="font-size: 10px; font-weight: 700; color: {text_sub}; text-transform: uppercase;">{t['prior_complaints']}</div>
+                <div style="font-size: 16px; font-weight: 800; color: {city_color};">{active_cust.travel_history.prior_complaints}</div>
+            </div>
+            <div style="{stat_card_bg} border-radius: 10px; padding: 8px 10px; text-align: center;">
+                <div style="font-size: 10px; font-weight: 700; color: {text_sub}; text-transform: uppercase;">{t['complaint_history']}</div>
+                <div style="font-size: 13px; font-weight: 700; color: {city_color}; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="{active_cust.travel_history.complaint_details or 'None'}">{active_cust.travel_history.complaint_details or 'None'}</div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
 
 
 # ── Main Tabbed Experience ─────────────────────────────────────────────────────
