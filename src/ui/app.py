@@ -70,7 +70,7 @@ html, body, [data-testid="stAppViewContainer"], .main, .block-container, [data-t
 }
 
 .block-container {
-    padding: 1rem 0.75rem 2.5rem 0.75rem !important;
+    padding: 1.5rem 0.75rem 2.5rem 0.75rem !important;
     max-width: 940px !important;
     margin: 0 auto !important;
 }
@@ -291,7 +291,7 @@ html, body, [data-testid="stAppViewContainer"], .main, .block-container, [data-t
 }
 
 .block-container {
-    padding: 1rem 0.75rem 2.5rem 0.75rem !important;
+    padding: 1.5rem 0.75rem 2.5rem 0.75rem !important;
     max-width: 940px !important;
     margin: 0 auto !important;
 }
@@ -540,18 +540,18 @@ def render_chip(action_type: str, language: str = "en") -> str:
 
 
 # ── Top Unified Toolbar (Luxury Brand Header + 3 Micro-Toggles in ONE row) ───
-top_brand, top_lang, top_theme, top_reset = st.columns([3.4, 0.95, 0.45, 0.45])
+top_brand, top_lang, top_theme, top_reset = st.columns([3.3, 0.95, 0.45, 0.45])
 
 with top_brand:
     brand_title_color = "#1c1917" if not is_dark else "#fafaf9"
     brand_sub_color = "#ea580c" if not is_dark else "#fb923c"
     icon_bg = "linear-gradient(135deg, #ea580c 0%, #c2410c 100%)"
     st.markdown(f"""
-    <div style="display: flex; align-items: center; gap: 10px; overflow: visible; padding: 2px 0;">
-        <div style="width: 36px; height: 36px; border-radius: 10px; background: {icon_bg}; display: flex; align-items: center; justify-content: center; color: #ffffff; font-size: 17px; box-shadow: 0 3px 10px rgba(234, 88, 12, 0.25); flex-shrink: 0;">✈️</div>
-        <div style="overflow: visible; white-space: nowrap;">
-            <div style="font-size: 15px; font-weight: 800; letter-spacing: -0.2px; color: {brand_title_color}; line-height: 1.2;">SKYWAY AIRLINES</div>
-            <div style="font-size: 9.5px; font-weight: 700; color: {brand_sub_color}; text-transform: uppercase; letter-spacing: 0.5px; line-height: 1.2;">Executive Concierge • 23 Sep 2026</div>
+    <div style="display: flex; align-items: center; gap: 8px; height: 36px; overflow: visible;">
+        <div style="width: 32px; height: 32px; border-radius: 9px; background: {icon_bg}; display: flex; align-items: center; justify-content: center; color: #ffffff; font-size: 16px; box-shadow: 0 2px 8px rgba(234, 88, 12, 0.3); flex-shrink: 0;">✈️</div>
+        <div style="display: flex; align-items: center; gap: 6px; white-space: nowrap; overflow: visible;">
+            <span style="font-size: 15px; font-weight: 800; letter-spacing: -0.2px; color: {brand_title_color}; line-height: 1;">SKYWAY AIRLINES</span>
+            <span style="font-size: 9.5px; font-weight: 700; color: {brand_sub_color}; background: {'#fff7ed' if not is_dark else 'rgba(249, 115, 22, 0.15)'}; border: 1px solid {'#fed7aa' if not is_dark else 'rgba(249, 115, 22, 0.3)'}; padding: 2px 6px; border-radius: 5px; text-transform: uppercase; letter-spacing: 0.4px;">Executive Desk</span>
         </div>
     </div>
     """, unsafe_allow_html=True)
