@@ -87,28 +87,25 @@ footer {visibility: hidden;}
     color: #0f172a !important;
 }
 
-.sky-nav-banner {
-    background: linear-gradient(135deg, #0284c7 0%, #0369a1 60%, #075985 100%);
-    color: #ffffff !important;
-    border-radius: 12px;
-    padding: 12px 16px;
-    margin-bottom: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 4px 15px rgba(2, 132, 199, 0.2);
-    flex-wrap: wrap;
-    gap: 8px;
+[data-testid="stHorizontalBlock"] {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    gap: 4px !important;
+}
+[data-testid="stHorizontalBlock"] > [data-testid="stColumn"] {
+    min-width: 0 !important;
 }
 
 .stButton > button {
     border-radius: 8px !important;
     font-weight: 700 !important;
-    font-size: 12px !important;
-    padding: 4px 6px !important;
-    min-height: 32px !important;
-    height: 32px !important;
-    line-height: 1.2 !important;
+    font-size: 11.5px !important;
+    padding: 2px 6px !important;
+    min-height: 30px !important;
+    height: 30px !important;
+    line-height: 1.1 !important;
     white-space: nowrap !important;
     border: 1px solid #7dd3fc !important;
     background-color: #ffffff !important;
@@ -186,26 +183,31 @@ p, span, div, h1, h2, h3, h4, label {
 
 div[role="radiogroup"] {
     background: #ffffff !important;
-    border: 2px solid #bae6fd !important;
-    border-radius: 10px !important;
-    padding: 4px !important;
+    border: 1.5px solid #bae6fd !important;
+    border-radius: 8px !important;
+    padding: 3px !important;
     gap: 4px !important;
     display: flex !important;
     flex-direction: row !important;
-    flex-wrap: wrap !important;
+    flex-wrap: nowrap !important;
+    margin-top: 2px !important;
+    margin-bottom: 6px !important;
 }
 div[role="radiogroup"] label {
     background: #f0f9ff !important;
     border: 1px solid #bae6fd !important;
-    padding: 4px 8px !important;
+    padding: 4px 6px !important;
     border-radius: 6px !important;
     font-weight: 700 !important;
-    font-size: 11px !important;
+    font-size: 10.5px !important;
     color: #0369a1 !important;
-    flex: 1 1 calc(33.333% - 6px) !important;
-    min-width: 120px !important;
+    flex: 1 1 0px !important;
+    min-width: 0 !important;
     text-align: center !important;
     justify-content: center !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
     margin: 0 !important;
 }
 
@@ -265,29 +267,25 @@ footer {visibility: hidden;}
     color: #f8fafc !important;
 }
 
-.sky-nav-banner {
-    background: linear-gradient(135deg, #0f172a 0%, #1e293b 60%, #0284c7 100%);
-    color: #ffffff !important;
-    border-radius: 12px;
-    padding: 12px 16px;
-    margin-bottom: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
-    flex-wrap: wrap;
-    gap: 8px;
+[data-testid="stHorizontalBlock"] {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    gap: 4px !important;
+}
+[data-testid="stHorizontalBlock"] > [data-testid="stColumn"] {
+    min-width: 0 !important;
 }
 
 .stButton > button {
     border-radius: 8px !important;
     font-weight: 700 !important;
-    font-size: 12px !important;
-    padding: 4px 6px !important;
-    min-height: 32px !important;
-    height: 32px !important;
-    line-height: 1.2 !important;
+    font-size: 11.5px !important;
+    padding: 2px 6px !important;
+    min-height: 30px !important;
+    height: 30px !important;
+    line-height: 1.1 !important;
     white-space: nowrap !important;
     background-color: #1e293b !important;
     border: 1px solid rgba(255, 255, 255, 0.2) !important;
@@ -364,25 +362,30 @@ p, span, div, h1, h2, h3, h4, h5, h6, label, strong, b, li {
 div[role="radiogroup"] {
     background: #1e293b !important;
     border: 1px solid rgba(255, 255, 255, 0.15) !important;
-    border-radius: 10px !important;
-    padding: 4px !important;
+    border-radius: 8px !important;
+    padding: 3px !important;
     gap: 4px !important;
     display: flex !important;
     flex-direction: row !important;
-    flex-wrap: wrap !important;
+    flex-wrap: nowrap !important;
+    margin-top: 2px !important;
+    margin-bottom: 6px !important;
 }
 div[role="radiogroup"] label {
     background: #0f172a !important;
     border: 1px solid rgba(255, 255, 255, 0.15) !important;
-    padding: 4px 8px !important;
+    padding: 4px 6px !important;
     border-radius: 6px !important;
     font-weight: 700 !important;
-    font-size: 11px !important;
+    font-size: 10.5px !important;
     color: #f8fafc !important;
-    flex: 1 1 calc(33.333% - 6px) !important;
-    min-width: 120px !important;
+    flex: 1 1 0px !important;
+    min-width: 0 !important;
     text-align: center !important;
     justify-content: center !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
     margin: 0 !important;
 }
 
@@ -469,43 +472,37 @@ def render_chip(action_type: str, language: str = "en") -> str:
     return f'<span class="action-chip {css}">{label}</span>'
 
 
-# ── Top Sleek Header ───────────────────────────────────────────────────────────
-st.markdown(f"""
-<div class="sky-nav-banner">
-    <div style="display: flex; align-items: center; gap: 10px;">
-        <span style="font-size: 24px;">✈️</span>
+# ── Top Unified Toolbar (Header + 3 Micro-Toggles in ONE neat row) ────────────
+top_brand, top_lang, top_theme, top_reset = st.columns([2.2, 0.9, 0.9, 0.8])
+
+with top_brand:
+    title_color = "#0369a1" if not is_dark else "#38bdf8"
+    sub_color = "#64748b" if not is_dark else "#94a3b8"
+    st.markdown(f"""
+    <div style="display: flex; align-items: center; gap: 8px; padding-top: 2px;">
+        <span style="font-size: 22px;">✈️</span>
         <div>
-            <div style="font-size: 16px; font-weight: 800; color: #ffffff !important; line-height: 1.2;">{t['portal_title']}</div>
-            <div style="font-size: 10px; color: #bae6fd !important; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase;">
-                {t['portal_subtitle']}
-            </div>
+            <div style="font-size: 15px; font-weight: 800; color: {title_color}; line-height: 1.1;">SkyWay Care</div>
+            <div style="font-size: 9px; color: {sub_color}; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">23 Sep 2026 • Ops Portal</div>
         </div>
     </div>
-    <div style="background: rgba(255, 255, 255, 0.2); color: #ffffff !important; padding: 4px 10px; border-radius: 12px; font-size: 11px; font-weight: 700;">
-        📅 {t['flight_ops']}: {EXERCISE_DATE}
-    </div>
-</div>
-""", unsafe_allow_html=True)
+    """, unsafe_allow_html=True)
 
-
-# ── Top Compact Toggles (Small size, 3 side-by-side) ───────────────────────────
-col_lang, col_theme, col_reset = st.columns(3)
-
-with col_lang:
-    lang_btn_text = "🌐 हिन्दी" if lang == "en" else "🌐 English"
+with top_lang:
+    lang_btn_text = "🌐 हिन्दी" if lang == "en" else "🌐 Eng"
     if st.button(lang_btn_text, use_container_width=True):
         st.session_state.language = "hi" if lang == "en" else "en"
         st.session_state.messages = []
         st.rerun()
 
-with col_theme:
-    theme_label = t['theme_night'] if not is_dark else t['theme_day']
+with top_theme:
+    theme_label = "🌙 Night" if not is_dark else "☀️ Day"
     if st.button(theme_label, use_container_width=True):
         st.session_state.theme_mode = "night_dark" if not is_dark else "sky_light"
         st.rerun()
 
-with col_reset:
-    if st.button(t['reset_btn'], use_container_width=True):
+with top_reset:
+    if st.button("🔄 Reset", use_container_width=True):
         st.session_state.messages = []
         if st.session_state.selected_customer:
             orchestrator.set_customer(st.session_state.selected_customer)
@@ -514,9 +511,9 @@ with col_reset:
 
 # ── 1-Tap Passenger Itinerary Switcher (Compact Segmented Chips) ───────────────
 customers = st.session_state.customer_repo.get_all()
-tier_icons = {"Gold": "🏆 Gold", "Silver": "🥈 Silver", "Platinum": "👑 Platinum"}
+tier_icons = {"Gold": "🏆", "Silver": "🥈", "Platinum": "👑"}
 cust_map = {
-    f"👤 {c.name} ({tier_icons.get(c.loyalty_tier.value, c.loyalty_tier.value)} • {c.booking_reference})": c.name 
+    f"👤 {c.name} ({tier_icons.get(c.loyalty_tier.value, '')} {c.loyalty_tier.value} • {c.booking_reference})": c.name 
     for c in customers
 }
 radio_options = list(cust_map.keys())
