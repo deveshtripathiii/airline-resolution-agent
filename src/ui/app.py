@@ -1,4 +1,4 @@
-﻿"""SkyWay Airlines Disruption Resolution Portal.
+"""SkyWay Airlines Disruption Resolution Portal.
 
 Features:
 - Instant 1-tap passenger switcher (Zero dropdown popover glitches)
@@ -367,8 +367,9 @@ st.markdown(f"""
 
 # ── 1-Tap Passenger Switcher & Controls Bar ────────────────────────────────────
 customers = st.session_state.customer_repo.get_all()
+tier_icons = {"Gold": "🏆 Gold", "Silver": "🥈 Silver", "Platinum": "👑 Platinum"}
 cust_map = {
-    f"👤 {c.name}  (PNR: {c.booking_reference})": c.name 
+    f"👤 {c.name} ({tier_icons.get(c.loyalty_tier.value, c.loyalty_tier.value)} • {c.booking_reference})": c.name 
     for c in customers
 }
 radio_options = list(cust_map.keys())
@@ -380,7 +381,7 @@ if st.session_state.selected_customer:
             current_idx = i
             break
 
-col_passengers, col_lang, col_theme, col_reset = st.columns([3, 0.8, 1, 0.7])
+col_passengers, col_lang, col_theme, col_reset = st.columns([3.2, 0.8, 1, 0.7])
 
 with col_passengers:
     selected_label = st.radio(
@@ -430,9 +431,12 @@ if active_cust:
 
     # ── Boarding Pass Card (Clean Native Streamlit Container) ───────────────────
     with st.container(border=True):
-        col_p1, col_p2 = st.columns([3, 1])
+        col_p1, col_p2 = st.columns([3, 1.2])
         with col_p1:
-            st.markdown(f"### 👤 {active_cust.name}")
+            tier_badge = f"🏆 {active_cust.loyalty_tier.value} Tier" if active_cust.loyalty_tier.value == "Gold" else (
+                f"👑 {active_cust.loyalty_tier.value} Tier" if active_cust.loyalty_tier.value == "Platinum" else f"🥈 {active_cust.loyalty_tier.value} Tier"
+            )
+            st.markdown(f"### 👤 {active_cust.name} &nbsp; <span style='font-size:14px; background:#e0f2fe; color:#0369a1; padding:4px 10px; border-radius:6px; font-weight:700;'>{tier_badge}</span>", unsafe_allow_html=True)
             st.caption(f"{t['pnr_label']}: **{active_cust.booking_reference}** • {t['contact_label']}: {active_cust.contact.email} ({active_cust.contact.phone})")
         with col_p2:
             if active_booking:
@@ -595,6 +599,7 @@ with tab_chat:
             flight_status=active_booking.status.value if active_booking else "CANCELLED",
             delay_info=f"Delayed {active_booking.delay_hours}h (New departure: {active_booking.new_departure})" if active_booking and active_booking.delay_hours else "Operational Cancellation",
             actions_taken=all_actions,
+            loyalty_tier=active_cust.loyalty_tier.value,
             exercise_date=EXERCISE_DATE,
         )
 
@@ -610,10 +615,31 @@ with tab_chat:
 
 
 # ───────────────────────────────────────────────────────────────────────────────
-# TAB 2: POLICY DIRECTORY
+# TAB 2: POLICY DIRECTORY & 3 OFFICIAL BENCHMARK SCENARIOS (PDF SECTION 6)
 # ───────────────────────────────────────────────────────────────────────────────
 with tab_policy:
-    st.markdown(f"### 📜 {t['portal_title']} {t['tab_policy']}")
+    # ── Section 6 Benchmark Scenarios ──────────────────────────────────────────
+    st.markdown(f"### {t['sec6_title']}")
+    st.caption(t['sec6_subtitle'])
+
+    sc1, sc2, sc3 = st.columns(3)
+    with sc1:
+        with st.container(border=True):
+            st.markdown(f"#### 🏆 {t['scen1_title']}")
+            st.markdown(t['scen1_body'])
+    with sc2:
+        with st.container(border=True):
+            st.markdown(f"#### 🥈 {t['scen2_title']}")
+            st.markdown(t['scen2_body'])
+    with sc3:
+        with st.container(border=True):
+            st.markdown(f"#### 👑 {t['scen3_title']}")
+            st.markdown(t['scen3_body'])
+
+    st.divider()
+
+    # ── Official Airline Policies ──────────────────────────────────────────────
+    st.markdown(f"### 📜 {t['portal_title']} Service Policies")
     st.caption("Official grounded guidelines governing flight disruptions, passenger care, and financial limits.")
 
     r1, r2 = st.columns(2)
