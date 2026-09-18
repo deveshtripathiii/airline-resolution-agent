@@ -27,9 +27,6 @@ from src.config import EXERCISE_DATE, GEMINI_API_KEY
 from src.data_access.repository import BookingRepository, CustomerRepository, PolicyRepository
 from src.domain.models import ActionType, BookingStatus
 from src.llm.client import GeminiClient, SmartDeterministicClient
-import importlib
-import src.ui.translations as trans_mod
-importlib.reload(trans_mod)
 from src.ui.translations import TRANSLATIONS
 from src.utils.pdf_generator import generate_claim_slip_pdf
 
