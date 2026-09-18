@@ -70,14 +70,28 @@ html, body, [data-testid="stAppViewContainer"], .main, .block-container, [data-t
 }
 
 .block-container {
-    padding: 1.5rem 0.75rem 2.5rem 0.75rem !important;
+    padding-top: 3.5rem !important;
+    padding-bottom: 2.5rem !important;
+    padding-left: 0.85rem !important;
+    padding-right: 0.85rem !important;
     max-width: 940px !important;
     margin: 0 auto !important;
 }
 
-header {visibility: hidden;}
+[data-testid="stHeader"], header[data-testid="stHeader"], header {
+    display: none !important;
+}
 footer {visibility: hidden;}
 #MainMenu {visibility: hidden;}
+
+div.stMarkdown p {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+[data-testid="stColumn"] > div {
+    overflow: visible !important;
+}
 
 .stApp {
     background: radial-gradient(at 10% 0%, rgba(249, 115, 22, 0.05) 0px, transparent 50%),
@@ -291,14 +305,28 @@ html, body, [data-testid="stAppViewContainer"], .main, .block-container, [data-t
 }
 
 .block-container {
-    padding: 1.5rem 0.75rem 2.5rem 0.75rem !important;
+    padding-top: 3.5rem !important;
+    padding-bottom: 2.5rem !important;
+    padding-left: 0.85rem !important;
+    padding-right: 0.85rem !important;
     max-width: 940px !important;
     margin: 0 auto !important;
 }
 
-header {visibility: hidden;}
+[data-testid="stHeader"], header[data-testid="stHeader"], header {
+    display: none !important;
+}
 footer {visibility: hidden;}
 #MainMenu {visibility: hidden;}
+
+div.stMarkdown p {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+[data-testid="stColumn"] > div {
+    overflow: visible !important;
+}
 
 .stApp {
     background: radial-gradient(at 0% 0%, rgba(249, 115, 22, 0.12) 0px, transparent 50%),
