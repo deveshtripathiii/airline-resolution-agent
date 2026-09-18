@@ -545,7 +545,7 @@ with tab_inspector:
         st.markdown("""
         | Fare Difference Amount | Authority Level | Action |
         | :--- | :--- | :--- |
-        | **$\le$ ₹1,500** | Front-line Agent | ✅ **Waive Allowed** |
+        | **<= ₹1,500** | Front-line Agent | ✅ **Waive Allowed** |
         | **> ₹1,500** (e.g. Meher ₹2,000) | Duty Supervisor | 🚨 **Must Escalate** |
         """)
 
