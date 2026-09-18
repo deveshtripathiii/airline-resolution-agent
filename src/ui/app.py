@@ -52,14 +52,14 @@ lang = st.session_state.language
 t = TRANSLATIONS.get(lang, TRANSLATIONS['en'])
 
 
-# ── Dynamic High-Contrast & Zero-Overflow CSS ──────────────────────────────────
+# ── Dynamic Ultra-Luxury & High-Contrast CSS ──────────────────────────────────
 if not is_dark:
-    # ⛅ SKY DAY THEME
+    # ⛅ EXECUTIVE LUXURY DAY THEME (Singapore Airlines / Emirates Inspired)
     st.markdown("""<style>
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
 
 * {
-    font-family: 'Plus Jakarta Sans', -apple-system, 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji', sans-serif !important;
+    font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, sans-serif !important;
     box-sizing: border-box !important;
 }
 
@@ -70,8 +70,8 @@ html, body, [data-testid="stAppViewContainer"], .main, .block-container, [data-t
 }
 
 .block-container {
-    padding: 0.75rem 0.6rem 2rem 0.6rem !important;
-    max-width: 920px !important;
+    padding: 1rem 0.75rem 2.5rem 0.75rem !important;
+    max-width: 940px !important;
     margin: 0 auto !important;
 }
 
@@ -80,7 +80,9 @@ footer {visibility: hidden;}
 #MainMenu {visibility: hidden;}
 
 .stApp {
-    background: linear-gradient(180deg, #dbeafe 0%, #e0f2fe 25%, #f0f9ff 60%, #ffffff 100%) !important;
+    background: radial-gradient(at 10% 0%, rgba(37, 99, 235, 0.04) 0px, transparent 50%),
+                radial-gradient(at 90% 0%, rgba(14, 165, 233, 0.05) 0px, transparent 50%),
+                #f8fafc !important;
     color: #0f172a !important;
 }
 
@@ -89,41 +91,47 @@ footer {visibility: hidden;}
     flex-direction: row !important;
     flex-wrap: nowrap !important;
     align-items: center !important;
-    gap: 4px !important;
+    gap: 6px !important;
 }
 [data-testid="stHorizontalBlock"] > [data-testid="stColumn"] {
     min-width: 0 !important;
 }
 
+/* Premium Buttons */
 .stButton > button {
-    border-radius: 8px !important;
+    border-radius: 10px !important;
     font-weight: 700 !important;
-    font-size: 11.5px !important;
-    padding: 2px 6px !important;
-    min-height: 30px !important;
-    height: 30px !important;
-    line-height: 1.1 !important;
+    font-size: 12px !important;
+    padding: 6px 12px !important;
+    min-height: 36px !important;
+    height: 36px !important;
+    line-height: 1.2 !important;
     white-space: nowrap !important;
-    border: 1px solid #7dd3fc !important;
+    border: 1px solid #e2e8f0 !important;
     background-color: #ffffff !important;
-    color: #0369a1 !important;
+    color: #1e293b !important;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04) !important;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 .stButton > button:hover {
-    background-color: #f0f9ff !important;
-    border-color: #0284c7 !important;
-    color: #0284c7 !important;
+    background-color: #f1f5f9 !important;
+    border-color: #cbd5e1 !important;
+    color: #0f172a !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 10px rgba(15, 23, 42, 0.08) !important;
 }
 .stButton > button[kind="primary"] {
-    background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%) !important;
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%) !important;
     color: #ffffff !important;
-    border: none !important;
-    box-shadow: 0 2px 8px rgba(2, 132, 199, 0.35) !important;
+    border: 1px solid #1e3a8a !important;
+    box-shadow: 0 4px 14px rgba(30, 58, 138, 0.25) !important;
 }
 .stButton > button[kind="primary"] * {
     color: #ffffff !important;
     font-weight: 800 !important;
 }
 
+/* Modern Tabs */
 .stTabs {
     width: 100% !important;
     max-width: 100% !important;
@@ -132,105 +140,82 @@ footer {visibility: hidden;}
 .stTabs [data-baseweb="tab-list"] {
     display: flex !important;
     width: 100% !important;
-    gap: 4px !important;
-    padding: 4px !important;
-    border-radius: 10px !important;
-    background-color: #ffffff !important;
-    border: 2px solid #bae6fd !important;
-    box-shadow: 0 2px 8px rgba(2, 132, 199, 0.08) !important;
+    gap: 6px !important;
+    padding: 5px !important;
+    border-radius: 12px !important;
+    background-color: #f1f5f9 !important;
+    border: 1px solid #e2e8f0 !important;
 }
 .stTabs [data-baseweb="tab"] {
     flex: 1 1 0px !important;
     min-width: 0 !important;
-    padding: 8px 4px !important;
+    padding: 8px 6px !important;
     font-size: 12px !important;
     font-weight: 700 !important;
     text-align: center !important;
     justify-content: center !important;
-    border-radius: 6px !important;
+    border-radius: 8px !important;
     white-space: nowrap !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;
-    color: #0369a1 !important;
+    color: #64748b !important;
+    transition: all 0.2s ease !important;
 }
 .stTabs [aria-selected="true"] {
-    background-color: #0284c7 !important;
-    color: #ffffff !important;
+    background: #ffffff !important;
+    color: #0f172a !important;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08) !important;
 }
 
 [data-testid="stVerticalBlockBorderWrapper"] {
     background-color: #ffffff !important;
-    border: 2px solid #bae6fd !important;
-    border-radius: 14px !important;
-    box-shadow: 0 4px 12px rgba(2, 132, 199, 0.06) !important;
-    padding: 0.5rem !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 16px !important;
+    box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05), 0 2px 6px -1px rgba(15, 23, 42, 0.02) !important;
+    padding: 0.85rem !important;
 }
 
 p, span, div, h1, h2, h3, h4, label {
     color: #0f172a !important;
 }
 .stCaption, .stCaption p {
-    color: #475569 !important;
+    color: #64748b !important;
     font-weight: 500 !important;
 }
 
+/* Luxury Download Button */
 .stDownloadButton>button {
-    border-radius: 10px !important;
+    border-radius: 12px !important;
     font-weight: 800 !important;
-    background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%) !important;
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%) !important;
     color: #ffffff !important;
-    border: none !important;
-    padding: 10px 18px !important;
-    box-shadow: 0 4px 14px rgba(2, 132, 199, 0.3) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    padding: 12px 20px !important;
+    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.2) !important;
+    transition: all 0.2s ease !important;
+}
+.stDownloadButton>button:hover {
+    transform: translateY(-1px) !important;
+    box-shadow: 0 6px 20px rgba(15, 23, 42, 0.3) !important;
 }
 .stDownloadButton>button * {
     color: #ffffff !important;
     font-weight: 800 !important;
 }
 
-div[data-testid="stRadio"], div[role="radiogroup"] {
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-    padding: 0 !important;
-    gap: 6px !important;
-    display: flex !important;
-    flex-direction: row !important;
-    flex-wrap: nowrap !important;
-    margin-top: 2px !important;
-    margin-bottom: 8px !important;
-}
-div[role="radiogroup"] label {
-    background: #ffffff !important;
-    border: 1px solid #bae6fd !important;
-    padding: 5px 8px !important;
-    border-radius: 8px !important;
-    font-weight: 700 !important;
-    font-size: 11px !important;
-    color: #0369a1 !important;
-    flex: 1 1 0px !important;
-    min-width: 0 !important;
-    text-align: center !important;
-    justify-content: center !important;
-    white-space: nowrap !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
-    box-shadow: 0 2px 5px rgba(2, 132, 199, 0.05) !important;
-    margin: 0 !important;
-}
-
+/* Chat Message Styling */
 [data-testid="stChatMessage"] {
     background-color: #ffffff !important;
-    border: 1px solid #e0f2fe !important;
-    border-radius: 14px !important;
-    box-shadow: 0 2px 8px rgba(2, 132, 199, 0.05) !important;
-    padding: 14px 16px 18px 16px !important;
-    margin-bottom: 12px !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 16px !important;
+    box-shadow: 0 2px 10px rgba(15, 23, 42, 0.03) !important;
+    padding: 16px 18px 20px 18px !important;
+    margin-bottom: 14px !important;
     overflow: visible !important;
     word-break: break-word !important;
 }
 
-/* Chat Input Bar - High Contrast White Background in Day Mode */
+/* Chat Input Bar */
 [data-testid="stBottom"], [data-testid="stBottomBlockContainer"] {
     background: transparent !important;
 }
@@ -239,50 +224,57 @@ div[role="radiogroup"] label {
 }
 [data-testid="stChatInput"] > div, .stChatInput > div {
     background-color: #ffffff !important;
-    border: 2px solid #bae6fd !important;
-    border-radius: 14px !important;
-    box-shadow: 0 4px 15px rgba(2, 132, 199, 0.12) !important;
+    border: 1.5px solid #cbd5e1 !important;
+    border-radius: 16px !important;
+    box-shadow: 0 4px 18px rgba(15, 23, 42, 0.08) !important;
+    transition: all 0.2s ease !important;
+}
+[data-testid="stChatInput"] > div:focus-within, .stChatInput > div:focus-within {
+    border-color: #1e3a8a !important;
+    box-shadow: 0 4px 20px rgba(30, 58, 138, 0.15) !important;
 }
 [data-testid="stChatInput"] textarea, .stChatInput textarea {
     background-color: #ffffff !important;
     color: #0f172a !important;
     font-size: 14px !important;
     font-weight: 600 !important;
-    caret-color: #0284c7 !important;
+    caret-color: #1e3a8a !important;
 }
 [data-testid="stChatInput"] textarea::placeholder, .stChatInput textarea::placeholder {
-    color: #64748b !important;
+    color: #94a3b8 !important;
     font-weight: 500 !important;
 }
 [data-testid="stChatInput"] button, .stChatInput button {
-    color: #0284c7 !important;
+    color: #1e3a8a !important;
 }
 
+/* Ultra-Refined Action Chips */
 .action-chip {
     display: inline-flex;
     align-items: center;
-    gap: 5px;
-    padding: 4px 10px;
-    border-radius: 6px;
-    font-size: 11px;
+    gap: 6px;
+    padding: 5px 12px;
+    border-radius: 8px;
+    font-size: 11.5px;
     font-weight: 700;
-    margin: 3px 3px 3px 0;
+    margin: 4px 4px 4px 0;
+    letter-spacing: 0.2px;
 }
-.chip-rebook { background: #e0f2fe; color: #0369a1 !important; border: 1px solid #bae6fd; }
-.chip-refund { background: #dcfce7; color: #15803d !important; border: 1px solid #bbf7d0; }
-.chip-meal { background: #fef3c7; color: #b45309 !important; border: 1px solid #fde68a; }
-.chip-lounge { background: #f3e8ff; color: #7e22ce !important; border: 1px solid #e9d5ff; }
-.chip-hotel { background: #ffe4e6; color: #be123c !important; border: 1px solid #fecdd3; }
-.chip-escalate { background: #fee2e2; color: #b91c1c !important; border: 1px solid #fca5a5; }
-.chip-decline { background: #f1f5f9; color: #475569 !important; border: 1px solid #cbd5e1; }
+.chip-rebook { background: #eff6ff; color: #1d4ed8 !important; border: 1px solid #bfdbfe; }
+.chip-refund { background: #ecfdf5; color: #047857 !important; border: 1px solid #a7f3d0; }
+.chip-meal { background: #fffbeb; color: #b45309 !important; border: 1px solid #fde68a; }
+.chip-lounge { background: #faf5ff; color: #7e22ce !important; border: 1px solid #e9d5ff; }
+.chip-hotel { background: #fff1f2; color: #be123c !important; border: 1px solid #fecdd3; }
+.chip-escalate { background: #fef2f2; color: #b91c1c !important; border: 1px solid #fca5a5; }
+.chip-decline { background: #f8fafc; color: #475569 !important; border: 1px solid #e2e8f0; }
 </style>""", unsafe_allow_html=True)
 else:
-    # 🌙 STARRY NIGHT THEME
+    # 🌙 MIDNIGHT OBSIDIAN THEME (Ultra-Modern Dark Aviation)
     st.markdown("""<style>
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
 
 * {
-    font-family: 'Plus Jakarta Sans', -apple-system, 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji', sans-serif !important;
+    font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, sans-serif !important;
     box-sizing: border-box !important;
 }
 
@@ -293,8 +285,8 @@ html, body, [data-testid="stAppViewContainer"], .main, .block-container, [data-t
 }
 
 .block-container {
-    padding: 0.75rem 0.6rem 2rem 0.6rem !important;
-    max-width: 920px !important;
+    padding: 1rem 0.75rem 2.5rem 0.75rem !important;
+    max-width: 940px !important;
     margin: 0 auto !important;
 }
 
@@ -303,7 +295,9 @@ footer {visibility: hidden;}
 #MainMenu {visibility: hidden;}
 
 .stApp {
-    background: radial-gradient(circle at 10% 20%, #0f172a 0%, #030712 100%) !important;
+    background: radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.08) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(99, 102, 241, 0.06) 0px, transparent 50%),
+                #090d16 !important;
     color: #f8fafc !important;
 }
 
@@ -312,41 +306,47 @@ footer {visibility: hidden;}
     flex-direction: row !important;
     flex-wrap: nowrap !important;
     align-items: center !important;
-    gap: 4px !important;
+    gap: 6px !important;
 }
 [data-testid="stHorizontalBlock"] > [data-testid="stColumn"] {
     min-width: 0 !important;
 }
 
+/* Premium Dark Buttons */
 .stButton > button {
-    border-radius: 8px !important;
+    border-radius: 10px !important;
     font-weight: 700 !important;
-    font-size: 11.5px !important;
-    padding: 2px 6px !important;
-    min-height: 30px !important;
-    height: 30px !important;
-    line-height: 1.1 !important;
+    font-size: 12px !important;
+    padding: 6px 12px !important;
+    min-height: 36px !important;
+    height: 36px !important;
+    line-height: 1.2 !important;
     white-space: nowrap !important;
-    background-color: #1e293b !important;
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    background-color: #131b2e !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
     color: #38bdf8 !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3) !important;
+    transition: all 0.2s ease !important;
 }
 .stButton > button:hover {
-    background-color: #0284c7 !important;
+    background-color: #1e293b !important;
     border-color: #38bdf8 !important;
     color: #ffffff !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 12px rgba(56, 189, 248, 0.2) !important;
 }
 .stButton > button[kind="primary"] {
-    background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%) !important;
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%) !important;
     color: #ffffff !important;
-    border: 1px solid rgba(255, 255, 255, 0.3) !important;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    box-shadow: 0 4px 16px rgba(37, 99, 235, 0.35) !important;
 }
 .stButton > button[kind="primary"] * {
     color: #ffffff !important;
     font-weight: 800 !important;
 }
 
+/* Dark Modern Tabs */
 .stTabs {
     width: 100% !important;
     max-width: 100% !important;
@@ -355,37 +355,38 @@ footer {visibility: hidden;}
 .stTabs [data-baseweb="tab-list"] {
     display: flex !important;
     width: 100% !important;
-    gap: 4px !important;
-    padding: 4px !important;
-    border-radius: 10px !important;
-    background-color: #1e293b !important;
-    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    gap: 6px !important;
+    padding: 5px !important;
+    border-radius: 12px !important;
+    background-color: #0f172a !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
 .stTabs [data-baseweb="tab"] {
     flex: 1 1 0px !important;
     min-width: 0 !important;
-    padding: 8px 4px !important;
+    padding: 8px 6px !important;
     font-size: 12px !important;
     font-weight: 700 !important;
     text-align: center !important;
     justify-content: center !important;
-    border-radius: 6px !important;
+    border-radius: 8px !important;
     white-space: nowrap !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;
     color: #94a3b8 !important;
 }
 .stTabs [aria-selected="true"] {
-    background-color: #0284c7 !important;
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%) !important;
     color: #ffffff !important;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3) !important;
 }
 
 [data-testid="stVerticalBlockBorderWrapper"] {
-    background-color: #1e293b !important;
-    border: 1px solid rgba(255, 255, 255, 0.15) !important;
-    border-radius: 14px !important;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4) !important;
-    padding: 0.5rem !important;
+    background-color: #111827 !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 16px !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5) !important;
+    padding: 0.85rem !important;
 }
 
 p, span, div, h1, h2, h3, h4, h5, h6, label, strong, b, li {
@@ -397,62 +398,32 @@ p, span, div, h1, h2, h3, h4, h5, h6, label, strong, b, li {
 }
 
 .stDownloadButton>button {
-    border-radius: 10px !important;
+    border-radius: 12px !important;
     font-weight: 800 !important;
-    background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%) !important;
+    background: linear-gradient(135deg, #2563eb 0%, #0284c7 100%) !important;
     color: #ffffff !important;
     border: 1px solid rgba(255, 255, 255, 0.2) !important;
-    padding: 10px 18px !important;
+    padding: 12px 20px !important;
+    box-shadow: 0 4px 16px rgba(37, 99, 235, 0.3) !important;
 }
 .stDownloadButton>button * {
     color: #ffffff !important;
     font-weight: 800 !important;
 }
 
-div[data-testid="stRadio"], div[role="radiogroup"] {
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-    padding: 0 !important;
-    gap: 6px !important;
-    display: flex !important;
-    flex-direction: row !important;
-    flex-wrap: nowrap !important;
-    margin-top: 2px !important;
-    margin-bottom: 8px !important;
-}
-div[role="radiogroup"] label {
-    background: #1e293b !important;
-    border: 1px solid rgba(255, 255, 255, 0.15) !important;
-    padding: 5px 8px !important;
-    border-radius: 8px !important;
-    font-weight: 700 !important;
-    font-size: 11px !important;
-    color: #f8fafc !important;
-    flex: 1 1 0px !important;
-    min-width: 0 !important;
-    text-align: center !important;
-    justify-content: center !important;
-    white-space: nowrap !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2) !important;
-    margin: 0 !important;
-}
-
 [data-testid="stChatMessage"] {
-    background-color: #1e293b !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
-    border-radius: 14px !important;
+    background-color: #111827 !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 16px !important;
     color: #f8fafc !important;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
-    padding: 14px 16px 18px 16px !important;
-    margin-bottom: 12px !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4) !important;
+    padding: 16px 18px 20px 18px !important;
+    margin-bottom: 14px !important;
     overflow: visible !important;
     word-break: break-word !important;
 }
 
-/* Chat Input Bar - High Contrast Night Mode */
+/* Chat Input Bar - Dark */
 [data-testid="stBottom"], [data-testid="stBottomBlockContainer"] {
     background: transparent !important;
 }
@@ -460,13 +431,13 @@ div[role="radiogroup"] label {
     background-color: transparent !important;
 }
 [data-testid="stChatInput"] > div, .stChatInput > div {
-    background-color: #1e293b !important;
-    border: 1.5px solid rgba(255, 255, 255, 0.2) !important;
-    border-radius: 14px !important;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5) !important;
+    background-color: #131b2e !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.15) !important;
+    border-radius: 16px !important;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5) !important;
 }
 [data-testid="stChatInput"] textarea, .stChatInput textarea {
-    background-color: #1e293b !important;
+    background-color: #131b2e !important;
     color: #f8fafc !important;
     font-size: 14px !important;
     font-weight: 600 !important;
@@ -481,26 +452,27 @@ div[role="radiogroup"] label {
 }
 
 hr {
-    border-color: rgba(255, 255, 255, 0.15) !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
 }
 
 .action-chip {
     display: inline-flex;
     align-items: center;
-    gap: 5px;
-    padding: 4px 10px;
-    border-radius: 6px;
-    font-size: 11px;
+    gap: 6px;
+    padding: 5px 12px;
+    border-radius: 8px;
+    font-size: 11.5px;
     font-weight: 700;
-    margin: 3px 3px 3px 0;
+    margin: 4px 4px 4px 0;
+    letter-spacing: 0.2px;
 }
-.chip-rebook { background: #e0f2fe; color: #0369a1 !important; border: 1px solid #bae6fd; }
-.chip-refund { background: #dcfce7; color: #15803d !important; border: 1px solid #bbf7d0; }
-.chip-meal { background: #fef3c7; color: #b45309 !important; border: 1px solid #fde68a; }
-.chip-lounge { background: #f3e8ff; color: #7e22ce !important; border: 1px solid #e9d5ff; }
-.chip-hotel { background: #ffe4e6; color: #be123c !important; border: 1px solid #fecdd3; }
-.chip-escalate { background: #fee2e2; color: #b91c1c !important; border: 1px solid #fca5a5; }
-.chip-decline { background: #f1f5f9; color: #475569 !important; border: 1px solid #cbd5e1; }
+.chip-rebook { background: rgba(37, 99, 235, 0.2); color: #60a5fa !important; border: 1px solid rgba(59, 130, 246, 0.4); }
+.chip-refund { background: rgba(5, 150, 105, 0.2); color: #34d399 !important; border: 1px solid rgba(16, 185, 129, 0.4); }
+.chip-meal { background: rgba(217, 119, 6, 0.2); color: #fbbf24 !important; border: 1px solid rgba(245, 158, 11, 0.4); }
+.chip-lounge { background: rgba(126, 34, 206, 0.2); color: #c084fc !important; border: 1px solid rgba(168, 85, 247, 0.4); }
+.chip-hotel { background: rgba(190, 18, 60, 0.2); color: #fb7185 !important; border: 1px solid rgba(244, 63, 94, 0.4); }
+.chip-escalate { background: rgba(185, 28, 28, 0.2); color: #f87171 !important; border: 1px solid rgba(239, 68, 68, 0.4); }
+.chip-decline { background: rgba(71, 85, 105, 0.2); color: #cbd5e1 !important; border: 1px solid rgba(100, 116, 139, 0.4); }
 </style>""", unsafe_allow_html=True)
 
 
@@ -556,24 +528,25 @@ def render_chip(action_type: str, language: str = "en") -> str:
     return f'<span class="action-chip {css}">{label}</span>'
 
 
-# ── Top Unified Toolbar (Header + 3 Micro-Toggles in ONE neat row) ────────────
-top_brand, top_lang, top_theme, top_reset = st.columns([1.8, 1.1, 0.6, 0.6])
+# ── Top Unified Toolbar (Luxury Brand Header + 3 Micro-Toggles in ONE row) ───
+top_brand, top_lang, top_theme, top_reset = st.columns([1.9, 1.1, 0.5, 0.5])
 
 with top_brand:
-    title_color = "#0369a1" if not is_dark else "#38bdf8"
-    sub_color = "#64748b" if not is_dark else "#94a3b8"
+    brand_title_color = "#0f172a" if not is_dark else "#f8fafc"
+    brand_sub_color = "#d97706" if not is_dark else "#fbbf24"
+    icon_bg = "linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%)" if not is_dark else "linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%)"
     st.markdown(f"""
-    <div style="display: flex; align-items: center; gap: 6px; padding-top: 2px;">
-        <span style="font-size: 20px;">✈️</span>
+    <div style="display: flex; align-items: center; gap: 8px; padding-top: 1px;">
+        <div style="width: 32px; height: 32px; border-radius: 9px; background: {icon_bg}; display: flex; align-items: center; justify-content: center; color: #ffffff; font-size: 15px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15); flex-shrink: 0;">✈️</div>
         <div>
-            <div style="font-size: 14px; font-weight: 800; color: {title_color}; line-height: 1.1;">SkyWay Care</div>
-            <div style="font-size: 8.5px; color: {sub_color}; font-weight: 600; text-transform: uppercase;">23 Sep 2026</div>
+            <div style="font-size: 13.5px; font-weight: 800; letter-spacing: -0.2px; color: {brand_title_color}; line-height: 1.1;">SKYWAY AIRLINES</div>
+            <div style="font-size: 8.5px; font-weight: 700; color: {brand_sub_color}; text-transform: uppercase; letter-spacing: 0.4px;">Executive Concierge • 23 Sep 2026</div>
         </div>
     </div>
     """, unsafe_allow_html=True)
 
 with top_lang:
-    lang_btn_text = "🌐 हिन्दी" if lang == "en" else "🌐 EN"
+    lang_btn_text = "🌐 हिन्दी" if lang == "en" else "🌐 English"
     if st.button(lang_btn_text, key="top_lang_btn", use_container_width=True):
         st.session_state.language = "hi" if lang == "en" else "en"
         st.session_state.messages = []
@@ -593,17 +566,18 @@ with top_reset:
         st.rerun()
 
 
-# ── 1-Tap Passenger Itinerary Selector (Zero-Glitch Native Segmented Pills) ────
+# ── VIP Passenger Itinerary Selector (1-Tap Segmented Switching) ──────────────
 curr_cust = st.session_state.selected_customer or "Priya Nair"
 c_p1, c_p2, c_p3 = st.columns(3)
 
 with c_p1:
     is_p1 = (curr_cust == "Priya Nair")
-    if st.button("🏆 Priya (Gold)", key="nav_priya", type="primary" if is_p1 else "secondary", use_container_width=True):
+    if st.button("🏆 Priya (Gold VIP)", key="nav_priya", type="primary" if is_p1 else "secondary", use_container_width=True):
         if not is_p1:
             st.session_state.selected_customer = "Priya Nair"
             orchestrator.set_customer("Priya Nair")
             st.session_state.messages = []
+            st.session_state.pending_prompt = None
             st.rerun()
 
 with c_p2:
@@ -613,15 +587,17 @@ with c_p2:
             st.session_state.selected_customer = "Arvind Kulkarni"
             orchestrator.set_customer("Arvind Kulkarni")
             st.session_state.messages = []
+            st.session_state.pending_prompt = None
             st.rerun()
 
 with c_p3:
     is_p3 = (curr_cust == "Meher Kaur")
-    if st.button("👑 Meher (Plat)", key="nav_meher", type="primary" if is_p3 else "secondary", use_container_width=True):
+    if st.button("👑 Meher (Plat Elite)", key="nav_meher", type="primary" if is_p3 else "secondary", use_container_width=True):
         if not is_p3:
             st.session_state.selected_customer = "Meher Kaur"
             orchestrator.set_customer("Meher Kaur")
             st.session_state.messages = []
+            st.session_state.pending_prompt = None
             st.rerun()
 
 
@@ -634,45 +610,44 @@ if active_cust:
     origin_city = cities[0].strip() if len(cities) > 0 else "Delhi"
     dest_city = cities[1].strip() if len(cities) > 1 else "Goa"
 
-    # Status Badge Styling
+    # Luxury Status Badge
     if active_booking:
         if active_booking.status == BookingStatus.CANCELLED:
-            status_html = f"<span style='background:#fee2e2; color:#b91c1c; padding:4px 10px; border-radius:6px; font-weight:800; font-size:11px; border:1px solid #fca5a5;'>● {t['status_cancelled']}</span>"
+            status_html = f"<span style='background:#fef2f2; color:#dc2626; padding:4px 12px; border-radius:8px; font-weight:800; font-size:11px; border:1px solid #fecaca; box-shadow: 0 1px 3px rgba(220, 38, 38, 0.1);'>● {t['status_cancelled']}</span>"
         elif active_booking.status == BookingStatus.DELAYED:
             status_text = t['status_delayed'].format(hours=active_booking.delay_hours, est=active_booking.new_departure)
-            status_html = f"<span style='background:#fef3c7; color:#b45309; padding:4px 10px; border-radius:6px; font-weight:800; font-size:11px; border:1px solid #fde68a;'>● {status_text}</span>"
+            status_html = f"<span style='background:#fffbeb; color:#d97706; padding:4px 12px; border-radius:8px; font-weight:800; font-size:11px; border:1px solid #fde68a; box-shadow: 0 1px 3px rgba(217, 119, 6, 0.1);'>● {status_text}</span>"
         else:
-            status_html = f"<span style='background:#dcfce7; color:#15803d; padding:4px 10px; border-radius:6px; font-weight:800; font-size:11px; border:1px solid #bbf7d0;'>● {t['status_ontime']}</span>"
+            status_html = f"<span style='background:#ecfdf5; color:#059669; padding:4px 12px; border-radius:8px; font-weight:800; font-size:11px; border:1px solid #a7f3d0; box-shadow: 0 1px 3px rgba(5, 150, 105, 0.1);'>● {t['status_ontime']}</span>"
     else:
         status_html = ""
 
-    tier_badge = f"🏆 {active_cust.loyalty_tier.value} Tier" if active_cust.loyalty_tier.value == "Gold" else (
-        f"👑 {active_cust.loyalty_tier.value} Tier" if active_cust.loyalty_tier.value == "Platinum" else f"🥈 {active_cust.loyalty_tier.value} Tier"
+    tier_badge = f"🏆 {active_cust.loyalty_tier.value} Medallion" if active_cust.loyalty_tier.value == "Gold" else (
+        f"👑 {active_cust.loyalty_tier.value} Elite" if active_cust.loyalty_tier.value == "Platinum" else f"🥈 {active_cust.loyalty_tier.value} Member"
     )
 
-    telemetry_bg = "background: rgba(2, 132, 199, 0.04); border: 1px solid #bae6fd;" if not is_dark else "background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.12);"
-    stat_card_bg = "background: #f0f9ff; border: 1px solid #bae6fd;" if not is_dark else "background: #0f172a; border: 1px solid rgba(255, 255, 255, 0.12);"
-    city_color = "#0284c7" if not is_dark else "#38bdf8"
-    text_sub = "#64748b" if not is_dark else "#94a3b8"
-    tier_bg = "#e0f2fe" if not is_dark else "#1e293b"
-    tier_color = "#0369a1" if not is_dark else "#38bdf8"
+    card_text_primary = "#0f172a" if not is_dark else "#f8fafc"
+    card_text_muted = "#64748b" if not is_dark else "#94a3b8"
+    accent_blue = "#1e3a8a" if not is_dark else "#38bdf8"
+    flight_box_bg = "background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); border: 1px solid #e2e8f0;" if not is_dark else "background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08);"
+    telemetry_item_bg = "background: #ffffff; border: 1px solid #e2e8f0;" if not is_dark else "background: #131b2e; border: 1px solid rgba(255, 255, 255, 0.08);"
 
     flight_num = active_booking.flight if active_booking else "SK-204"
     sched_str = f"Sch: <b>{active_booking.scheduled_departure}</b>" if active_booking else "Sch: 18:40"
     if active_booking and active_booking.delay_hours:
-        sched_str += f" &nbsp;•&nbsp; <span style='color:#f59e0b; font-weight:700;'>New: {active_booking.new_departure}</span>"
+        sched_str += f" &nbsp;•&nbsp; <span style='color:#d97706; font-weight:700;'>Est: {active_booking.new_departure}</span>"
 
-    # ── Boarding Pass Card (Clean Zero-Overflow Container) ─────────────────────
+    # ── Luxury Digital Boarding Pass Container ─────────────────────────────────
     with st.container(border=True):
         st.markdown(f"""
-        <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px; margin-bottom: 8px;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px; margin-bottom: 10px;">
             <div>
                 <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-                    <span style="font-size: 17px; font-weight: 800; color: {city_color};">👤 {active_cust.name}</span>
-                    <span style="font-size: 11px; background: {tier_bg}; color: {tier_color}; padding: 2px 8px; border-radius: 6px; font-weight: 700; border: 1px solid #bae6fd;">{tier_badge}</span>
+                    <span style="font-size: 17px; font-weight: 800; color: {card_text_primary}; letter-spacing: -0.2px;">👤 {active_cust.name}</span>
+                    <span style="font-size: 11px; background: {'#fffbeb' if not is_dark else 'rgba(245, 158, 11, 0.15)'}; color: {'#b45309' if not is_dark else '#fbbf24'}; padding: 3px 9px; border-radius: 6px; font-weight: 700; border: 1px solid {'#fde68a' if not is_dark else 'rgba(245, 158, 11, 0.3)'};">{tier_badge}</span>
                 </div>
-                <div style="font-size: 11px; color: {text_sub}; margin-top: 3px;">
-                    {t['pnr_label']}: <b>{active_cust.booking_reference}</b> • {t['contact_label']}: {active_cust.contact.email}
+                <div style="font-size: 11px; color: {card_text_muted}; margin-top: 3px;">
+                    {t['pnr_label']}: <span style="font-family: monospace; font-weight: 800; color: {accent_blue}; background: {'#eff6ff' if not is_dark else 'rgba(56, 189, 248, 0.15)'}; padding: 1px 6px; border-radius: 4px;">{active_cust.booking_reference}</span> • {t['contact_label']}: {active_cust.contact.email}
                 </div>
             </div>
             <div style="align-self: center;">
@@ -680,40 +655,40 @@ if active_cust:
             </div>
         </div>
 
-        <div style="{telemetry_bg} border-radius: 10px; padding: 8px 12px; margin: 8px 0;">
+        <div style="{flight_box_bg} border-radius: 12px; padding: 10px 14px; margin: 10px 0;">
             <div style="display: flex; justify-content: space-between; align-items: center; text-align: center;">
-                <div style="text-align: left; min-width: 50px;">
-                    <div style="font-size: 22px; font-weight: 800; color: {city_color}; line-height: 1;">{origin_city.upper()[:3]}</div>
-                    <div style="font-size: 10px; color: {text_sub}; font-weight: 600;">{origin_city}</div>
+                <div style="text-align: left; min-width: 55px;">
+                    <div style="font-size: 24px; font-weight: 800; color: {card_text_primary}; line-height: 1; letter-spacing: -0.5px;">{origin_city.upper()[:3]}</div>
+                    <div style="font-size: 10.5px; color: {card_text_muted}; font-weight: 600; margin-top: 2px;">{origin_city}</div>
                 </div>
-                <div style="flex: 1; padding: 0 6px; text-align: center; min-width: 0;">
-                    <div style="font-size: 12px; font-weight: 800; color: {city_color};">Flight {flight_num}</div>
-                    <div style="display: flex; align-items: center; justify-content: center; gap: 4px; margin: 2px 0;">
-                        <span style="font-size: 12px;">✈</span>
-                        <div style="flex: 1; height: 2px; border-bottom: 2px dashed {city_color}; max-width: 110px;"></div>
-                        <span style="font-size: 12px; font-weight: 800; color: {city_color};">➔</span>
+                <div style="flex: 1; padding: 0 10px; text-align: center; min-width: 0;">
+                    <div style="font-size: 12px; font-weight: 800; color: {accent_blue}; letter-spacing: 0.3px;">Flight {flight_num}</div>
+                    <div style="display: flex; align-items: center; justify-content: center; gap: 6px; margin: 3px 0;">
+                        <span style="font-size: 13px;">✈</span>
+                        <div style="flex: 1; height: 2px; border-bottom: 2px dashed {'#cbd5e1' if not is_dark else 'rgba(255, 255, 255, 0.2)'}; max-width: 120px;"></div>
+                        <span style="font-size: 12px; font-weight: 800; color: {accent_blue};">➔</span>
                     </div>
-                    <div style="font-size: 10px; color: {text_sub};">{sched_str}</div>
+                    <div style="font-size: 10.5px; color: {card_text_muted};">{sched_str}</div>
                 </div>
-                <div style="text-align: right; min-width: 50px;">
-                    <div style="font-size: 22px; font-weight: 800; color: {city_color}; line-height: 1;">{dest_city.upper()[:3]}</div>
-                    <div style="font-size: 10px; color: {text_sub}; font-weight: 600;">{dest_city}</div>
+                <div style="text-align: right; min-width: 55px;">
+                    <div style="font-size: 24px; font-weight: 800; color: {card_text_primary}; line-height: 1; letter-spacing: -0.5px;">{dest_city.upper()[:3]}</div>
+                    <div style="font-size: 10.5px; color: {card_text_muted}; font-weight: 600; margin-top: 2px;">{dest_city}</div>
                 </div>
             </div>
         </div>
 
-        <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; width: 100%; box-sizing: border-box;">
-            <div style="{stat_card_bg} border-radius: 8px; padding: 6px 4px; text-align: center; min-width: 0; overflow: hidden;">
-                <div style="font-size: 9px; font-weight: 700; color: {text_sub}; text-transform: uppercase; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{t['flights_12m']}</div>
-                <div style="font-size: 14px; font-weight: 800; color: {city_color};">{active_cust.travel_history.flights_last_12_months} (12M)</div>
+        <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; width: 100%; box-sizing: border-box;">
+            <div style="{telemetry_item_bg} border-radius: 10px; padding: 7px 6px; text-align: center; min-width: 0; overflow: hidden; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);">
+                <div style="font-size: 9px; font-weight: 700; color: {card_text_muted}; text-transform: uppercase; letter-spacing: 0.3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{t['flights_12m']}</div>
+                <div style="font-size: 14px; font-weight: 800; color: {card_text_primary}; margin-top: 1px;">{active_cust.travel_history.flights_last_12_months} Flights</div>
             </div>
-            <div style="{stat_card_bg} border-radius: 8px; padding: 6px 4px; text-align: center; min-width: 0; overflow: hidden;">
-                <div style="font-size: 9px; font-weight: 700; color: {text_sub}; text-transform: uppercase; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{t['prior_complaints']}</div>
-                <div style="font-size: 14px; font-weight: 800; color: {city_color};">{active_cust.travel_history.prior_complaints}</div>
+            <div style="{telemetry_item_bg} border-radius: 10px; padding: 7px 6px; text-align: center; min-width: 0; overflow: hidden; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);">
+                <div style="font-size: 9px; font-weight: 700; color: {card_text_muted}; text-transform: uppercase; letter-spacing: 0.3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{t['prior_complaints']}</div>
+                <div style="font-size: 14px; font-weight: 800; color: {card_text_primary}; margin-top: 1px;">{active_cust.travel_history.prior_complaints} Incidents</div>
             </div>
-            <div style="{stat_card_bg} border-radius: 8px; padding: 6px 4px; text-align: center; min-width: 0; overflow: hidden;">
-                <div style="font-size: 9px; font-weight: 700; color: {text_sub}; text-transform: uppercase; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{t['complaint_history']}</div>
-                <div style="font-size: 11px; font-weight: 700; color: {city_color}; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="{active_cust.travel_history.complaint_details or 'None'}">{active_cust.travel_history.complaint_details or 'None'}</div>
+            <div style="{telemetry_item_bg} border-radius: 10px; padding: 7px 6px; text-align: center; min-width: 0; overflow: hidden; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);">
+                <div style="font-size: 9px; font-weight: 700; color: {card_text_muted}; text-transform: uppercase; letter-spacing: 0.3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{t['complaint_history']}</div>
+                <div style="font-size: 11.5px; font-weight: 700; color: {card_text_primary}; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 2px;" title="{active_cust.travel_history.complaint_details or 'Clean Record'}">{active_cust.travel_history.complaint_details or 'Clean Record'}</div>
             </div>
         </div>
         """, unsafe_allow_html=True)
@@ -987,7 +962,8 @@ with tab_chat:
                     ]
 
         # Quick Passenger Action Chips placed directly ABOVE the input box (2x2 grid for comfortable tap)
-        st.markdown(f"<div style='margin-top: 14px; margin-bottom: 6px; font-size: 11px; font-weight: 700; color: #0284c7;'>⚡ {t['quick_actions_title']}</div>", unsafe_allow_html=True)
+        action_header_color = "#0f172a" if not is_dark else "#f8fafc"
+        st.markdown(f"<div style='margin-top: 14px; margin-bottom: 8px; font-size: 11.5px; font-weight: 800; color: {action_header_color}; letter-spacing: 0.3px;'>✦ {t['quick_actions_title']}</div>", unsafe_allow_html=True)
         q_row1_1, q_row1_2 = st.columns(2)
         with q_row1_1:
             if st.button(dynamic_opts[0][0], key="dyn_opt_1", use_container_width=True):
