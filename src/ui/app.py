@@ -355,11 +355,14 @@ def get_orchestrator() -> AgentOrchestrator:
         st.session_state.policy_repo = PolicyRepository()
         st.session_state.messages = []
         st.session_state.selected_customer = "Priya Nair"
+        st.session_state.orchestrator.set_customer("Priya Nair")
 
     return st.session_state.orchestrator
 
 
 orchestrator = get_orchestrator()
+if not orchestrator.current_customer and st.session_state.selected_customer:
+    orchestrator.set_customer(st.session_state.selected_customer)
 
 
 # ── Chip Renderer ──────────────────────────────────────────────────────────────
@@ -457,7 +460,11 @@ with col_reset:
         st.rerun()
 
 chosen_name = cust_map[selected_label]
-if chosen_name != st.session_state.selected_customer:
+if (
+    not orchestrator.current_customer
+    or chosen_name != st.session_state.selected_customer
+    or orchestrator.current_customer.name != chosen_name
+):
     st.session_state.selected_customer = chosen_name
     orchestrator.set_customer(chosen_name)
     st.session_state.messages = []
