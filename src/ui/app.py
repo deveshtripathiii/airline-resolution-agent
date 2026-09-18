@@ -1,11 +1,7 @@
 """SkyWay Airlines Disruption Resolution Portal.
 
-Features:
-- Sky & Clouds theme (Aviation Aesthetic)
-- 100% crystal-clear text contrast & tab visibility
-- Zero HTML code-block rendering errors
-- Bulletproof Day (Sky Light) & Night (Starry Dark) toggle
-- Strict adherence to AIONOS Assignment 3 PDF guidelines
+Native Streamlit Architecture — Zero HTML escaping bugs, high-contrast, mobile-responsive.
+Strictly grounded in AIONOS Assignment 3 PDF Guidelines.
 """
 
 from __future__ import annotations
@@ -39,262 +35,167 @@ st.set_page_config(
 
 # ── Theme Management ──────────────────────────────────────────────────────────
 if "theme_mode" not in st.session_state:
-    st.session_state.theme_mode = "sky_light"  # Default to beautiful sky light theme
+    st.session_state.theme_mode = "sky_light"
 
 is_dark = st.session_state.theme_mode == "night_dark"
 
 
-# ── Aviation & Sky Theme CSS ──────────────────────────────────────────────────
+# ── Clean High-Contrast CSS ───────────────────────────────────────────────────
 if not is_dark:
-    # ⛅ Sky Day Theme (Blue Skies & Clouds)
     st.markdown("""
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
         
         * {
             font-family: 'Plus Jakarta Sans', -apple-system, sans-serif !important;
         }
 
-        /* Full page sky & soft cloud atmosphere */
         .stApp {
-            background: linear-gradient(180deg, #dbeafe 0%, #e0f2fe 30%, #f0f9ff 70%, #ffffff 100%) !important;
+            background: linear-gradient(180deg, #dbeafe 0%, #e0f2fe 25%, #f0f9ff 60%, #ffffff 100%) !important;
             color: #0f172a !important;
         }
 
-        /* Top Header */
-        .sky-header {
-            background: linear-gradient(135deg, #0284c7 0%, #0369a1 50%, #075985 100%);
+        /* Navigation Banner */
+        .sky-nav-banner {
+            background: linear-gradient(135deg, #0284c7 0%, #0369a1 60%, #075985 100%);
             color: #ffffff;
-            border-radius: 16px;
-            padding: 16px 24px;
-            margin-bottom: 20px;
+            border-radius: 14px;
+            padding: 16px 22px;
+            margin-bottom: 18px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 10px 25px rgba(2, 132, 199, 0.25);
+            box-shadow: 0 8px 20px rgba(2, 132, 199, 0.25);
         }
 
-        /* Tab Navigation Bar - Super high contrast */
+        /* Tab Navigation */
         .stTabs [data-baseweb="tab-list"] {
-            background-color: rgba(255, 255, 255, 0.8) !important;
+            background-color: #ffffff !important;
             border-radius: 12px !important;
-            padding: 6px !important;
-            border: 1px solid #bae6fd !important;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
+            padding: 5px !important;
+            border: 2px solid #bae6fd !important;
+            box-shadow: 0 4px 12px rgba(2, 132, 199, 0.08) !important;
         }
         
         .stTabs [data-baseweb="tab"] {
             color: #0369a1 !important;
             font-weight: 700 !important;
             font-size: 14px !important;
+            padding: 8px 20px !important;
             border-radius: 8px !important;
-            padding: 8px 18px !important;
         }
         
         .stTabs [aria-selected="true"] {
             background-color: #0284c7 !important;
             color: #ffffff !important;
-            box-shadow: 0 2px 8px rgba(2, 132, 199, 0.35) !important;
         }
 
-        /* Boarding Pass Hero Container */
-        .pass-container {
-            background: #ffffff;
-            border: 2px solid #bae6fd;
-            border-radius: 18px;
-            padding: 22px;
-            margin-bottom: 20px;
-            box-shadow: 0 12px 30px rgba(2, 132, 199, 0.12);
-        }
-
-        /* Text colors */
-        .text-dark-main { color: #0f172a !important; }
-        .text-muted-main { color: #475569 !important; }
-
-        /* Buttons */
         .stButton>button {
-            border-radius: 10px !important;
+            border-radius: 8px !important;
             font-weight: 700 !important;
-            border: 1px solid #bae6fd !important;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.06) !important;
+            border: 1px solid #7dd3fc !important;
+            background-color: #ffffff !important;
+            color: #0369a1 !important;
         }
 
-        /* Selectbox */
         .stSelectbox div[data-baseweb="select"] {
             background-color: #ffffff !important;
-            border-radius: 10px !important;
+            border-radius: 8px !important;
             border: 1px solid #7dd3fc !important;
             color: #0f172a !important;
             font-weight: 600 !important;
         }
-
-        /* Policy & Service Cards */
-        .card-box {
-            background: #ffffff;
-            border: 1px solid #e0f2fe;
-            border-radius: 14px;
-            padding: 18px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
-            margin-bottom: 14px;
-        }
     </style>
     """, unsafe_allow_html=True)
 else:
-    # 🌙 Starry Night Theme (Aviation Midnight)
     st.markdown("""
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
         
         * {
             font-family: 'Plus Jakarta Sans', -apple-system, sans-serif !important;
         }
 
         .stApp {
-            background: radial-gradient(circle at 10% 20%, #0f172a 0%, #030712 100%) !important;
+            background: radial-gradient(circle at 10% 20%, #0f172a 0%, #020617 100%) !important;
             color: #f8fafc !important;
         }
 
-        .sky-header {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0369a1 100%);
+        .sky-nav-banner {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 60%, #0284c7 100%);
             color: #ffffff;
-            border-radius: 16px;
-            padding: 16px 24px;
-            margin-bottom: 20px;
+            border-radius: 14px;
+            padding: 16px 22px;
+            margin-bottom: 18px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
-        /* Tab Navigation Bar */
         .stTabs [data-baseweb="tab-list"] {
             background-color: #1e293b !important;
             border-radius: 12px !important;
-            padding: 6px !important;
-            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            padding: 5px !important;
+            border: 1px solid rgba(255, 255, 255, 0.15) !important;
         }
         
         .stTabs [data-baseweb="tab"] {
             color: #94a3b8 !important;
             font-weight: 700 !important;
             font-size: 14px !important;
+            padding: 8px 20px !important;
             border-radius: 8px !important;
-            padding: 8px 18px !important;
         }
         
         .stTabs [aria-selected="true"] {
             background-color: #0284c7 !important;
             color: #ffffff !important;
-            box-shadow: 0 2px 10px rgba(2, 132, 199, 0.4) !important;
         }
-
-        .pass-container {
-            background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 18px;
-            padding: 22px;
-            margin-bottom: 20px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
-        }
-
-        .text-dark-main { color: #f8fafc !important; }
-        .text-muted-main { color: #94a3b8 !important; }
 
         .stButton>button {
-            border-radius: 10px !important;
+            border-radius: 8px !important;
             font-weight: 700 !important;
             background-color: #1e293b !important;
             color: #f8fafc !important;
-            border: 1px solid rgba(255, 255, 255, 0.15) !important;
+            border: 1px solid rgba(255, 255, 255, 0.2) !important;
         }
 
         .stSelectbox div[data-baseweb="select"] {
             background-color: #1e293b !important;
-            border-radius: 10px !important;
+            border-radius: 8px !important;
             border: 1px solid rgba(255, 255, 255, 0.2) !important;
             color: #f8fafc !important;
             font-weight: 600 !important;
-        }
-
-        .card-box {
-            background: #1e293b;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 14px;
-            padding: 18px;
-            margin-bottom: 14px;
         }
     </style>
     """, unsafe_allow_html=True)
 
 
-# ── General Clean UI Elements ──────────────────────────────────────────────────
+# ── Action Chip Styles ─────────────────────────────────────────────────────────
 st.markdown("""
 <style>
     header {visibility: hidden;}
     footer {visibility: hidden;}
     #MainMenu {visibility: hidden;}
 
-    /* Flight Vector Display */
-    .route-bar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin: 14px 0;
-        padding: 12px 0;
-        border-top: 1px dashed rgba(125, 211, 252, 0.4);
-        border-bottom: 1px dashed rgba(125, 211, 252, 0.4);
-    }
-    
-    .city-label {
-        font-size: 26px;
-        font-weight: 800;
-        letter-spacing: -0.5px;
-    }
-
-    .status-badge {
-        display: inline-block;
-        padding: 5px 12px;
-        border-radius: 9999px;
-        font-size: 12px;
-        font-weight: 800;
-        letter-spacing: 0.5px;
-        text-transform: uppercase;
-    }
-    
-    .status-red { background: #fee2e2; color: #b91c1c; border: 1px solid #f87171; }
-    .status-amber { background: #fef3c7; color: #b45309; border: 1px solid #fbbf24; }
-    .status-green { background: #dcfce7; color: #15803d; border: 1px solid #4ade80; }
-
-    .tier-tag {
-        display: inline-block;
-        padding: 3px 8px;
-        border-radius: 6px;
-        font-size: 11px;
-        font-weight: 800;
-        text-transform: uppercase;
-    }
-    .tier-gold-c { background: #fef3c7; color: #b45309; border: 1px solid #fde68a; }
-    .tier-platinum-c { background: #f3e8ff; color: #7e22ce; border: 1px solid #e9d5ff; }
-    .tier-silver-c { background: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; }
-
-    .action-pill {
+    .action-chip {
         display: inline-flex;
         align-items: center;
-        gap: 4px;
-        padding: 4px 10px;
+        gap: 5px;
+        padding: 4px 12px;
         border-radius: 6px;
-        font-size: 11px;
+        font-size: 12px;
         font-weight: 700;
-        margin: 2px 4px 2px 0;
+        margin: 4px 4px 4px 0;
     }
-    .pill-rebook { background: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd; }
-    .pill-refund { background: #dcfce7; color: #15803d; border: 1px solid #bbf7d0; }
-    .pill-voucher { background: #fef3c7; color: #b45309; border: 1px solid #fde68a; }
-    .pill-lounge { background: #f3e8ff; color: #7e22ce; border: 1px solid #e9d5ff; }
-    .pill-hotel { background: #ffe4e6; color: #be123c; border: 1px solid #fecdd3; }
-    .pill-escalate { background: #fee2e2; color: #b91c1c; border: 1px solid #fca5a5; }
-    .pill-decline { background: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; }
+    .chip-rebook { background: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd; }
+    .chip-refund { background: #dcfce7; color: #15803d; border: 1px solid #bbf7d0; }
+    .chip-meal { background: #fef3c7; color: #b45309; border: 1px solid #fde68a; }
+    .chip-lounge { background: #f3e8ff; color: #7e22ce; border: 1px solid #e9d5ff; }
+    .chip-hotel { background: #ffe4e6; color: #be123c; border: 1px solid #fecdd3; }
+    .chip-escalate { background: #fee2e2; color: #b91c1c; border: 1px solid #fca5a5; }
+    .chip-decline { background: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -320,36 +221,36 @@ def get_orchestrator() -> AgentOrchestrator:
 orchestrator = get_orchestrator()
 
 
-# ── Chip Formatter ─────────────────────────────────────────────────────────────
-def render_pill(action_type: str) -> str:
+# ── Chip Renderer ──────────────────────────────────────────────────────────────
+def render_chip(action_type: str) -> str:
     badges = {
-        "rebook": ("✈️ Priority Rebooking Authorized", "pill-rebook"),
-        "refund": ("💰 Full Refund Authorized (7 Days)", "pill-refund"),
-        "meal_voucher": ("🍽️ Dining Voucher Issued", "pill-voucher"),
-        "lounge_access": ("🛋️ Executive Lounge Pass Issued", "pill-lounge"),
-        "hotel_accommodation": ("🏨 Transit Accommodation Arranged", "pill-hotel"),
-        "escalate_to_supervisor": ("🚨 Escalated to Duty Supervisor", "pill-escalate"),
-        "decline_request": ("⛔ Exceeds Airline Policy (Declined)", "pill-decline"),
-        "provide_info": ("ℹ️ Flight Telemetry Provided", "pill-rebook"),
+        "rebook": ("✈️ Priority Rebooking Authorized", "chip-rebook"),
+        "refund": ("💰 Full Refund Authorized (7 Days)", "chip-refund"),
+        "meal_voucher": ("🍽️ Dining Voucher Issued", "chip-meal"),
+        "lounge_access": ("🛋️ Executive Lounge Pass Issued", "chip-lounge"),
+        "hotel_accommodation": ("🏨 Transit Accommodation Arranged", "chip-hotel"),
+        "escalate_to_supervisor": ("🚨 Escalated to Duty Supervisor", "chip-escalate"),
+        "decline_request": ("⛔ Exceeds Airline Policy (Declined)", "chip-decline"),
+        "provide_info": ("ℹ️ Flight Telemetry Provided", "chip-rebook"),
     }
-    label, css = badges.get(action_type, ("🔹 Action Confirmed", "pill-rebook"))
-    return f'<span class="action-pill {css}">{label}</span>'
+    label, css = badges.get(action_type, ("🔹 Action Confirmed", "chip-rebook"))
+    return f'<span class="action-chip {css}">{label}</span>'
 
 
-# ── Sky Header ─────────────────────────────────────────────────────────────────
+# ── Top Navigation Bar ─────────────────────────────────────────────────────────
 st.markdown(f"""
-<div class="sky-header">
+<div class="sky-nav-banner">
     <div style="display: flex; align-items: center; gap: 12px;">
-        <div style="font-size: 28px;">✈️</div>
+        <span style="font-size: 28px;">✈️</span>
         <div>
-            <div style="font-size: 22px; font-weight: 800; letter-spacing: -0.5px;">SkyWay Airlines</div>
+            <div style="font-size: 20px; font-weight: 800;">SkyWay Airlines</div>
             <div style="font-size: 11px; opacity: 0.9; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;">
                 Customer Self-Service & Disruption Care Portal
             </div>
         </div>
     </div>
     <div style="background: rgba(255, 255, 255, 0.2); padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 700;">
-        📅 Flight Operations Date: {EXERCISE_DATE}
+        📅 Flight Operations: <strong>{EXERCISE_DATE}</strong>
     </div>
 </div>
 """, unsafe_allow_html=True)
@@ -357,7 +258,7 @@ st.markdown(f"""
 
 # ── Top Control Bar (Passenger Selector + Day/Night Toggle + Reset) ─────────────
 customers = st.session_state.customer_repo.get_all()
-cust_map = {f"{c.name} (PNR: {c.booking_reference} • {c.loyalty_tier.value} Tier)": c.name for c in customers}
+cust_map = {f"{c.name} (PNR: {c.booking_reference} • {c.loyalty_tier.value} Member)": c.name for c in customers}
 options_list = ["— Select Verified Passenger Itinerary —"] + list(cust_map.keys())
 
 current_idx = 0
@@ -403,67 +304,53 @@ active_cust = orchestrator.current_customer
 
 if active_cust:
     tier_val = active_cust.loyalty_tier.value
-    tier_css = {"Platinum": "tier-platinum-c", "Gold": "tier-gold-c", "Silver": "tier-silver-c"}.get(tier_val, "tier-silver-c")
     active_booking = orchestrator._get_active_booking()
 
     cities = active_booking.route.split("→") if active_booking else ["Delhi", "Goa"]
     origin_city = cities[0].strip() if len(cities) > 0 else "Delhi"
     dest_city = cities[1].strip() if len(cities) > 1 else "Goa"
 
-    status_pill_class = "status-green"
-    status_label = "ON TIME"
-    if active_booking:
-        if active_booking.status == BookingStatus.CANCELLED:
-            status_pill_class = "status-red"
-            status_label = "CANCELLED (OPERATIONAL)"
-        elif active_booking.status == BookingStatus.DELAYED:
-            status_pill_class = "status-amber"
-            status_label = f"DELAYED {active_booking.delay_hours}H (EST: {active_booking.new_departure})"
+    # ── Boarding Pass Card (100% Native Streamlit Container) ───────────────────
+    with st.container(border=True):
+        col_p1, col_p2 = st.columns([3, 1])
+        with col_p1:
+            st.markdown(f"### 👤 {active_cust.name} &nbsp; `{tier_val.upper()} MEMBER`")
+            st.caption(f"Booking PNR: **{active_cust.booking_reference}** • Contact: {active_cust.contact.email} ({active_cust.contact.phone})")
+        with col_p2:
+            if active_booking:
+                if active_booking.status == BookingStatus.CANCELLED:
+                    st.error("● CANCELLED (OPERATIONAL)")
+                elif active_booking.status == BookingStatus.DELAYED:
+                    st.warning(f"● DELAYED {active_booking.delay_hours}H (EST: {active_booking.new_departure})")
+                else:
+                    st.success("● ON TIME")
 
-    # ── Boarding Pass Hero Card (Clean Multi-Column Native Structure) ───────────
-    st.markdown(f"""
-    <div class="pass-container">
-        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
-            <div>
-                <span style="font-size: 20px; font-weight: 800;" class="text-dark-main">{active_cust.name}</span>
-                &nbsp; <span class="tier-tag {tier_css}">{tier_val} MEMBER</span>
-                <div style="font-size: 12px; margin-top: 2px;" class="text-muted-main">
-                    PNR: <strong style="color: #0284c7;">{active_cust.booking_reference}</strong> • Contact: {active_cust.contact.email}
-                </div>
-            </div>
-            <div>
-                <span class="status-badge {status_pill_class}">● {status_label}</span>
-            </div>
-        </div>
+        st.divider()
 
-        <div class="route-bar">
-            <div style="text-align: left;">
-                <div class="city-label text-dark-main">{origin_city.upper()[:3]}</div>
-                <div style="font-size: 13px;" class="text-muted-main">{origin_city}</div>
-            </div>
-            <div style="text-align: center; flex-grow: 1; padding: 0 20px;">
-                <div style="font-size: 13px; font-weight: 700; color: #0284c7;">
-                    Flight {active_booking.flight if active_booking else 'SK-204'}
-                </div>
-                <div style="color: #0284c7; font-size: 16px; margin: 2px 0;">✈ ────────── ➔</div>
-                <div style="font-size: 11px;" class="text-muted-main">
-                    Sch: {active_booking.scheduled_departure if active_booking else '18:40'}
-                    {f" • <strong style='color:#b45309;'>Rescheduled: {active_booking.new_departure}</strong>" if active_booking.delay_hours else ""}
-                </div>
-            </div>
-            <div style="text-align: right;">
-                <div class="city-label text-dark-main">{dest_city.upper()[:3]}</div>
-                <div style="font-size: 13px;" class="text-muted-main">{dest_city}</div>
-            </div>
-        </div>
+        # Flight Vector Telemetry
+        c_org, c_route, c_dst = st.columns([1, 2, 1])
+        with c_org:
+            st.markdown(f"## {origin_city.upper()[:3]}")
+            st.caption(origin_city)
+        with c_route:
+            flight_num = active_booking.flight if active_booking else "SK-204"
+            st.markdown(f"<div style='text-align:center; font-weight:800; color:#0284c7; font-size:16px;'>Flight {flight_num}</div>", unsafe_allow_html=True)
+            st.markdown("<div style='text-align:center; font-size:18px; color:#0284c7;'>✈ ─────────────── ➔</div>", unsafe_allow_html=True)
+            sched_str = f"Sch: **{active_booking.scheduled_departure}**" if active_booking else "Sch: 18:40"
+            if active_booking and active_booking.delay_hours:
+                sched_str += f" &nbsp;•&nbsp; <span style='color:#b45309; font-weight:700;'>Rescheduled: {active_booking.new_departure}</span>"
+            st.markdown(f"<div style='text-align:center; font-size:12px;'>{sched_str}</div>", unsafe_allow_html=True)
+        with c_dst:
+            st.markdown(f"## {dest_city.upper()[:3]}")
+            st.caption(dest_city)
 
-        <div style="display: flex; justify-content: space-between; font-size: 12px; flex-wrap: wrap; gap: 8px;" class="text-muted-main">
-            <div>✈ Annual Flights: <strong>{active_cust.travel_history.flights_last_12_months} (Last 12M)</strong></div>
-            <div>📋 Service Complaints: <strong>{active_cust.travel_history.prior_complaints}</strong></div>
-            <div>ℹ️ Details: <strong>{active_cust.travel_history.complaint_details or 'None'}</strong></div>
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
+        st.divider()
+
+        # History Stats
+        m1, m2, m3 = st.columns(3)
+        m1.metric("Annual Flights", f"{active_cust.travel_history.flights_last_12_months} (12M)")
+        m2.metric("Service Complaints", f"{active_cust.travel_history.prior_complaints}")
+        m3.metric("Complaint History", f"{active_cust.travel_history.complaint_details or 'None'}")
 
 
 # ── Main Tabbed Experience ─────────────────────────────────────────────────────
@@ -484,32 +371,20 @@ with tab_chat:
         st.markdown("#### ✈️ Flight Disruption Network Status")
         sc1, sc2, sc3 = st.columns(3)
         with sc1:
-            st.markdown("""
-            <div class="card-box">
-                <strong style="color: #b91c1c;">Flight SK-204 (DEL → GOI)</strong><br/>
-                • <strong>Status:</strong> Cancelled (Operational)<br/>
-                • <strong>Passenger:</strong> Priya Nair (Gold)<br/>
-                • <strong>Policy:</strong> Free Rebooking (24h) OR Full Refund (7 Days)
-            </div>
-            """, unsafe_allow_html=True)
+            with st.container(border=True):
+                st.markdown("**Flight SK-204 (DEL → GOI)**")
+                st.error("● Cancelled (Operational)")
+                st.caption("Passenger: **Priya Nair (Gold)**\n\nPolicy: Free Rebooking (24h) OR Full Refund (7 Days)")
         with sc2:
-            st.markdown("""
-            <div class="card-box">
-                <strong style="color: #b45309;">Flight SK-118 (BOM → BLR)</strong><br/>
-                • <strong>Status:</strong> Delayed 4 Hours (11:10)<br/>
-                • <strong>Passenger:</strong> Arvind Kulkarni (Silver)<br/>
-                • <strong>Policy:</strong> Meal Voucher + Lounge Access
-            </div>
-            """, unsafe_allow_html=True)
+            with st.container(border=True):
+                st.markdown("**Flight SK-118 (BOM → BLR)**")
+                st.warning("● Delayed 4 Hours (11:10)")
+                st.caption("Passenger: **Arvind Kulkarni (Silver)**\n\nPolicy: Meal Voucher + Lounge Access")
         with sc3:
-            st.markdown("""
-            <div class="card-box">
-                <strong style="color: #7e22ce;">Flight SK-305 (DEL → HYD)</strong><br/>
-                • <strong>Status:</strong> Delayed 6 Hours (20:00)<br/>
-                • <strong>Passenger:</strong> Meher Kaur (Platinum)<br/>
-                • <strong>Policy:</strong> Meal + Lounge + Transit Hotel + Supervisor Review
-            </div>
-            """, unsafe_allow_html=True)
+            with st.container(border=True):
+                st.markdown("**Flight SK-305 (DEL → HYD)**")
+                st.warning("● Delayed 6 Hours (20:00)")
+                st.caption("Passenger: **Meher Kaur (Platinum)**\n\nPolicy: Meal + Lounge + Transit Hotel + Supervisor Review")
     else:
         # Welcome message
         if not st.session_state.messages:
@@ -541,7 +416,7 @@ with tab_chat:
                 st.markdown(msg["content"])
 
                 if msg.get("actions"):
-                    chips_html = "".join([render_pill(a) for a in msg["actions"]])
+                    chips_html = "".join([render_chip(a) for a in msg["actions"]])
                     st.markdown(f"<div style='margin-top: 8px;'>{chips_html}</div>", unsafe_allow_html=True)
 
         # Chat Input Bar
@@ -572,19 +447,19 @@ with tab_chat:
         st.caption("⚡ Quick Passenger Requests:")
         q1, q2, q3, q4 = st.columns(4)
         with q1:
-            if st.button("💰 Request Full Refund", key="btn_p_ref", use_container_width=True):
+            if st.button("💰 Request Full Refund", key="b_ref", use_container_width=True):
                 st.session_state.pending_prompt = "I would like to request a full refund for my flight."
                 st.rerun()
         with q2:
-            if st.button("✈️ Request Priority Rebook", key="btn_p_reb", use_container_width=True):
+            if st.button("✈️ Request Priority Rebook", key="b_reb", use_container_width=True):
                 st.session_state.pending_prompt = "Please rebook me on the next available flight."
                 st.rerun()
         with q3:
-            if st.button("🍽️ Claim Meal & Lounge", key="btn_p_vou", use_container_width=True):
+            if st.button("🍽️ Claim Meal & Lounge", key="b_vou", use_container_width=True):
                 st.session_state.pending_prompt = "What meal vouchers and lounge access am I entitled to?"
                 st.rerun()
         with q4:
-            if st.button("🏨 Inquire Transit Hotel", key="btn_p_hot", use_container_width=True):
+            if st.button("🏨 Inquire Transit Hotel", key="b_hot", use_container_width=True):
                 st.session_state.pending_prompt = "Can you arrange hotel accommodation for my delay?"
                 st.rerun()
 
@@ -598,45 +473,37 @@ with tab_policy:
 
     r1, r2 = st.columns(2)
     with r1:
-        st.markdown("""
-        <div class="card-box">
-            <h4 style="color: #0284c7; margin: 0 0 8px 0;">1. Cancellation Rebooking Policy</h4>
-            <p style="font-size: 13px; line-height: 1.5;" class="text-muted-main">
-                When a flight is cancelled by SkyWay Airlines for operational reasons, passengers are entitled to choose between:
-                <br/>• <strong>Free Rebooking</strong> on the next available flight within 24 hours (with priority seating for Gold/Platinum members).
-                <br/>• <strong>Full Refund</strong> issued to the original payment method within 7 business days.
-            </p>
-        </div>
+        with st.container(border=True):
+            st.markdown("#### 1. Cancellation Rebooking Policy")
+            st.markdown("""
+            When a flight is cancelled by SkyWay Airlines for operational reasons, passengers are entitled to choose between:
+            - **Free Rebooking** on the next available flight within 24 hours (with priority seating for Gold/Platinum members).
+            - **Full Refund** issued to the original payment method within 7 business days.
+            """)
 
-        <div class="card-box">
-            <h4 style="color: #d97706; margin: 0 0 8px 0;">2. Delay Care & Entitlements Tiers</h4>
-            <p style="font-size: 13px; line-height: 1.5;" class="text-muted-main">
-                • <strong>Under 3 Hours Delay:</strong> ₹500 Dining Voucher.<br/>
-                • <strong>3 to 5 Hours Delay:</strong> Meal Voucher + Executive Departure Lounge Access.<br/>
-                • <strong>Over 5 Hours Delay:</strong> Meal Voucher + Lounge Access + Hotel Accommodation covering the delayed-hours duration only (not a full night's stay).
-            </p>
-        </div>
-        """, unsafe_allow_html=True)
+        with st.container(border=True):
+            st.markdown("#### 2. Delay Care & Entitlements Tiers")
+            st.markdown("""
+            - **Under 3 Hours Delay:** ₹500 Dining Voucher.
+            - **3 to 5 Hours Delay:** Meal Voucher + Executive Departure Lounge Access.
+            - **Over 5 Hours Delay:** Meal Voucher + Lounge Access + Hotel Accommodation covering the delayed-hours duration only (not a full night's stay).
+            """)
 
     with r2:
-        st.markdown("""
-        <div class="card-box">
-            <h4 style="color: #10b981; margin: 0 0 8px 0;">3. Fare Difference & Rebooking Authority</h4>
-            <p style="font-size: 13px; line-height: 1.5;" class="text-muted-main">
-                When passengers voluntarily choose alternative higher-fare flights:
-                <br/>• <strong>Up to ₹1,500 difference:</strong> Front-line agent has direct waiver authority.
-                <br/>• <strong>Above ₹1,500 difference:</strong> Mandatory escalation to Duty Supervisor.
-            </p>
-        </div>
+        with st.container(border=True):
+            st.markdown("#### 3. Fare Difference & Rebooking Authority")
+            st.markdown("""
+            When passengers voluntarily choose alternative higher-fare flights:
+            - **Up to ₹1,500 difference:** Front-line agent has direct waiver authority.
+            - **Above ₹1,500 difference:** Mandatory escalation to Duty Supervisor.
+            """)
 
-        <div class="card-box">
-            <h4 style="color: #a855f7; margin: 0 0 8px 0;">4. Loyalty Tier Benefits</h4>
-            <p style="font-size: 13px; line-height: 1.5;" class="text-muted-main">
-                • <strong>Gold & Platinum Members:</strong> Receive first-priority rebooking on replacement flights.
-                <br/>• <em>Note:</em> Loyalty status does not authorize complimentary cabin upgrades or compensation beyond standard policy.
-            </p>
-        </div>
-        """, unsafe_allow_html=True)
+        with st.container(border=True):
+            st.markdown("#### 4. Loyalty Tier Benefits")
+            st.markdown("""
+            - **Gold & Platinum Members:** Receive first-priority rebooking on replacement flights.
+            - *Note:* Loyalty status does not authorize complimentary cabin upgrades or compensation beyond standard policy.
+            """)
 
 
 # ───────────────────────────────────────────────────────────────────────────────
