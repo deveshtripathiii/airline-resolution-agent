@@ -226,6 +226,34 @@ div[role="radiogroup"] label {
     box-shadow: 0 2px 6px rgba(0,0,0,0.03) !important;
 }
 
+/* Chat Input Bar - High Contrast White Background in Day Mode */
+[data-testid="stBottom"], [data-testid="stBottomBlockContainer"] {
+    background: transparent !important;
+}
+[data-testid="stChatInput"], .stChatInput {
+    background-color: transparent !important;
+}
+[data-testid="stChatInput"] > div, .stChatInput > div {
+    background-color: #ffffff !important;
+    border: 2px solid #bae6fd !important;
+    border-radius: 14px !important;
+    box-shadow: 0 4px 15px rgba(2, 132, 199, 0.12) !important;
+}
+[data-testid="stChatInput"] textarea, .stChatInput textarea {
+    background-color: #ffffff !important;
+    color: #0f172a !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    caret-color: #0284c7 !important;
+}
+[data-testid="stChatInput"] textarea::placeholder, .stChatInput textarea::placeholder {
+    color: #64748b !important;
+    font-weight: 500 !important;
+}
+[data-testid="stChatInput"] button, .stChatInput button {
+    color: #0284c7 !important;
+}
+
 .action-chip {
     display: inline-flex;
     align-items: center;
@@ -413,6 +441,34 @@ div[role="radiogroup"] label {
     border: 1px solid rgba(255, 255, 255, 0.1) !important;
     border-radius: 12px !important;
     color: #f8fafc !important;
+}
+
+/* Chat Input Bar - High Contrast Night Mode */
+[data-testid="stBottom"], [data-testid="stBottomBlockContainer"] {
+    background: transparent !important;
+}
+[data-testid="stChatInput"], .stChatInput {
+    background-color: transparent !important;
+}
+[data-testid="stChatInput"] > div, .stChatInput > div {
+    background-color: #1e293b !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.2) !important;
+    border-radius: 14px !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5) !important;
+}
+[data-testid="stChatInput"] textarea, .stChatInput textarea {
+    background-color: #1e293b !important;
+    color: #f8fafc !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    caret-color: #38bdf8 !important;
+}
+[data-testid="stChatInput"] textarea::placeholder, .stChatInput textarea::placeholder {
+    color: #94a3b8 !important;
+    font-weight: 500 !important;
+}
+[data-testid="stChatInput"] button, .stChatInput button {
+    color: #38bdf8 !important;
 }
 
 hr {
